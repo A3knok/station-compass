@@ -109,4 +109,4 @@
 https://www.figma.com/design/BK4b0tmU4MkfO5CailX2Lt/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&t=8EC2T6F9FMwObaE2-1
 
 ## ER図URL
-https://gyazo.com/0ac58b186a3e6a1dedd8b3d0090ec2f9
+https://gyazo.com/6a2018eafeb16d1e2097e7a8de2ff5ca
