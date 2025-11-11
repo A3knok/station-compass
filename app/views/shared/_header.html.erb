@@ -1,20 +1,25 @@
 <header>
-  <nav class="navbar navbar-expand-xs bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">駅コンパス</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">ログイン</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">新規登録</a>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">駅コンパス</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <% if user_signed_in? %>            <li class="nav-item me-2">
+              <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
+            </li>
+          <% else %>
+            <li class="nav-item me-2">
+              <%= link_to t('header.login'), new_user_session_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to t('header.sign_up'), "#" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
   </nav>
 </header>

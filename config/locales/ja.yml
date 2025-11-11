@@ -1,0 +1,27 @@
+ja:
+  helpers:
+    submit:
+      user:
+        create: 登録する
+      user_session:
+        create: ログイン
+    label:
+      user:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+  
+  user_sessions:
+    new:
+      title: ログイン
+  
+  users:
+    new:
+      title: 新規登録
+      login: ログイン
+
+  header:
+    login: ログイン
+    logout: ログアウト
+    sign_up: 新規登録
+    
