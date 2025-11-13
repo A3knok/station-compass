@@ -57,3 +57,10 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# 認証用
+gem "devise"
+
+# 日本語化
+gem "rails-i18n", "~> 7.0.0"
+gem "devise-i18n"

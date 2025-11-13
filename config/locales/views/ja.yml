@@ -1,0 +1,19 @@
+ja:  
+  user_sessions:
+    new:
+      title: ログイン
+
+  sign_up:
+    new:
+      title: 新規登録
+  
+  users:
+    new:
+      title: 新規登録
+      login: ログイン
+
+  header:
+    login: ログイン
+    logout: ログアウト
+    sign_up: 新規登録
+    

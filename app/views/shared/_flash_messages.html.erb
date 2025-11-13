@@ -1,0 +1,12 @@
+<% flash.each do |message_type, message| %>
+  <% 
+    # Deviseページでバリデーションエラーがある場合、
+    # 重複するalertフラッシュメッセージをスキップ
+    if defined?(resource) && resource&.errors&.any? && message_type.to_s == 'alert'
+      next
+    end
+  %>
+  <div class="alert <%= flash_bootstrap_class(message_type) %>">
+    <%= message %>
+  </div>
+<% end %>
