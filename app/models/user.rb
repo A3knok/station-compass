@@ -1,10 +1,27 @@
+# app/models/user.rb
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # validatableを除外してカスタマイズ
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable
 
-  validates :email, presence: true
-  validates :password, presence: true, uniqueness:true, length: { is: 7 }
+  # カスタムバリデーション
   validates :name, presence: true
+  validates :email, presence: true,
+                    # emailの正規表現にマッチするか
+                    format: { with: URI::MailTo::EMAIL_REGEXP },
+                    uniqueness: true
+  validates :password, presence: true,
+                      length: { minimum: 6 },
+                      # 2つのフォームで入力された内容が完全に一致するかを検証
+                      confirmation: true,
+                      if: :password_required?
+  validates :password_confirmation, presence: true, if: :password_required?
+
+
+  private
+
+  # 新規作成 or パスワード更新かを判断
+  def password_required?
+    new_record? || password.present? || password_confirmation.present?
+  end
 end
