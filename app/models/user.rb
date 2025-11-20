@@ -1,5 +1,6 @@
 # app/models/user.rb
 class User < ApplicationRecord
+  has_many :routes, dependent: :destroy
   # validatableを除外してカスタマイズ
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable

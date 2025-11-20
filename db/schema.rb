@@ -10,9 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_09_075528) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_20_033230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exits", force: :cascade do |t|
+    t.bigint "station_id", null: false
+    t.string "name"
+    t.string "direction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["station_id"], name: "index_exits_on_station_id"
+  end
+
+  create_table "gates", force: :cascade do |t|
+    t.string "name"
+    t.bigint "station_id", null: false
+    t.bigint "railway_company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["railway_company_id"], name: "index_gates_on_railway_company_id"
+    t.index ["station_id"], name: "index_gates_on_station_id"
+  end
+
+  create_table "railway_companies", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "routes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "gate_id", null: false
+    t.bigint "exit_id", null: false
+    t.integer "estimated_time"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exit_id"], name: "index_routes_on_exit_id"
+    t.index ["gate_id"], name: "index_routes_on_gate_id"
+    t.index ["user_id"], name: "index_routes_on_user_id"
+  end
+
+  create_table "stations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -26,4 +70,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_09_075528) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "exits", "stations"
+  add_foreign_key "gates", "railway_companies"
+  add_foreign_key "gates", "stations"
+  add_foreign_key "routes", "exits"
+  add_foreign_key "routes", "gates"
+  add_foreign_key "routes", "users"
 end

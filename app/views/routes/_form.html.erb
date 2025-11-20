@@ -1,0 +1,23 @@
+<%= form_with model: route do |f| %>
+  <div class="mb-3">
+    <%= f.label :gate_id, class: "form-label" %>
+    <%= f.select :gate_id, options_for_select([]), class: "form-control" %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :exit_id, class: "form-label" %>
+    <%= f.select :exit_id, options_for_select([]), class: "form-control" %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :description, class: "form-label" %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :estimated_time, class: "form-label" %>
+    <%= f.number_field :estimated_time, class: "form-control" %>
+  </div>
+  
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

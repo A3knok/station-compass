@@ -1,0 +1,6 @@
+ja:
+  flash_messages:
+    routes:
+      create:
+        success: ルート投稿が完了しました
+        failure: ルート投稿に失敗しました

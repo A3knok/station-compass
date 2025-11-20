@@ -1,19 +1,28 @@
-ja:  
-  user_sessions:
-    new:
-      title: ログイン
+ja:
+  devise:
+    sessions:
+      new:
+        title: ログイン
 
-  sign_up:
-    new:
-      title: 新規登録
+    registrations:
+      new:
+        title: 新規登録
   
   users:
+    show:
+      title: マイページ
+      name: ユーザー名
+      post_count: 投稿件数
+      history: 投稿履歴
+  
+  routes:
     new:
-      title: 新規登録
-      login: ログイン
+      title: 新規投稿
 
   header:
     login: ログイン
     logout: ログアウト
     sign_up: 新規登録
+    routes: ルート一覧
+    my_page: マイページ
     

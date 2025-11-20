@@ -8,6 +8,12 @@ ja:
         email: メールアドレス
         password: パスワード
         # password_confirmation: パスワード(確認用)
+      route:
+        gate_id: 出発地
+        exit_id: 目的地
+        description: ルート詳細
+        estimated_time: 所要時間(分)
+
     errors:
       messages:
         blank: "を入力してください。"
@@ -20,12 +26,18 @@ ja:
   helpers:
     submit:
       user:
-        create: 登録する
+        create: 登録
+        edit: 編集
+        destroy: 削除
       user_session:
         create: ログイン
+      route:
+        create: ルートを作成
     label:
       user:
         name: ユーザー名
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード(確認用)
+        
+        
