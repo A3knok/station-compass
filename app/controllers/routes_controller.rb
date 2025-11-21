@@ -1,9 +1,8 @@
 class RoutesController < ApplicationController
-
   def show
     @route = current_user.routes.find(params[:id])
   end
-  
+
   def new
     @route = Route.new
   end
@@ -12,9 +11,9 @@ class RoutesController < ApplicationController
     @route = current_user.routes.build(route_params)
 
     if @route.save
-      redirect_to route_path(@route), success: t('flash_messages.routes.create.success')
+      redirect_to route_path(@route), success: t("flash_messages.routes.create.success")
     else
-      flash.now[:danger] = t('flash_messages.routes.create.failure')
+      flash.now[:danger] = t("flash_messages.routes.create.failure")
       render :new, status: :unprocessable_entity
     end
   end
