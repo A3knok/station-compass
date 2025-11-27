@@ -5,9 +5,8 @@
         <i class="fas fa-user me-2"></i>
         <%= t('routes.new.title') %>
       </h2>
-
+      <%= render 'shared/error_messages', resource: @route %>
       <%= render 'form', route: @route %>
-
     </div>
   </div>
 </div>

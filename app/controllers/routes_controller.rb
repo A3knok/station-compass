@@ -1,10 +1,16 @@
 class RoutesController < ApplicationController
+  before_action :set_form_data, only: %i[ new create ]
+
   def show
     @route = current_user.routes.find(params[:id])
   end
 
   def new
     @route = Route.new
+  end
+
+  def index
+    @routes = Route.all
   end
 
   def create
@@ -22,5 +28,10 @@ class RoutesController < ApplicationController
 
   def route_params
     params.require(:route).permit(:gate_id, :exit_id, :description, :estimated_time)
+  end
+
+  def set_form_data
+    @gates = Gate.all
+    @exits = Exit.all
   end
 end

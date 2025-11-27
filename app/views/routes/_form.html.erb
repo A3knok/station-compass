@@ -1,12 +1,16 @@
 <%= form_with model: route do |f| %>
   <div class="mb-3">
     <%= f.label :gate_id, class: "form-label" %>
-    <%= f.select :gate_id, options_for_select([]), class: "form-control" %>
+    <%= f.collection_select :gate_id, @gates, :id, :name, 
+                            { include_blank: '出発地を選択' },
+                            { class: "form-select" } %>
   </div>
   
   <div class="mb-3">
     <%= f.label :exit_id, class: "form-label" %>
-    <%= f.select :exit_id, options_for_select([]), class: "form-control" %>
+    <%= f.collection_select :exit_id, @exits, :id, :name,
+                            { include_blank: '目的地を選択'},
+                            { class: "form-select" } %>
   </div>
   
   <div class="mb-3">
@@ -19,5 +23,7 @@
     <%= f.number_field :estimated_time, class: "form-control" %>
   </div>
   
-  <%= f.submit class: "btn btn-primary" %>
+  <div class="d-grid">
+    <%= f.submit t('helpers.submit.route.create'), class: "btn btn-primary btn-lg" %>
+  </div>
 <% end %>

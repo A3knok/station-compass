@@ -1,0 +1,33 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <h2 class="text-center mb-5">
+        <i class="fa-solid fa-map-location-dot"></i>
+        <%= t('routes.index.title') %>
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- 左側：投稿一覧 -->
+    <div class="col-12 col-lg-8">
+      <!-- 投稿総数 -->
+      <div class="d-flex justify-content-between border-bottom mb-4">
+        <h6>
+          <i class="fas fa-newspaper text-success me-2"></i>
+          <%= t('.total_routes_count') %>
+        </h6>
+        <span><%= @routes.count %>件</span>
+      </div>
+
+      <!-- ルート概要一覧 -->
+      <div class="routes-grid">
+        <%= render 'routes/route', routes: @routes, show_actions: false %>
+      </div>
+    </div>
+
+    <!-- 右側：検索フォーム -->
+    <div class="col-4">
+    </div>
+  </div>
+</div>

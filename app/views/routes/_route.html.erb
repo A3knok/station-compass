@@ -1,0 +1,49 @@
+<%
+  # 親ビューの“意図”を正しく受け取り意図しないエラーを防ぐ[.fetch]
+  routes_data = local_assigns.fetch(:routes, false)
+  show_actions = local_assigns.fetch(:show_actions, false)
+%>
+
+<% if routes_data.present? %>
+  <% routes_data.each do |route| %>
+    <div class="bg-light rounded-3 p-3 mb-3">
+      <!-- 左：ルート情報-->
+      <div class="flex-grow-1 me-3">
+        <!-- ルート名とリンク-->
+        <%= link_to route_path(route), class: "text-decoration-none d-block mb-2" do %>
+          <span class="fw-bold text-primary">
+            <i class="fas fa-location-dot text-success me-1"></i>
+            <%= route.gate&.name || "出発地未設定" %>
+            <i class="fas fa-arrow-right mx-2 text-muted"></i>
+            <i class="fas fa-flag-checkered text-danger me-1"></i>
+            <%= route.exit&.name || "目的地未設定" %>
+          </span>
+        <% end %>
+
+        <p class="mb-2 text-muted small">
+          <%= route_description_summary(route, length: 60) %>
+        </p>
+
+        <!-- 右：アクションボタン -->
+        <% if show_actions %>
+          <div class="d-flex flex-column gap-1">
+            <%= link_to root_path, class: "btn btn-outline-primary btn-sm" do %>
+              <i class="fas fa-pen me-1"></i>
+              <span><%= t('helpers.submit.route.edit')%></span>
+            <% end %>
+            <%= link_to root_path, class: "btn btn-outline-danger btn-sm" do %>
+              <i class="fas fa-trash me-1"></i>
+              <span><%= t('helpers.submit.route.destroy')%></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="text-center py-4">
+    <i class="fas fa-inbox text-muted mb-2"></i>
+    <p class="text-muted mb-0">まだルートが投稿されていません</p>
+    <%= link_to "最初のルートを作成", new_route_path, class: "btn btn-primary mt-2" %>
+  </div>
+<% end %>

@@ -2,6 +2,8 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      gate: 出発地
+      exit: 到着地
     attributes:
       user:
         name: ユーザー名
@@ -19,9 +21,18 @@ ja:
         blank: "を入力してください。"
         invalid: "の形式が正しくありません"
         taken: "はすでに使用されています"
-        too_short: "は6文字以上で入力してください"
         confirmation: "と確認用の入力が一致しません"
-
+      models:
+        user:
+          attributes:
+            password:
+              too_short: "は6文字以上で入力してください"
+            password_confirmation:
+              blank: "を再入力してください"
+        route:
+          attributes:
+            description:
+              too_short: "は10文字以上で入力してください"
 
   helpers:
     submit:
@@ -33,11 +44,11 @@ ja:
         create: ログイン
       route:
         create: ルートを作成
+        edit: 編集
+        destroy: 削除
     label:
       user:
         name: ユーザー名
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード(確認用)
-        
-        

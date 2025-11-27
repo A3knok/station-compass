@@ -1,1 +1,41 @@
-<p>成功！！！</p>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <h2 class="text-center mb-5">
+        <i class="fas fa-user me-2"></i>
+        <%= t('routes.show.title') %>
+      </h2>
+
+      <div class="row g-3 mb-4">
+        <%= route_info_card("fas fa-door-open", "primary", :gate_id, @route.gate.name) %>
+        <%= route_info_card("fas fas fa-map-marker-alt", "success", :exit_id, @route.exit.name) %>
+        <%= route_info_card("fas fa-clock", "warning", :estimated_time, "#{@route.estimated_time}分") %>
+      </div>
+
+      <!-- ルート詳細エリア -->
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">
+            <i class="fas fa-info-circle me-2"></i>
+            ルート詳細
+          </h4>
+        </div>
+        <div class="card-body">
+          <dl class="row mb-0">
+            <dt class="col-sm-3 text-muted"><%= t('.gate') %></dt>
+            <dd class="col-sm-9"><%= @route.gate.name %></dd>
+            
+            <dt class="col-sm-3 text-muted"><%= t('.exit') %></dt>
+            <dd class="col-sm-9"><%= @route.exit.name %></dd>
+            
+            <dt class="col-sm-3 text-muted"><%= t('.route_text') %></dt>
+            <dd class="col-sm-9"><%= simple_format(@route.description) %></dd>
+            
+            <dt class="col-sm-3 text-muted">作成日時</dt>
+            <dd class="col-sm-9"><%= l(@route.created_at, format: :long) %></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

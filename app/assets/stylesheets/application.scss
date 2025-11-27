@@ -22,3 +22,9 @@ a {
 .navbar a:hover {
   color: #e0e0e0 !important;
 }
+
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}

@@ -18,6 +18,15 @@ ja:
   routes:
     new:
       title: 新規投稿
+    show:
+      title: ルート詳細
+      gate: 改札詳細
+      exit: 出口詳細
+      route_text: ルート説明
+      created_at: 作成日時
+    index:
+      title: ルート一覧
+      total_routes_count: 投稿総数
 
   header:
     login: ログイン

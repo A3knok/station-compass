@@ -2,37 +2,44 @@
   <div class="row justify-content-center">
     <div class="col-md-6 col-lg-4">
       <h2 class="text-center mb-5">
-        <i class="fas fa-user me-2"></i>
-        <%= t('users.show.title') %>
+        <i class="fas fa-user me-2 text-primary"></i>
+        <%= t('.title') %>
       </h2>
 
-      <dl class="row mb-0">
-        <dt class="col-4 fw-bold"><%= t('.name')%></dt>
-        <dd class="col-8 text-end mb-3"><%= @user.name %></dd>
+      <div class="border rounded-3 shadow-sm p-4 mb-4">
+        <dl class="row mb-0 align-items-center">
+          <!-- 名前 -->
+          <dt class="col-6 fw-bold d-flex align-items-center mb-3">
+            <i class="fas fa-user text-primary me-2"></i>
+            <%= t('.name') %>
+          </dt>
+          <dd class="col-6 align-items-center text-end mb-3">
+            <span class="fs-6 fw-normal text-dark"><%= @user.name %></span>
+          </dd>
 
-        <dt class="col-4 fw-bold"><%= t('.post_count')%></dt>
-        <dd class="col-8 text-end mb-5">0</dd>
+          <!-- 投稿数 -->
+          <dt class="col-6 fw-bold d-flex align-items-center mb-3">
+            <i class="fas fa-newspaper text-success me-2"></i>
+            <%= t('users.show.post_count') %>
+          </dt>
+          <dd class="col-6 d-flex align-items-center justify-content-end mb-3">
+            <span class="badge bg-success fs-6"><%= @total_routes_count %>件</span>
+          </dd>
 
-        <dt class="col-12 fw-bold"><%= t('.history')%></dt>
-        <dd>
-          <div class="d-flex">
-            <div class="flex-grow-1 me-3">
-              <span>投稿概要</span>
-            </div>
-            <div class="d-flex gap-2">
-              <%= link_to root_path, class: "btn btn-sm" do %>
-                <i class="fa-solid fa-pen"></i>
-                <span><%= t('helpers.submit.user.edit')%></span>
-              <% end %>
-              <%= link_to root_path, class: "btn btn-sm" do %>
-                <i class="fa-solid fa-trash"></i>
-                <span><%= t('helpers.submit.user.destroy')%></span>
-              <% end %>
-            </div>
-          </div>
-        </dd>
-      </dl>
+          <!-- 区切り線 -->
+          <dt class="col-12"><hr class="my-3"></dt>
+          <dd class="col-12"></dd>
 
+          <!-- 投稿履歴 -->
+          <dt class="col-12 fw-bold mb-3">
+            <i class="fas fa-history text-info me-2"></i>
+            <%= t('.history') %>
+          </dt>
+          <dd class="col-12">
+            <%= render 'routes/route', routes: @recent_routes, show_actions: true %>
+          </dd>
+        </dl>
+      </div>    
     </div>
   </div>
 </div>
