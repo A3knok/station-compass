@@ -7,10 +7,10 @@ class Route < ApplicationRecord
   validates :estimated_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
   def self.ransackable_attributes(auth_object = nil)
-    ["exit_id", "gate_id"]
+    [ "exit_id", "gate_id" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["gate", "exit"]
+    [ "gate", "exit" ]
   end
 end
