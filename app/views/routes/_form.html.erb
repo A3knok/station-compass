@@ -5,6 +5,13 @@
                             { include_blank: '出発地を選択' },
                             { class: "form-select" } %>
   </div>
+
+  <div class="mb-3">
+    <%= f.label :gate_id, class: "form-label" %>
+    <%= f.collection_select :gate_id, @gates, :id, :name, 
+                            { include_blank: '出発地を選択' },
+                            { class: "form-select" } %>
+  </div>
   
   <div class="mb-3">
     <%= f.label :exit_id, class: "form-label" %>

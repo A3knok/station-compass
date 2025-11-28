@@ -33,7 +33,8 @@ class RoutesController < ApplicationController
   end
 
   def set_form_data
-    @gates = Gate.all
     @exits = Exit.all
+    @railway_companies = RailwayCompany.all
+    @gate_by_company = Gate.grouped_by_company_for_json
   end
 end

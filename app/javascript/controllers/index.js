@@ -4,5 +4,8 @@
 
 import { application } from "./application"
 
+import GateFilterController from "./gate_filter_controller"
+application.register("gate-filter", GateFilterController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
