@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       gate: 出発地
       exit: 到着地
+      railway_company: 鉄道会社
     attributes:
       user:
         name: ユーザー名
@@ -13,6 +14,7 @@ ja:
       route:
         gate_id: 出発地
         exit_id: 目的地
+        railway_company_id: 鉄道会社
         description: ルート詳細
         estimated_time: 所要時間(分)
 
@@ -53,3 +55,5 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード(確認用)
+      route:
+        railway_company: 鉄道会社

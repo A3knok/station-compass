@@ -16,6 +16,7 @@ ja:
       history: 投稿履歴
   
   routes:
+    railway_company: 鉄道会社
     new:
       title: 新規投稿
     show:

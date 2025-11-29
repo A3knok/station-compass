@@ -6,10 +6,10 @@
         <%= t('routes.new.title') %>
       </h2>
       <%= render 'shared/error_messages', resource: @route %>
-      <div data-controller="gate-filter" data-gate-filter-gates-by-company-value="@gate_by_company_for_json">
+      <div data-controller="gate-filter"
+          data-gate-filter-gates-by-company-value="<%= @gate_by_company %>">
         <%= render 'form', route: @route %>
       </div>
-      
     </div>
   </div>
 </div>

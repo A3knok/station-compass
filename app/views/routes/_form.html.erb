@@ -1,16 +1,31 @@
 <%= form_with model: route do |f| %>
   <div class="mb-3">
-    <%= f.label :gate_id, class: "form-label" %>
-    <%= f.collection_select :gate_id, @gates, :id, :name, 
-                            { include_blank: '出発地を選択' },
-                            { class: "form-select" } %>
+    <%= label_tag :railway_company_id, t('routes.railway_company'), class: "form-label" %>
+    <%= select_tag :ailway_company_id,
+                    # <option>の生成
+                    options_from_collection_for_select(
+                      @railway_companies,
+                      :id,
+                      :name
+                    ),
+                    {
+                      include_blank: '路線を選択',
+                      class: "form-select",
+                      # stimulusに値を渡す
+                      data: {
+                        gate_filter_target: "railwayCompany",
+                        action: "change->gate-filter#filterGates"
+                      }
+                    } %>
   </div>
 
   <div class="mb-3">
     <%= f.label :gate_id, class: "form-label" %>
     <%= f.collection_select :gate_id, @gates, :id, :name, 
-                            { include_blank: '出発地を選択' },
-                            { class: "form-select" } %>
+                            { include_blank: '出発地を選択'},
+                            { class: "form-select",
+                              data: { gate_filter_target: "gate" }
+                            } %>
   </div>
   
   <div class="mb-3">

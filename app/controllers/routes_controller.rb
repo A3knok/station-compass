@@ -34,7 +34,8 @@ class RoutesController < ApplicationController
 
   def set_form_data
     @exits = Exit.all
-    @railway_companies = RailwayCompany.all
-    @gate_by_company = Gate.grouped_by_company_for_json
+    @railway_companies = RailwayCompany.all.order(:name)
+    @gates_by_company = Gate.grouped_by_company_for_json
+    @gates = []
   end
 end
