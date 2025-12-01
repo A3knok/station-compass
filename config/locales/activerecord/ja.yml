@@ -2,8 +2,9 @@ ja:
   activerecord:
     models:
       user: ユーザー
-      gate: 出発地
-      exit: 到着地
+      route: ルート
+      gate: 地点
+      exit: 地点
       railway_company: 鉄道会社
     attributes:
       user:
@@ -11,6 +12,7 @@ ja:
         email: メールアドレス
         password: パスワード
         # password_confirmation: パスワード(確認用)
+
       route:
         gate_id: 出発地
         exit_id: 目的地
@@ -18,12 +20,19 @@ ja:
         description: ルート詳細
         estimated_time: 所要時間(分)
 
+      gate:
+        name: 地点名
+      
+      exit:
+        name: 地点名
+
     errors:
       messages:
-        blank: "を入力してください。"
+        blank: "を入力してください"
         invalid: "の形式が正しくありません"
         taken: "はすでに使用されています"
         confirmation: "と確認用の入力が一致しません"
+
       models:
         user:
           attributes:
@@ -31,24 +40,35 @@ ja:
               too_short: "は6文字以上で入力してください"
             password_confirmation:
               blank: "を再入力してください"
+              
         route:
           attributes:
+            gate_id:
+              blank: "を選択してください"
+            exit_id:
+              blank: "を選択してください"
             description:
               too_short: "は10文字以上で入力してください"
+  
+  defaults:
+    show: 詳細
+    edit: 編集
+    delete : 削除
+    create: 新規作成
+    search: 検索
+
 
   helpers:
     submit:
       user:
         create: 登録
-        edit: 編集
-        destroy: 削除
+        update: 更新
       user_session:
         create: ログイン
       route:
-        create: ルートを作成
-        edit: 編集
-        destroy: 削除
-        search: 検索
+        create: 作成
+        update: 更新
+
     label:
       user:
         name: ユーザー名
@@ -56,4 +76,9 @@ ja:
         password: パスワード
         password_confirmation: パスワード(確認用)
       route:
+        gate_id: 出発地
+        exit_id: 目的地
+        railway_company_id: 鉄道会社
+        description: ルート詳細
+        estimated_time: 所要時間(分)
         railway_company: 鉄道会社
