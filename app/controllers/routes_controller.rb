@@ -1,5 +1,6 @@
 class RoutesController < ApplicationController
-  before_action :set_form_data, only: %i[ new create index ]
+  before_action :set_search_form_data, only: %i[ index ]
+  before_action :set_new_form_data, only: %i[ new create ]
 
   def show
     @route = current_user.routes.find(params[:id])
@@ -10,7 +11,6 @@ class RoutesController < ApplicationController
   end
 
   def index
-    # @routes = Route.all
     @q = Route.ransack(params[:q])
     @routes = @q.result(distinct: true).includes(:gate, :exit).order(created_at: :desc)
   end
@@ -28,14 +28,19 @@ class RoutesController < ApplicationController
 
   private
 
-  def route_params
-    params.require(:route).permit(:gate_id, :exit_id, :description, :estimated_time)
-  end
-
-  def set_form_data
+  def set_new_form_data
     @exits = Exit.all
     @railway_companies = RailwayCompany.all.order(:name)
-    @gates_by_company = Gate.grouped_by_company_for_json
+    @gates_by_company = Gate.grouped_by_company.to_json
     @gates = []
+  end
+
+  def set_search_form_data
+    @exits = Exit.all
+    @gates = Gate.all
+  end
+
+  def route_params
+    params.require(:route).permit(:gate_id, :exit_id, :description, :estimated_time)
   end
 end
