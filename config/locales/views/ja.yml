@@ -28,6 +28,8 @@ ja:
     index:
       title: ルート一覧
       total_routes_count: 投稿総数
+    edit:
+      title: ルート編集
 
   header:
     login: ログイン

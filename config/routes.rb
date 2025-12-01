@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   root "static_pages#index"
 
   resources :users, only: %i[show]
-  resources :routes, only: %i[new show create index]
+  resources :routes, only: %i[new show create index edit update]
 end

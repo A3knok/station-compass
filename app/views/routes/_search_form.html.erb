@@ -1,7 +1,10 @@
 <%= search_form_for @q, url: routes_path do |f| %>
   <div class="mb-3">
     <i class="fas fa-location-dot text-success me-1"></i>
-    <%= f.label :gate_id_eq, Route.human_attribute_name(:gate_id), class: "form-label" %>
+    <strong>
+      <%= f.label :gate_id_eq, Route.human_attribute_name(:gate_id), class: "form-label" %>
+    </strong>
+    
     <%= f.collection_select :gate_id_eq, @gates, :id, :name, 
                             { include_blank: 'すべて' },
                             { class: "form-select" } %>
@@ -9,13 +12,16 @@
   
   <div class="mb-3">
     <i class="fas fa-flag-checkered text-danger me-1"></i>
-    <%= f.label :exit_id_eq, Route.human_attribute_name(:exit_id), class: "form-label" %>
+    <strong>
+      <%= f.label :exit_id_eq, Route.human_attribute_name(:exit_id), class: "form-label" %>
+    </strong>
+    
     <%= f.collection_select :exit_id_eq, @exits, :id, :name,
                             { include_blank: 'すべて'},
                             { class: "form-select" } %>
   </div>
 
   <div class="d-grid">
-    <%= f.submit t('helpers.submit.route.search'), class: "btn btn-primary btn-lg" %>
+    <%= f.submit t('defaults.search'), class: "btn btn-primary btn-lg" %>
   </div>
 <% end %>

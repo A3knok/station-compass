@@ -1,6 +1,9 @@
 <%= form_with model: route do |f| %>
   <div class="mb-3">
-    <%= label_tag :railway_company_id, t('routes.railway_company'), class: "form-label" %>
+    <i class="fa-solid fa-train text-secondary me-1"></i>
+    <strong>
+      <%= label_tag :railway_company_id, t('routes.railway_company'), class: "form-label " %>
+    </strong>
     <%= select_tag :railway_company_id,
                     # <option>の生成
                     options_from_collection_for_select(
@@ -20,7 +23,10 @@
   </div>
 
   <div class="mb-3">
-    <%= f.label :gate_id, class: "form-label" %>
+    <i class="fas fa-location-dot text-success me-1"></i>
+    <strong>
+      <%= f.label :gate_id, class: "form-label" %>
+    </strong>
     <%= f.collection_select :gate_id, @gates, :id, :name, 
                             { include_blank: '出発地を選択'},
                             { class: "form-select",
@@ -29,23 +35,32 @@
   </div>
   
   <div class="mb-3">
-    <%= f.label :exit_id, class: "form-label" %>
+    <i class="fas fa-flag-checkered text-danger me-1"></i>
+    <strong>
+      <%= f.label :exit_id, class: "form-label" %>
+    </strong>
     <%= f.collection_select :exit_id, @exits, :id, :name,
                             { include_blank: '目的地を選択'},
                             { class: "form-select" } %>
   </div>
   
   <div class="mb-3">
-    <%= f.label :description, class: "form-label" %>
+    <i class="fa-solid fa-map-location-dot text-warning"></i>
+    <strong>
+      <%= f.label :description, class: "form-label" %>
+    </strong>
     <%= f.text_area :description, class: "form-control" %>
   </div>
   
   <div class="mb-3">
-    <%= f.label :estimated_time, class: "form-label" %>
+    <i class="fas fa-history text-info me-2"></i>
+    <strong>
+      <%= f.label :estimated_time, class: "form-label" %>
+    </strong>
     <%= f.number_field :estimated_time, class: "form-control" %>
   </div>
   
   <div class="d-grid">
-    <%= f.submit t('helpers.submit.route.search'), class: "btn btn-primary btn-lg" %>
+    <%= f.submit class: "btn btn-primary btn-lg" %>
   </div>
 <% end %>

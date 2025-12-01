@@ -1,19 +1,22 @@
 class RoutesController < ApplicationController
+  before_action :set_route, only: %i[ show edit update update ]
+  before_action :check_route_owner, only: %i[ edit update ]
   before_action :set_search_form_data, only: %i[ index ]
-  before_action :set_new_form_data, only: %i[ new create ]
+  before_action :set_new_form_data, only: %i[ new create edit update ]
 
-  def show
-    @route = current_user.routes.find(params[:id])
-  end
-
-  def new
-    @route = Route.new
-  end
 
   def index
     @q = Route.ransack(params[:q])
     @routes = @q.result(distinct: true).includes(:gate, :exit).order(created_at: :desc)
   end
+
+  def show; end
+
+  def new
+    @route = Route.new
+  end
+
+  def edit; end
 
   def create
     @route = current_user.routes.build(route_params)
@@ -26,7 +29,24 @@ class RoutesController < ApplicationController
     end
   end
 
+  def update
+    if @route.update(route_params)
+      redirect_to route_path(@route), success: t("flash_messages.routes.update.success")
+    else
+      flash.now[:danger] = t("flash_messages.routes.update.failure")
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
+
+  def set_route
+    @route = Route.find(params[:id])
+  end
+
+  def check_route_owner
+    redirect_to root_path unless current_user == @route.user
+  end
 
   def set_new_form_data
     @exits = Exit.all

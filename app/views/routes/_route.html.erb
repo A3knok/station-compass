@@ -27,13 +27,13 @@
         <!-- 右：アクションボタン -->
         <% if show_actions %>
           <div class="d-flex flex-column gap-1">
-            <%= link_to root_path, class: "btn btn-outline-primary btn-sm" do %>
+            <%= link_to edit_route_path(route), class: "btn btn-outline-primary btn-sm" do %>
               <i class="fas fa-pen me-1"></i>
-              <span><%= t('helpers.submit.route.edit')%></span>
+              <span><%= t('defaults.edit')%></span>
             <% end %>
             <%= link_to root_path, class: "btn btn-outline-danger btn-sm" do %>
               <i class="fas fa-trash me-1"></i>
-              <span><%= t('helpers.submit.route.destroy')%></span>
+              <span><%= t('defaults.delete')%></span>
             <% end %>
           </div>
         <% end %>
