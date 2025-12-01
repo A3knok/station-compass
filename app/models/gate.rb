@@ -3,8 +3,8 @@ class Gate < ApplicationRecord
   belongs_to :station
   belongs_to :railway_company
 
-  def self.grouped_by_company_for_json
-    gates = includes(:railway_company)
+  def self.grouped_by_company
+    gates = Gate.includes(:railway_company)
 
     # group_byはハッシュを返す
     # group_by(&:railway_company_id)でもOK

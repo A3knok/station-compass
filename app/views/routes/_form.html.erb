@@ -1,7 +1,7 @@
 <%= form_with model: route do |f| %>
   <div class="mb-3">
     <%= label_tag :railway_company_id, t('routes.railway_company'), class: "form-label" %>
-    <%= select_tag :ailway_company_id,
+    <%= select_tag :railway_company_id,
                     # <option>の生成
                     options_from_collection_for_select(
                       @railway_companies,
