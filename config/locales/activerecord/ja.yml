@@ -56,7 +56,7 @@ ja:
     delete : 削除
     create: 新規作成
     search: 検索
-
+    delete_confirm: 削除しますか？
 
   helpers:
     submit:

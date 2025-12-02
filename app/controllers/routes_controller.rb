@@ -1,6 +1,6 @@
 class RoutesController < ApplicationController
-  before_action :set_route, only: %i[ show edit update update ]
-  before_action :check_route_owner, only: %i[ edit update ]
+  before_action :set_route, only: %i[ show edit update update destroy ]
+  before_action :check_route_owner, only: %i[ edit update destroy ]
   before_action :set_search_form_data, only: %i[ index ]
   before_action :set_new_form_data, only: %i[ new create edit update ]
 
@@ -36,6 +36,11 @@ class RoutesController < ApplicationController
       flash.now[:danger] = t("flash_messages.routes.update.failure")
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @route.destroy!
+    redirect_to user_path(current_user)
   end
 
   private

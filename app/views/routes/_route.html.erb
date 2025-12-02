@@ -7,7 +7,7 @@
 <% if routes_data.present? %>
   <% routes_data.each do |route| %>
     <div class="bg-light rounded-3 p-3 mb-3">
-      <!-- 左：ルート情報-->
+      <!-- ルート情報-->
       <div class="flex-grow-1 me-3">
         <!-- ルート名とリンク-->
         <%= link_to route_path(route), class: "text-decoration-none d-block mb-2" do %>
@@ -24,18 +24,9 @@
           <%= route_description_summary(route, length: 60) %>
         </p>
 
-        <!-- 右：アクションボタン -->
+        <!-- アクションボタン -->
         <% if show_actions %>
-          <div class="d-flex flex-column gap-1">
-            <%= link_to edit_route_path(route), class: "btn btn-outline-primary btn-sm" do %>
-              <i class="fas fa-pen me-1"></i>
-              <span><%= t('defaults.edit')%></span>
-            <% end %>
-            <%= link_to root_path, class: "btn btn-outline-danger btn-sm" do %>
-              <i class="fas fa-trash me-1"></i>
-              <span><%= t('defaults.delete')%></span>
-            <% end %>
-          </div>
+          <%= render 'routes/action_buttons', route: route %>
         <% end %>
       </div>
     </div>

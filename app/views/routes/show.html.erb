@@ -36,17 +36,7 @@
           </dl>
         </div>
       </div>
-
-      <div class="d-flex flex-column gap-1">
-        <%= link_to edit_route_path(@route), class: "btn btn-outline-primary btn-sm mb-2" do %>
-          <i class="fas fa-pen me-1"></i>
-          <span><%= t('defaults.edit')%></span>
-        <% end %>
-        <%= link_to root_path, class: "btn btn-outline-danger btn-sm" do %>
-          <i class="fas fa-trash me-1"></i>
-          <span><%= t('defaults.delete')%></span>
-        <% end %>
-      </div>
+      <%= render 'routes/action_buttons', route: @route %>
     </div>
   </div>
 </div>
