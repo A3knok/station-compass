@@ -23,8 +23,56 @@ a {
   color: #e0e0e0 !important;
 }
 
+/*----- 投稿一覧画面 -----*/
 .routes-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
+
+/*----- 投稿詳細画面 -----*/
+dt.route-old,
+dd.route-old {
+  background-color: #F06060;
+  padding: 0.75rem;
+  margin-bottom: 0;
+}
+
+dt.route-old {
+  border-radius: 8px 0 0 8px;
+}
+
+dd.route-old {
+  border-radius: 0 8px 8px 0;
+}
+
+dt.route-middle,
+dd.route-middle {
+  background-color: #ffc107;
+  padding: 0.75rem;
+  margin-bottom: 0;
+}
+
+dt.route-middle {
+  border-radius: 8px 0 0 8px;
+}
+
+dd.route-middle {
+  border-radius: 0 8px 8px 0;
+}
+
+dt.route-fresh,
+dd.route-fresh {
+  background-color: #d1e7dd;
+  padding: 0.75rem;
+  margin-bottom: 0;
+}
+
+dt.route-fresh {
+  border-radius: 8px 0 0 8px;
+}
+
+dd.route-fresh {
+  border-radius: 0 8px 8px 0;
+}
+

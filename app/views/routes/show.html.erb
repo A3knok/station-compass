@@ -6,7 +6,7 @@
         <%= t('routes.show.title') %>
       </h2>
 
-      <div class="row g-3 mb-4">
+      <div class="row mb-4">
         <%= route_info_card("fas fa-door-open", "primary", :gate_id, @route.gate.name) %>
         <%= route_info_card("fas fas fa-map-marker-alt", "success", :exit_id, @route.exit.name) %>
         <%= route_info_card("fas fa-clock", "warning", :estimated_time, "#{@route.estimated_time}分") %>
@@ -35,8 +35,21 @@
             <dt class="col-sm-4 text-muted"><%= t('.created_at') %></dt>
             <dd class="col-sm-8"><%= l(@route.created_at, format: :route_list) %></dd>
 
-            <dt class="col-sm-4 text-muted"><%= t('.updated_at') %></dt>
-            <dd class="col-sm-8"><%= l(@route.updated_at, format: :route_list) %></dd>
+            <dt class="col-sm-4 <%= route_freshness_class(@route) %>">
+              <%= t('.updated_at') %>
+            </dt>
+            <dd class="col-sm-8 mb-0 <%= route_freshness_class(@route) %>">
+              <%= l(@route.updated_at, format: :route_list) %>
+            </dd>
+
+            <% if route_freshness_message(@route).present? %>
+              <dt class="col-sm-4"></dt>
+              <dd class="col-sm-8 mb-0 <%= route_freshness_class(@route) %>">
+                <small class="mb-2">
+                  <%= route_freshness_message(@route) %>
+                </small>
+              </dd>
+            <% end %>
           </dl>
         </div>
       </div>
