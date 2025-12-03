@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_action :set_route, only: %i[ show edit update update destroy ]
+  before_action :set_route, only: %i[ show edit update destroy ]
   before_action :check_route_owner, only: %i[ edit update destroy ]
   before_action :set_search_form_data, only: %i[ index ]
   before_action :set_new_form_data, only: %i[ new create edit update ]
@@ -10,7 +10,9 @@ class RoutesController < ApplicationController
     @routes = @q.result(distinct: true).includes(:gate, :exit).order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    redirect_to routes_path, alert: "投稿が見つかりません" if @route.nil?
+  end
 
   def new
     @route = Route.new
@@ -46,7 +48,7 @@ class RoutesController < ApplicationController
   private
 
   def set_route
-    @route = Route.find(params[:id])
+    @route = Route.find_by(id: params[:id])
   end
 
   def check_route_owner

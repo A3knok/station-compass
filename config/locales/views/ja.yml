@@ -1,4 +1,8 @@
 ja:
+  time:
+    formats:
+      route_list: "%Y/%m/%d(%a)" 
+
   devise:
     sessions:
       new:
@@ -25,6 +29,7 @@ ja:
       exit: 出口詳細
       route_text: ルート説明
       created_at: 作成日時
+      updated_at: 最終更新日
     index:
       title: ルート一覧
       total_routes_count: 投稿総数

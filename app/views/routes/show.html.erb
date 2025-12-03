@@ -22,17 +22,21 @@
         </div>
         <div class="card-body">
           <dl class="row mb-0">
-            <dt class="col-sm-3 text-muted"><%= t('.gate') %></dt>
-            <dd class="col-sm-9"><%= @route.gate.name %></dd>
+            <dt class="col-sm-4 text-muted"><%= t('.gate') %></dt>
+            <dd class="col-sm-8"><%= @route.gate.name %></dd>
             
-            <dt class="col-sm-3 text-muted"><%= t('.exit') %></dt>
-            <dd class="col-sm-9"><%= @route.exit.name %></dd>
+            <dt class="col-sm-4 text-muted"><%= t('.exit') %></dt>
+            <dd class="col-sm-8"><%= @route.exit.name %></dd>
             
-            <dt class="col-sm-3 text-muted"><%= t('.route_text') %></dt>
-            <dd class="col-sm-9"><%= simple_format(@route.description) %></dd>
+            <dt class="col-sm-4 text-muted"><%= t('.route_text') %></dt>
+            <!-- 改行をHTMLタグに変換 -->
+            <dd class="col-sm-8"><%= simple_format(@route.description) %></dd>
             
-            <dt class="col-sm-3 text-muted"><%= t('.created_at') %></dt>
-            <dd class="col-sm-9"><%= l(@route.created_at, format: :long) %></dd>
+            <dt class="col-sm-4 text-muted"><%= t('.created_at') %></dt>
+            <dd class="col-sm-8"><%= l(@route.created_at, format: :route_list) %></dd>
+
+            <dt class="col-sm-4 text-muted"><%= t('.updated_at') %></dt>
+            <dd class="col-sm-8"><%= l(@route.updated_at, format: :route_list) %></dd>
           </dl>
         </div>
       </div>
