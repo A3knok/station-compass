@@ -8,19 +8,19 @@ module RoutesHelper
 
   def route_freshness_class(route)
     if route.updated_at < 6.month.ago
-      'text-danger'
+      "text-danger"
     elsif route.updated_at < 3.month.ago
-      'text-warning'
+      "text-warning"
     else
-      'text-success'
+      "text-success"
     end
   end
 
   def route_freshness_message(route)
     if route.updated_at < 6.month.ago
-      '※この情報は6ヶ月以上更新されていません'
+      "※この情報は6ヶ月以上更新されていません"
     elsif route.updated_at < 3.month.ago
-      '※この情報は3ヶ月以上更新されていません'
+      "※この情報は3ヶ月以上更新されていません"
     else
       nil
     end
