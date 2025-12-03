@@ -3,6 +3,10 @@ class Gate < ApplicationRecord
   belongs_to :station
   belongs_to :railway_company
 
+  def self.ransackable_attributes(auth_object = nil)
+    [ "id", "name" ]
+  end
+
   def self.grouped_by_company
     gates = Gate.includes(:railway_company)
 
