@@ -31,7 +31,7 @@ class User < ApplicationRecord
 
   # ゲストユーザーか判定する
   def guest?
-    guest == true      
+    guest == true
   end
 
   private
@@ -43,9 +43,8 @@ class User < ApplicationRecord
 
   # 一般ユーザーにゲストユーザーのメールアドレスを使って登録させない
   def forbid_guest_email
-    if email == "guest@example.com" && !guest #!guestは一派ユーザー
+    if email == "guest@example.com" && !guest # !guestは一派ユーザー
       errors.add(:email, "このメールアドレスは使用できません")
     end
   end
-  
 end

@@ -13,5 +13,4 @@ class ApplicationController < ActionController::Base
       redirect_to routes_path, alert: "ゲストユーザーはこの操作を実行できません。"
     end
   end
-
 end
