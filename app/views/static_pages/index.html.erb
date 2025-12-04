@@ -1,8 +1,8 @@
 <div class="container station-compass custom-content">
   <div class="row justify-content-center">
     <!-- サービス紹介部分 -->
-    <div class="col-12 col-md-8 col-lg-6 my-3">
-      <div class="text-center">
+    <div class="col-12 col-md-8 col-lg-4 my-5">
+      <div class="text-start text-md-center">
         <p class="mb-0 lh-lg">
           駅の雑踏の中でも、道はいつもそこにある。<br>
           迷いそうになった瞬間、ふと確認できるルートが心を落ち着かせます。<br>
@@ -13,13 +13,14 @@
   </div>
 
   <!-- ボタンを独立した行にする -->
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-auto mb-3 text-center">
-      <button type="button" class="btn btn-outline-success rounded-5 w-100 w-md-auto px-md-5 mb-3">
-        ゲストとしてログインする
-      </button>
+  <% if !user_signed_in? %>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-auto mb-5 text-center">
+          <%= link_to "ゲストとしてログイン", users_guest_sign_in_path, 
+            class: "btn btn-outline-success rounded-5 w-100 w-md-auto px-md-5 mb-3", data: { turbo_method: :post } %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <!-- 3つの要素も独立した行にする -->
   <div class="row justify-content-center">

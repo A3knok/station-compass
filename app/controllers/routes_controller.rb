@@ -3,6 +3,7 @@ class RoutesController < ApplicationController
   before_action :check_route_owner, only: %i[ edit update destroy ]
   before_action :set_search_form_data, only: %i[ index ]
   before_action :set_new_form_data, only: %i[ new create edit update ]
+  skip_before_action :check_guest_user, only: %i[ index show ]
 
 
   def index
