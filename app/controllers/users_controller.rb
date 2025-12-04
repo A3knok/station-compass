@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show] # 特定のユーザー情報を取得してインスタンス変数にセット
   before_action :check_owner, only: %i[show]
+  skip_before_action :check_guest_user, only: %i[show]
 
   def show
     @recent_routes = @user.routes.includes(:gate, :exit)

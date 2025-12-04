@@ -42,6 +42,14 @@
   <div class="text-center py-4">
     <i class="fas fa-inbox text-muted mb-2"></i>
     <p class="text-muted mb-0">まだルートが投稿されていません</p>
-    <%= link_to "最初のルートを作成", new_route_path, class: "btn btn-primary mt-2" %>
+
+    <% if current_user&.guest? %>
+      <small class="d-block">(会員登録後に投稿できます)</small>
+      <button class="btn btn-secondary mt-2" disabled>
+        最初のルートを作成
+      </button>
+    <% else %>
+      <%= link_to "最初のルートを作成", new_route_path, class: "btn btn-primary mt-2" %>
+    <% end %>
   </div>
 <% end %>

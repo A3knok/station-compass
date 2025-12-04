@@ -25,6 +25,7 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   skip_before_action :authenticate_user!
+  skip_before_action :check_guest_user
 
   def after_sign_in_path_for(resource)
     user_path(resource)
@@ -32,5 +33,11 @@ class Users::SessionsController < Devise::SessionsController
 
   def after_sign_out_path_for(resource_or_scope)
     new_user_session_path
+  end
+
+  def guest_sign_in
+    guest_user = User.guest_user
+    sign_in guest_user
+    redirect_to routes_path, notice: "ゲストユーザーでログインしました"
   end
 end

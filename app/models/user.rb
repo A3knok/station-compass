@@ -17,7 +17,22 @@ class User < ApplicationRecord
                       confirmation: true,
                       if: :password_required?
   validates :password_confirmation, presence: true, if: :password_required?
+  validate :forbid_guest_email # ゲストユーザーのみ使用できるメールアドレス
 
+  # ゲストユーザー作成メソッド
+  def self.guest_user
+    find_or_create_by!(email: "guest@example.com") do |user|
+      user.name = "ゲストユーザー"
+      user.password = SecureRandom.urlsafe_base64
+      user.password_confirmation = user.password
+      user.guest = true
+    end
+  end
+
+  # ゲストユーザーか判定する
+  def guest?
+    guest == true      
+  end
 
   private
 
@@ -25,4 +40,12 @@ class User < ApplicationRecord
   def password_required?
     new_record? || password.present? || password_confirmation.present?
   end
+
+  # 一般ユーザーにゲストユーザーのメールアドレスを使って登録させない
+  def forbid_guest_email
+    if email == "guest@example.com" && !guest #!guestは一派ユーザー
+      errors.add(:email, "このメールアドレスは使用できません")
+    end
+  end
+  
 end
