@@ -57,3 +57,29 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="thanksModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="thanksModalLabel">投稿ありがとうございます!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        他にも知っているルートを共有しませんか？
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal自動表示 -->
+<% if flash[:success] %>
+  <script>
+    (() => {
+      // scriptが読み込まれた瞬間に実行される
+      const modal = new bootstrap.Modal(document.getElementById('thanksModal'));
+      modal.show();
+    })();
+  </script>
+<% end %>
