@@ -1,57 +1,59 @@
-<div class="container station-compass custom-content">
-  <div class="row justify-content-center">
-    <!-- サービス紹介部分 -->
-    <div class="col-12 col-md-8 col-lg-4 my-5">
-      <div class="text-start text-md-center">
-        <p class="mb-0 lh-lg">
-          駅の雑踏の中でも、道はいつもそこにある。<br>
-          迷いそうになった瞬間、ふと確認できるルートが心を落ち着かせます。<br>
-          駅コンパスは、改札から出口までのルートを検索し、ユーザー同士で共有できる駅ナビアプリです。
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ボタンを独立した行にする -->
-  <% if !user_signed_in? %>
+<div class="hero-background">
+  <div class="container station-compass custom-content">
     <div class="row justify-content-center">
-      <div class="col-12 col-md-auto mb-5 text-center">
-          <%= link_to "ゲストとしてログイン", users_guest_sign_in_path, 
-            class: "btn btn-outline-success rounded-5 w-100 w-md-auto px-md-5 mb-3", data: { turbo_method: :post } %>
+      <!-- サービス紹介部分 -->
+      <div class="col-12 col-md-8 col-lg-4 my-5">
+        <div class="text-start text-md-center">
+          <p class="mb-0 lh-lg hero-text">
+            駅の雑踏の中でも、道はいつもそこにある。<br>
+            迷いそうになった瞬間、ふと確認できるルートが心を落ち着かせます。<br>
+            駅コンパスは、改札から出口までのルートを検索し、ユーザー同士で共有できる駅ナビアプリです。
+          </p>
+        </div>
       </div>
     </div>
-  <% end %>
 
-  <!-- 3つの要素も独立した行にする -->
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-8 col-lg-6">
-      <div class="row g-3 mb-4">
-        <div class="col-md-6">
-          <div class="card h-100">
-            <div class="card-body text-center">
-              <i class="fas fa-map-marked-alt fa-3x text-info mb-3"></i>
-              <h6>ルート投稿</h6>
-              <p class="card-text small">
-                知っている便利なルートを投稿して<br>
-                <strong class="text-success">みんなの役に立とう</strong>
-              </p>
+    <!-- ボタンを独立した行にする -->
+    <% if !user_signed_in? %>
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-auto mb-5 text-center">
+            <%= link_to "ゲストとしてログイン", users_guest_sign_in_path, 
+              class: "btn btn-light rounded-5 w-100 w-md-auto px-md-5 mb-3 fw-semibold shadow", data: { turbo_method: :post } %>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- つの要素も独立した行にする -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-map-marked-alt fa-3x text-info mb-3"></i>
+                <h6>ルート投稿</h6>
+                <p class="card-text small">
+                  知っている便利なルートを投稿して<br>
+                  <strong class="text-success">みんなの役に立とう</strong>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="col-md-6">
-          <div class="card h-100">
-            <div class="card-body text-center">
-              <i class="fa-solid fa-comments fa-3x text-warning mb-3"></i>
-              <h6>情報交換</h6>
-              <p class="card-text small">
-                「このルート使いやすい！」<br>
-                <strong class="text-success">リアルな声が聞ける</strong>
-              </p>
+          
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <i class="fa-solid fa-comments fa-3x text-warning mb-3"></i>
+                <h6>情報交換</h6>
+                <p class="card-text small">
+                  「このルート使いやすい！」<br>
+                  <strong class="text-success">リアルな声が聞ける</strong>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>  
+        </div>  
+      </div>
     </div>
   </div>
 </div>
