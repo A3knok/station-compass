@@ -16,7 +16,7 @@
       <%= f.label :exit_id_eq, Route.human_attribute_name(:exit_id), class: "form-label" %>
     </strong>
     
-    <%= f.collection_select :exit_id_eq, @exits, :id, :name,
+    <%= f.collection_select :exit_id_eq, @exits, :id, :display_name,
                             { include_blank: 'すべて'},
                             { class: "form-select" } %>
   </div>

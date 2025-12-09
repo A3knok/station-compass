@@ -27,7 +27,7 @@ railway_companies_data = [
 
 railway_companies = railway_companies_data.map do |company_data|
   # RailwayCompanyオブジェクトの配列が渡される
-  # RailwayCompanu.find_or_creare_by!(name: "テスト鉄道2")みたく渡される
+  # RailwayCompany.find_or_create_by!(name: "テスト鉄道2")みたく渡される
   RailwayCompany.find_or_create_by!(company_data)
 end
 

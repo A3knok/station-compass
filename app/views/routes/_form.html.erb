@@ -39,7 +39,7 @@
     <strong>
       <%= f.label :exit_id, class: "form-label" %>
     </strong>
-    <%= f.collection_select :exit_id, @exits, :id, :name,
+    <%= f.collection_select :exit_id, @exits, :id, :display_name,
                             { include_blank: '目的地を選択'},
                             { class: "form-select" } %>
   </div>
