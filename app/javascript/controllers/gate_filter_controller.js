@@ -48,7 +48,12 @@ export default class extends Controller {
   showAllGates() {
     // gatesByCompanyValueの値だけ取り出してvalueの配列を1つにまとめて返す
     const allGates = Object.values(this.gatesByCompanyValue).flat()
-    this.addGateOptions(allGates)
+
+    const sortedGates = allGates.sort((a, b) => {
+      return a.name.localeCompare(b.name, 'ja')
+    })
+
+    this.addGateOptions(sortedGates)
   }
 
   addGateOptions(gates) {

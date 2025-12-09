@@ -19,7 +19,7 @@
             <%= route.gate&.name || "出発地未設定" %>
             <i class="fas fa-arrow-right mx-2 text-muted"></i>
             <i class="fas fa-flag-checkered text-danger me-1"></i>
-            <%= route.exit&.name || "目的地未設定" %>
+            <%= route.exit&.display_name || "目的地未設定" %>
           </span>
         <% end %>
 

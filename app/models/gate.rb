@@ -8,7 +8,7 @@ class Gate < ApplicationRecord
   end
 
   def self.grouped_by_company
-    gates = Gate.includes(:railway_company)
+    gates = Gate.includes(:railway_company).order(name: :asc)
 
     # group_byはハッシュを返す
     # group_by(&:railway_company_id)でもOK

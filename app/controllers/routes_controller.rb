@@ -57,15 +57,15 @@ class RoutesController < ApplicationController
   end
 
   def set_new_form_data
-    @exits = Exit.all
-    @railway_companies = RailwayCompany.all.order(:name)
+    @exits = Exit.order(name: :asc)
+    @railway_companies = RailwayCompany.all.order(name: :asc)
     @gates_by_company = Gate.grouped_by_company.to_json
     @gates = []
   end
 
   def set_search_form_data
-    @exits = Exit.all
-    @gates = Gate.all
+    @exits = Exit.order(name: :asc)
+    @gates = Gate.order(name: :asc)
   end
 
   def route_params
