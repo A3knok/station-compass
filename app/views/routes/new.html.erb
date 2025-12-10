@@ -1,4 +1,4 @@
-<div class="page-container station-atmosphere">
+<div class="page-container">
   <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-6">
@@ -9,7 +9,7 @@
           <%= t('.title') %>
         </h2>
       <%= render 'shared/error_messages', resource: @route %>
-      <div data-controller="gate-filter"
+      <div class="form-container" data-controller="gate-filter"
           data-gate-filter-gates-by-company-value="<%= @gates_by_company %>">
         <%= render 'form', route: @route %>
       </div>
