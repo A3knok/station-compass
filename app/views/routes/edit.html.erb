@@ -1,15 +1,15 @@
-<div class="page-container station-atmosphere">
+<div class="page-container">
   <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-6">
         <div class="station-sign-bar mb-3"></div>
 
         <h2 class="text-center mb-5">
-          <i class="fas fa-user me-2 text-primary"></i>
+          <i class="fas fa-pen-to-square me-2 text-warning"></i>
           <%= t('.title') %>
         </h2>
         <%= render 'shared/error_messages', resource: @route %>
-        <div data-controller="gate-filter"
+        <div class="form-container" data-controller="gate-filter"
             data-gate-filter-gates-by-company-value="<%= @gates_by_company %>">
           <%= render 'form', route: @route %>
         </div>

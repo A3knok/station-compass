@@ -1,10 +1,10 @@
-<div class="page-container station-atmosphere">
+<div class="page-container">
   <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-6">
         <div class="station-sign-bar mb-3"></div>
         <h2 class="text-center mb-5">
-          <i class="fas fa-user me-2 text-primary"></i>
+          <i class="fas fa-route me-2 text-primary"></i>
           <%= t('.title') %>
         </h2>
       </div>
@@ -19,7 +19,7 @@
             <i class="fas fa-newspaper text-success me-2"></i>
             <%= t('.total_routes_count') %>
           </h6>
-          <span><%= @routes.count %>件</span>
+          <span class="badge bg-success fs-6"><%= @routes.count %>件</span>
         </div>
 
         <!-- ルート概要一覧 -->

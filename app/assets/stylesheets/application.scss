@@ -8,6 +8,9 @@ a {
   text-decoration: none;
 }
 
+/*-----------------
+フローティングボタン
+-----------------*/
 .floating-action-button {
   position: fixed;
   bottom: 2rem;
@@ -47,47 +50,19 @@ a {
   i {
     transition: transform 0.3s ease;
   }
-  
-  // レスポンシブ対応
-  @media (max-width: 768px) {
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 56px;
-    height: 56px;
-    font-size: 1.3rem;
-  }
 }
 
-// 共通
+/*-----------------
+共通コンテンツ
+-----------------*/
 .page-container {
-  background: linear-gradient(180deg, #f0f8ff 0%, #ffffff 100%);
-  min-height: 100vh;
-  padding-bottom: 3rem;
-}
-
-.station-atmosphere {
   // 駅構内の明るい雰囲気
   background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
   min-height: 100vh;
   position: relative;
-  
-  // 駅の天井照明のような光の効果
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 200px;
-    background: radial-gradient(
-      ellipse at top,
-      rgba(79, 172, 254, 0.08) 0%,
-      transparent 70%
-    );
-    pointer-events: none;
-  }
 }
 
+// タイトル上のバー装飾
 .station-sign-bar {
   height: 8px;
   background: linear-gradient(
@@ -108,7 +83,7 @@ a {
 }
 
 // タイトルに駅の案内板風のスタイル
-.station-atmosphere h2 {
+.page-container h2 {
   font-weight: 700;
   letter-spacing: 0.05em;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -120,7 +95,10 @@ a {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.station-atmosphere [data-controller="gate-filter"] {
+/*-----------------
+投稿フォーム
+-----------------*/
+.form-container {
   background: #ffffff;
   border-radius: 12px;
   padding: 2rem;
@@ -150,7 +128,7 @@ a {
   }
 }
 
-.station-atmosphere .form-group {
+.page-container .form-group {
   position: relative;
   padding-left: 8px;
   
@@ -172,7 +150,7 @@ a {
 }
 
 // セレクトボックスに駅の券売機的なスタイル
-.station-atmosphere .form-select {
+.page-container .form-select {
   border: 2px solid #dee2e6;
   border-radius: 8px;
   padding: 0.75rem 1rem;
@@ -187,54 +165,8 @@ a {
   }
 }
 
-/*----- トップページ -----*/
-.hero-background {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  padding: 3rem 0;
-  position: relative;
-  overflow: hidden;
-
-  .hero-text {
-    color: #fff;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    font-size: 1.1rem;
-    line-height: 1.8;
-  }
-
-  &::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -10%;
-  width: 500px;
-  height: 500px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-}
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -30%;
-    left: -5%;
-    width: 400px;
-    height: 400px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50%;
-  }
-
-  .card {
-  transition: all 0.3s ease;
-
-    &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-    }
-  }
-}
-
 /*-----------------
-ヘッダー
+ヘッダー(header)
 -----------------*/
 .site-header {
   background: #fff;
@@ -281,12 +213,56 @@ a {
   }
 }
 
-/*-----------------
-マイページ
------------------*/
+/*---------------------
+トップページ(static-page)
+---------------------*/
+.hero-background {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  padding: 3rem 0;
+  position: relative;
+  overflow: hidden;
+
+  .hero-text {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  &::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+  }
+
+  .card {
+  transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+  }
+}
 
 /*-----------------
-投稿一覧画面
+投稿一覧画面(index)
 -----------------*/
 .count-area {
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
@@ -302,16 +278,6 @@ a {
     margin-bottom: 0;
     color: #212529;
     font-size: 1.1rem;
-  }
-
-  span {
-    background: #0d6efd;
-    color: #ffffff;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    box-shadow: 0 2px 4px rgba(13, 110, 253, 0.3);
   }
 }
 
@@ -353,7 +319,16 @@ a {
   }
 }
 
-/*----- 投稿詳細画面 -----*/
+/*-----------------
+投稿詳細画面(show)
+-----------------*/
+.route-description {
+  p {
+    margin-bottom: 0 !important;
+  }
+}
+
+// 最終更新日dt, dd
 dt.route-old,
 dd.route-old {
   background-color: #F06060;
@@ -399,3 +374,22 @@ dd.route-fresh {
   border-radius: 0 8px 8px 0;
 }
 
+
+/*-----------------
+レスポンシブ
+-----------------*/
+@media (max-width: 768px) {
+  // フローティングボタン
+  .floating-action-button {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+    font-size: 1.3rem;    
+  }
+
+  // ルート一覧画面(index)
+  .routes-grid {
+    display: block;
+  }
+}
