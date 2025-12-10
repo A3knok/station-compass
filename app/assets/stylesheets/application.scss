@@ -8,6 +8,9 @@ a {
   text-decoration: none;
 }
 
+/*-----------------
+フローティングボタン
+-----------------*/
 .floating-action-button {
   position: fixed;
   bottom: 2rem;
@@ -46,15 +49,6 @@ a {
   // アイコンの回転アニメーション
   i {
     transition: transform 0.3s ease;
-  }
-  
-  // レスポンシブ対応
-  @media (max-width: 768px) {
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 56px;
-    height: 56px;
-    font-size: 1.3rem;
   }
 }
 
@@ -102,7 +96,7 @@ a {
 }
 
 /*-----------------
-フォーム共通
+投稿フォーム
 -----------------*/
 .form-container {
   background: #ffffff;
@@ -172,7 +166,7 @@ a {
 }
 
 /*-----------------
-ヘッダー
+ヘッダー(header)
 -----------------*/
 .site-header {
   background: #fff;
@@ -219,9 +213,9 @@ a {
   }
 }
 
-/*-----------------
-トップページ
------------------*/
+/*---------------------
+トップページ(static-page)
+---------------------*/
 .hero-background {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   padding: 3rem 0;
@@ -268,7 +262,7 @@ a {
 }
 
 /*-----------------
-投稿一覧画面
+投稿一覧画面(index)
 -----------------*/
 .count-area {
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
@@ -284,16 +278,6 @@ a {
     margin-bottom: 0;
     color: #212529;
     font-size: 1.1rem;
-  }
-
-  span {
-    background: #0d6efd;
-    color: #ffffff;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    box-shadow: 0 2px 4px rgba(13, 110, 253, 0.3);
   }
 }
 
@@ -335,7 +319,16 @@ a {
   }
 }
 
-/*----- 投稿詳細画面 -----*/
+/*-----------------
+投稿詳細画面(show)
+-----------------*/
+.route-description {
+  p {
+    margin-bottom: 0 !important;
+  }
+}
+
+// 最終更新日dt, dd
 dt.route-old,
 dd.route-old {
   background-color: #F06060;
@@ -381,3 +374,22 @@ dd.route-fresh {
   border-radius: 0 8px 8px 0;
 }
 
+
+/*-----------------
+レスポンシブ
+-----------------*/
+@media (max-width: 768px) {
+  // フローティングボタン
+  .floating-action-button {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+    font-size: 1.3rem;    
+  }
+
+  // ルート一覧画面(index)
+  .routes-grid {
+    display: block;
+  }
+}
