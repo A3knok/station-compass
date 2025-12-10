@@ -1,33 +1,42 @@
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
-      <h2 class="text-center mb-5">
-        <i class="fa-solid fa-map-location-dot"></i>
-        <%= t('routes.index.title') %>
-      </h2>
-    </div>
-  </div>
-
-  <div class="row">
-    <!-- 左側：投稿一覧 -->
-    <div class="col-12 col-lg-8 order-2 order-lg-1">
-      <!-- 投稿総数 -->
-      <div class="d-flex justify-content-between border-bottom mb-4">
-        <h6>
-          <i class="fas fa-newspaper text-success me-2"></i>
-          <%= t('.total_routes_count') %>
-        </h6>
-        <span><%= @routes.count %>件</span>
-      </div>
-
-      <!-- ルート概要一覧 -->
-      <div class="routes-grid">
-        <%= render 'routes/route', routes: @routes, show_actions: false %>
+<div class="page-container station-atmosphere">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="station-sign-bar mb-3"></div>
+        <h2 class="text-center mb-5">
+          <i class="fas fa-user me-2 text-primary"></i>
+          <%= t('.title') %>
+        </h2>
       </div>
     </div>
-    <!-- 右側：検索フォーム -->
-    <div class="col-12 col-lg-4 order-1 order-lg-2 mb-4 mb-lg-0">
-      <%= render 'routes/search_form', route: @routes %>
+
+    <div class="row">
+      <!-- 左側：投稿一覧 -->
+      <div class="col-12 col-lg-8 order-2 order-lg-1">
+        <!-- 投稿総数 -->
+        <div class="d-flex justify-content-between align-items-center border-bottom mb-4 count-area">
+          <h6>
+            <i class="fas fa-newspaper text-success me-2"></i>
+            <%= t('.total_routes_count') %>
+          </h6>
+          <span><%= @routes.count %>件</span>
+        </div>
+
+        <!-- ルート概要一覧 -->
+        <div class="routes-grid">
+          <%= render 'routes/route', 
+              routes: @routes,
+              show_actions: false %>
+        </div>
+      </div>
+      <!-- 右側：検索フォーム -->
+      <div class="col-12 col-lg-4 order-1 order-lg-2 mb-4 mb-lg-0">
+        <%= render 'routes/search_form', route: @routes %>
+      </div>
     </div>
   </div>
 </div>
+
+<%= link_to new_route_path, class: "floating-action-button", title: "新規投稿" do %>
+  <i class="fas fa-plus"></i>
+<% end %>

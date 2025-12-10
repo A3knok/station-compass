@@ -2,11 +2,12 @@
   # 親ビューの“意図”を正しく受け取り意図しないエラーを防ぐ[.fetch]
   routes_data = local_assigns.fetch(:routes, false)
   show_actions = local_assigns.fetch(:show_actions, false)
+  custom_card_class = local_assigns.fetch(:card_class, 'bg-light')
 %>
 
 <% if routes_data.present? %>
   <% routes_data.each do |route| %>
-    <div class="bg-light rounded-3 p-3 mb-3">
+    <div class="<%= custom_card_class %> rounded-3 p-3 mb-3">
       <!-- ルート情報-->
       <div class="flex-grow-1 me-3">
         <!-- ルート名とリンク-->

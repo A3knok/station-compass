@@ -1,85 +1,89 @@
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
-      <h2 class="text-center mb-5">
-        <i class="fas fa-user me-2"></i>
-        <%= t('routes.show.title') %>
-      </h2>
+<div class="page-container station-atmosphere">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="station-sign-bar mb-3"></div>
 
-      <div class="row mb-4">
-        <%= route_info_card("fas fa-door-open", "primary", :gate_id, @route.gate.name) %>
-        <%= route_info_card("fas fas fa-map-marker-alt", "success", :exit_id, @route.exit.name) %>
-        <%= route_info_card("fas fa-clock", "warning", :estimated_time, "#{@route.estimated_time}分") %>
-      </div>
+        <h2 class="text-center mb-5">
+          <i class="fas fa-user me-2 text-primary"></i>
+          <%= t('.title') %>
+        </h2>
 
-      <!-- ルート詳細エリア -->
-      <div class="card mb-4">
-        <div class="card-header bg-primary text-white">
-          <h4 class="mb-0">
-            <i class="fas fa-info-circle me-2"></i>
-            <span class="text-center"><%= t('routes.show.title') %></span>
-          </h4>
+        <div class="row mb-4 g-3">
+          <%= route_info_card("fas fa-door-open", "primary", :gate_id, @route.gate.name) %>
+          <%= route_info_card("fas fas fa-map-marker-alt", "success", :exit_id, @route.exit.name) %>
+          <%= route_info_card("fas fa-clock", "warning", :estimated_time, "#{@route.estimated_time}分") %>
         </div>
-        <div class="card-body">
-          <dl class="row mb-0">
-            <dt class="col-sm-4 text-muted"><%= t('.gate') %></dt>
-            <dd class="col-sm-8"><%= @route.gate.name %></dd>
-            
-            <dt class="col-sm-4 text-muted"><%= t('.exit') %></dt>
-            <dd class="col-sm-8"><%= @route.exit.name %></dd>
-            
-            <dt class="col-sm-4 text-muted"><%= t('.route_text') %></dt>
-            <!-- 改行をHTMLタグに変換 -->
-            <dd class="col-sm-8"><%= simple_format(@route.description) %></dd>
-            
-            <dt class="col-sm-4 text-muted"><%= t('.created_at') %></dt>
-            <dd class="col-sm-8"><%= l(@route.created_at, format: :route_list) %></dd>
 
-            <dt class="col-sm-4 <%= route_freshness_class(@route) %>">
-              <%= t('.updated_at') %>
-            </dt>
-            <dd class="col-sm-8 mb-0 <%= route_freshness_class(@route) %>">
-              <%= l(@route.updated_at, format: :route_list) %>
-            </dd>
+        <!-- ルート詳細エリア -->
+        <div class="card mb-4">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+              <i class="fas fa-info-circle me-2"></i>
+              <span class="text-center"><%= t('routes.show.title') %></span>
+            </h4>
+          </div>
+          <div class="card-body">
+            <dl class="row mb-0">
+              <dt class="col-sm-4 text-muted"><%= t('.gate') %></dt>
+              <dd class="col-sm-8"><%= @route.gate.name %></dd>
+              
+              <dt class="col-sm-4 text-muted"><%= t('.exit') %></dt>
+              <dd class="col-sm-8"><%= @route.exit.name %></dd>
+              
+              <dt class="col-sm-4 text-muted"><%= t('.route_text') %></dt>
+              <!-- 改行をHTMLタグに変換 -->
+              <dd class="col-sm-8"><%= simple_format(@route.description) %></dd>
+              
+              <dt class="col-sm-4 text-muted"><%= t('.created_at') %></dt>
+              <dd class="col-sm-8"><%= l(@route.created_at, format: :route_list) %></dd>
 
-            <% if route_freshness_message(@route).present? %>
-              <dt class="col-sm-4"></dt>
+              <dt class="col-sm-4 <%= route_freshness_class(@route) %>">
+                <%= t('.updated_at') %>
+              </dt>
               <dd class="col-sm-8 mb-0 <%= route_freshness_class(@route) %>">
-                <small class="mb-2">
-                  <%= route_freshness_message(@route) %>
-                </small>
+                <%= l(@route.updated_at, format: :route_list) %>
               </dd>
-            <% end %>
-          </dl>
+
+              <% if route_freshness_message(@route).present? %>
+                <dt class="col-sm-4"></dt>
+                <dd class="col-sm-8 mb-0 <%= route_freshness_class(@route) %>">
+                  <small class="mb-2">
+                    <%= route_freshness_message(@route) %>
+                  </small>
+                </dd>
+              <% end %>
+            </dl>
+          </div>
+        </div>
+        <%= render 'routes/action_buttons', route: @route %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="thanksModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="thanksModalLabel">投稿ありがとうございます!</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          他にも知っているルートを共有しませんか？
         </div>
       </div>
-      <%= render 'routes/action_buttons', route: @route %>
     </div>
   </div>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="thanksModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="thanksModalLabel">投稿ありがとうございます!</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        他にも知っているルートを共有しませんか？
-      </div>
-    </div>
-  </div>
+  <!-- modal自動表示 -->
+  <% if flash[:success] %>
+    <script>
+      (() => {
+        // scriptが読み込まれた瞬間に実行される
+        const modal = new bootstrap.Modal(document.getElementById('thanksModal'));
+        modal.show();
+      })();
+    </script>
+  <% end %>
 </div>
-
-<!-- modal自動表示 -->
-<% if flash[:success] %>
-  <script>
-    (() => {
-      // scriptが読み込まれた瞬間に実行される
-      const modal = new bootstrap.Modal(document.getElementById('thanksModal'));
-      modal.show();
-    })();
-  </script>
-<% end %>

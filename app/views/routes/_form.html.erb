@@ -1,9 +1,9 @@
 <%= form_with model: route do |f| %>
-  <div class="mb-3">
-    <i class="fa-solid fa-train text-secondary me-1"></i>
+  <div class="mb-3 ps-3 form-group">
     <strong>
       <%= label_tag :railway_company_id, t('routes.railway_company'), class: "form-label " %>
     </strong>
+    <i class="fa-solid fa-train text-secondary me-1"></i>
     <%= select_tag :railway_company_id,
                     # <option>の生成
                     options_from_collection_for_select(
@@ -22,41 +22,41 @@
                     } %>
   </div>
 
-  <div class="mb-3">
-    <i class="fas fa-location-dot text-success me-1"></i>
+  <div class="mb-3 ps-3 form-group">
     <strong>
       <%= f.label :gate_id, class: "form-label" %>
     </strong>
+    <i class="fas fa-location-dot text-success me-1"></i>
     <%= f.collection_select :gate_id, @gates, :id, :name, 
                             { include_blank: '出発地を選択'},
                             { class: "form-select",
                               data: { gate_filter_target: "gate" }
                             } %>
   </div>
-  
-  <div class="mb-3">
-    <i class="fas fa-flag-checkered text-danger me-1"></i>
+
+  <div class="mb-3 ps-3 form-group">
     <strong>
       <%= f.label :exit_id, class: "form-label" %>
     </strong>
+    <i class="fas fa-flag-checkered text-danger me-1"></i>
     <%= f.collection_select :exit_id, @exits, :id, :display_name,
                             { include_blank: '目的地を選択'},
                             { class: "form-select" } %>
   </div>
   
-  <div class="mb-3">
-    <i class="fa-solid fa-map-location-dot text-warning"></i>
+  <div class="mb-3 ps-3 form-group">
     <strong>
       <%= f.label :description, class: "form-label" %>
     </strong>
+    <i class="fa-solid fa-map-location-dot text-warning"></i>
     <%= f.text_area :description, class: "form-control" %>
   </div>
   
-  <div class="mb-3">
-    <i class="fas fa-history text-info me-2"></i>
+  <div class="mb-3 ps-3 form-group">
     <strong>
       <%= f.label :estimated_time, class: "form-label" %>
     </strong>
+    <i class="fas fa-history text-info me-2"></i>
     <%= f.number_field :estimated_time, class: "form-control" %>
   </div>
   
