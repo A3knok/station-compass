@@ -35,6 +35,10 @@ ja:
       total_routes_count: 投稿総数
     edit:
       title: ルート編集
+  
+  privacy_policies:
+    privacy_policy:
+      title: プライバシーポリシー
 
   header:
     login: ログイン
