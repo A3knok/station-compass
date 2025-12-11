@@ -16,9 +16,10 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-
   root "static_pages#index"
+  get "privacy_policy", to: "privacy_policies#privacy_policy"
 
   resources :users, only: %i[show]
   resources :routes, only: %i[new show create index edit update destroy]
+
 end
