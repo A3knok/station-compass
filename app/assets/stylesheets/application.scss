@@ -286,9 +286,9 @@ a {
   padding: 1.5rem;
   border: 2px solid rgba(13, 110, 253, 0.15);
   border-top: none; // 上部の投稿総数と繋げる
+  margin-bottom: 0;
   border-radius: 0 0 8px 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 2rem; // 下に余白を追加
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
@@ -391,5 +391,16 @@ dd.route-fresh {
   // ルート一覧画面(index)
   .routes-grid {
     display: block;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-body dt {
+    margin-bottom: 8px;
+  }
+  
+  .card-body dd {
+    border-bottom: 1px solid var(--bs-border-color);
+    padding-bottom: 8px;
   }
 }

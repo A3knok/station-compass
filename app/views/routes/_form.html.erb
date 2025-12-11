@@ -3,7 +3,7 @@
     <strong>
       <%= label_tag :railway_company_id, t('routes.railway_company'), class: "form-label " %>
     </strong>
-    <i class="fa-solid fa-train text-secondary me-1"></i>
+    <i class="fa-solid fa-train text-secondary"></i>
     <%= select_tag :railway_company_id,
                     # <option>の生成
                     options_from_collection_for_select(
@@ -26,7 +26,8 @@
     <strong>
       <%= f.label :gate_id, class: "form-label" %>
     </strong>
-    <i class="fas fa-location-dot text-success me-1"></i>
+    <i class="fas fa-location-dot text-success"></i>
+    <span style="color: red;">*</span>
     <%= f.collection_select :gate_id, @gates, :id, :name, 
                             { include_blank: '出発地を選択'},
                             { class: "form-select",
@@ -38,7 +39,8 @@
     <strong>
       <%= f.label :exit_id, class: "form-label" %>
     </strong>
-    <i class="fas fa-flag-checkered text-danger me-1"></i>
+    <i class="fas fa-flag-checkered text-danger"></i>
+    <span style="color: red;">*</span>
     <%= f.collection_select :exit_id, @exits, :id, :display_name,
                             { include_blank: '目的地を選択'},
                             { class: "form-select" } %>
@@ -49,6 +51,7 @@
       <%= f.label :description, class: "form-label" %>
     </strong>
     <i class="fa-solid fa-map-location-dot text-warning"></i>
+    <span style="color: red;">*</span>
     <%= f.text_area :description, class: "form-control" %>
   </div>
   
@@ -56,7 +59,8 @@
     <strong>
       <%= f.label :estimated_time, class: "form-label" %>
     </strong>
-    <i class="fas fa-history text-info me-2"></i>
+    <i class="fas fa-history text-info"></i>
+    <span style="color: red;">*</span>
     <%= f.number_field :estimated_time, class: "form-control" %>
   </div>
   
