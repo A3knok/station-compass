@@ -6,6 +6,9 @@
       next
     end
   %>
+
+  <% next if message_type == "show_thanks_modal" %>
+
   <div class="alert <%= flash_bootstrap_class(message_type) %>">
     <%= message %>
   </div>
