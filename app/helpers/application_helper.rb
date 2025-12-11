@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def page_title(title = '')
+  def page_title(title = "")
     base_title = "駅コンパス"
     title.present? ? "#{title} | #{base_title}" : base_title
   end
