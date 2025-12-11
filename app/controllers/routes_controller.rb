@@ -25,7 +25,7 @@ class RoutesController < ApplicationController
     @route = current_user.routes.build(route_params)
 
     if @route.save
-      redirect_to route_path(@route), success: t("flash_messages.routes.create.success")
+      redirect_to route_path(@route), flash: { show_thanks_modal: true } # モーダル用のflash
     else
       flash.now[:danger] = t("flash_messages.routes.create.failure")
       render :new, status: :unprocessable_entity

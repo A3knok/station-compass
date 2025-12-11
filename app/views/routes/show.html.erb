@@ -67,9 +67,9 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- モーダルウィンドウ -->
   <div class="modal fade" id="thanksModal" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="thanksModalLabel">投稿ありがとうございます!</h1>
@@ -78,12 +78,16 @@
         <div class="modal-body">
           他にも知っているルートを共有しませんか？
         </div>
+
+        <div class="modal-footer">
+          <%= link_to "続けて投稿する", new_route_path, class: "btn btn-primary" %>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- modal自動表示 -->
-  <% if flash[:success] %>
+  <% if flash[:show_thanks_modal] %>
     <script>
       (() => {
         // scriptが読み込まれた瞬間に実行される
