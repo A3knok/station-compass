@@ -1,3 +1,5 @@
+<%= content_for(:title, t('.title')) %>
+
 <div class="page-container">
   <div class="container py-5">
     <div class="row justify-content-center">
@@ -5,7 +7,7 @@
         <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="station-sign-bar mb-3"></div>
           <h2 class="text-center mb-5">
-            <%= t('.sign_in') %>
+            <%= t('.title') %>
           </h2>
           <%= render 'shared/error_messages' %>
             <div class="field mb-3">
