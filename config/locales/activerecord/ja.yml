@@ -11,7 +11,7 @@ ja:
         name: ユーザー名
         email: メールアドレス
         password: パスワード
-        # password_confirmation: パスワード(確認用)
+        password_confirmation: パスワード(確認用)
 
       route:
         gate_id: 出発地
@@ -40,6 +40,7 @@ ja:
               too_short: "は6文字以上で入力してください"
             password_confirmation:
               blank: "を再入力してください"
+              confirmation: "とパスワードの入力が一致しません"
               
         route:
           attributes:
