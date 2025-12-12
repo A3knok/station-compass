@@ -9,6 +9,7 @@ class RoutesController < ApplicationController
   def index
     @q = Route.ransack(params[:q])
     @routes = @q.result(distinct: true).includes(:gate, :exit).order(created_at: :desc)
+    @station = Station.find_by(name: "渋谷駅")
   end
 
   def show
