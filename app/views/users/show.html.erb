@@ -41,7 +41,9 @@
               <%= t('.history') %>
             </dt>
             <dd class="col-12">
-              <%= render 'routes/route', routes: @recent_routes, show_actions: true %>
+              <%= render 'routes/route', routes: @recent_routes,
+                                          station: @station,
+                                          show_actions: true %>
             </dd>
           </dl>
         </div>    

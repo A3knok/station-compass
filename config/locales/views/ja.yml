@@ -25,6 +25,7 @@ ja:
       title: 新規投稿
     show:
       title: ルート詳細
+      station: 駅名
       gate: 改札詳細
       exit: 出口詳細
       route_text: ルート説明

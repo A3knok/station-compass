@@ -8,6 +8,7 @@ class UsersController < ApplicationController
                     .limit(5)
                     .order(created_at: :desc)
     @total_routes_count = @user.routes.count
+    @station = Station.find_by(name: "渋谷駅")
   end
 
   private

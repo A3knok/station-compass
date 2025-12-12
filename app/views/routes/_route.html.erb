@@ -10,7 +10,13 @@
     <div class="<%= custom_card_class %> rounded-3 p-3 mb-3">
       <!-- ルート情報-->
       <div class="flex-grow-1 me-3">
-        <!-- ルート名とリンク-->
+          <div class="d-flex align-items-center mb-2">
+            <span class="badge bg-primary">
+              <i class="fas fa-train me-1"></i>
+              <%= station[:name] %>
+            </span>
+          </div>
+        <!-- 情報鮮度管理メッセージ -->
         <small class="d-block mb-2 <%= route_freshness_class(route) %>">
           <%= route_freshness_message(route) %>
         </small>
