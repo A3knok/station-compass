@@ -13,7 +13,7 @@
       <%= render 'shared/error_messages', resource: @route %>
       <div class="form-container" data-controller="gate-filter"
           data-gate-filter-gates-by-company-value="<%= @gates_by_company %>">
-        <%= render 'form', route: @route %>
+        <%= render 'form', route: @route, station: @station %>
       </div>
     </div>
   </div>

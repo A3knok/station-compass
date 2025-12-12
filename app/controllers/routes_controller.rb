@@ -1,5 +1,6 @@
 class RoutesController < ApplicationController
   before_action :set_route, only: %i[ show edit update destroy ]
+  before_action :set_station
   before_action :check_route_owner, only: %i[ edit update destroy ]
   before_action :set_search_form_data, only: %i[ index ]
   before_action :set_new_form_data, only: %i[ new create edit update ]
@@ -9,7 +10,6 @@ class RoutesController < ApplicationController
   def index
     @q = Route.ransack(params[:q])
     @routes = @q.result(distinct: true).includes(:gate, :exit).order(created_at: :desc)
-    @station = Station.find_by(name: "渋谷駅")
   end
 
   def show
@@ -51,6 +51,10 @@ class RoutesController < ApplicationController
 
   def set_route
     @route = Route.find_by(id: params[:id])
+  end
+
+  def set_station
+    @station = Station.find_by(name: "渋谷駅")
   end
 
   def check_route_owner

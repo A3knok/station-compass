@@ -1,5 +1,12 @@
 <%= form_with model: route do |f| %>
   <div class="mb-3 ps-3 form-group">
+    <div>
+      <strong class="d-block">駅名</strong>
+      <span><%= station.name %></span>
+    </div>
+  </div>
+
+  <div class="mb-3 ps-3 form-group">
     <strong>
       <%= label_tag :railway_company_id, t('routes.railway_company'), class: "form-label " %>
     </strong>
