@@ -16,7 +16,8 @@
                     options_from_collection_for_select(
                       @railway_companies,
                       :id,
-                      :name
+                      :name,
+                      route.gate&.railway_company_id # 編集時は選択済みの状態にする
                     ),
                     {
                       include_blank: '路線を選択',
