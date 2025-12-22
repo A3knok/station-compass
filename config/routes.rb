@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # CI / LoadBalancer 用のヘルスチェック
-  get "/healthz", to: proc { [200, {}, ["OK"]] }
+  get "/healthz", to: proc { [ 200, {}, [ "OK" ] ] }
 
   # DeviseをUserモデルに適用する
   devise_for :users, controllers: {
