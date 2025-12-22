@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   # DeviseをUserモデルに適用する
   devise_for :users, controllers: {
     # ヘルスチェック専用エンドポイント
-    get '/healthz', to: proc { [200, {}, ['OK']] }
-    
+    get "/healthz", to: proc { [200, {}, ['OK']] }
+
     sessions: "users/sessions",
     registrations: "users/registrations"
   }
