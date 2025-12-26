@@ -13,7 +13,7 @@ class MigrateUsersToUuid < ActiveRecord::Migration[7.2]
     rename_column :users, :id, :old_id
     # 4.uuidカラムの名前を変更
     rename_column :users, :uuid, :id
-    #5.主キーを変更
+    # 5.主キーを変更
     execute "ALTER TABLE users DROP CONSTRAINT users_pkey;"
     execute "ALTER TABLE users ADD PRIMARY KEY (id);"
 

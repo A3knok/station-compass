@@ -13,7 +13,7 @@ class MigrateExitsToUuid < ActiveRecord::Migration[7.2]
     rename_column :exits, :id, :old_id
     # 4.uuidカラムの名前を変更
     rename_column :exits, :uuid, :id
-    #5.主キーを変更
+    # 5.主キーを変更
     execute "ALTER TABLE exits DROP CONSTRAINT exits_pkey;" # 今の主キー制約を解除
     execute "ALTER TABLE exits ADD PRIMARY KEY (id);" # 新しい主キーを設定
 

@@ -13,7 +13,7 @@ class MigrateGatesToUuid < ActiveRecord::Migration[7.2]
     rename_column :gates, :id, :old_id
     # 4.uuidカラムの名前を変更
     rename_column :gates, :uuid, :id
-    #5.主キーを変更
+    # 5.主キーを変更
     execute "ALTER TABLE gates DROP CONSTRAINT gates_pkey;" # 今の主キー制約を解除
     execute "ALTER TABLE gates ADD PRIMARY KEY (id);" # 新しい主キーを設定
 

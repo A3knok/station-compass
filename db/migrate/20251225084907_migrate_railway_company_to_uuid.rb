@@ -13,7 +13,7 @@ class MigrateRailwayCompanyToUuid < ActiveRecord::Migration[7.2]
     rename_column :railway_companies, :id, :old_id
     # 4.uuidカラムの名前を変更
     rename_column :railway_companies, :uuid, :id
-    #5.主キーを変更
+    # 5.主キーを変更
     execute "ALTER TABLE railway_companies DROP CONSTRAINT railway_companies_pkey;" # 今の主キー制約を解除
     execute "ALTER TABLE railway_companies ADD PRIMARY KEY (id);" # 新しい主キーを設定
 
