@@ -14,7 +14,7 @@ class MigrateRoutesToUuid < ActiveRecord::Migration[7.2]
     rename_column :routes, :id, :old_id
     # 4.uuidカラムの名前を変更
     rename_column :routes, :uuid, :id
-    #5.主キーを変更
+    # 5.主キーを変更
     execute "ALTER TABLE routes DROP CONSTRAINT routes_pkey;" # 今の主キー制約を解除
     execute "ALTER TABLE routes ADD PRIMARY KEY (id);" # 新しい主キーを設定
     # 6.古いidカラムの削除
