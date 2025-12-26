@@ -10,55 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_04_024341) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_26_030239) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "exits", force: :cascade do |t|
-    t.bigint "station_id", null: false
+  create_table "exits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "direction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "station_id", null: false
+    t.index ["id"], name: "index_exits_on_id", unique: true
     t.index ["station_id"], name: "index_exits_on_station_id"
   end
 
-  create_table "gates", force: :cascade do |t|
+  create_table "gates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.bigint "station_id", null: false
-    t.bigint "railway_company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "railway_company_id", null: false
+    t.uuid "station_id", null: false
+    t.index ["id"], name: "index_gates_on_id", unique: true
     t.index ["railway_company_id"], name: "index_gates_on_railway_company_id"
     t.index ["station_id"], name: "index_gates_on_station_id"
   end
 
-  create_table "railway_companies", force: :cascade do |t|
+  create_table "railway_companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_railway_companies_on_id", unique: true
   end
 
-  create_table "routes", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "gate_id", null: false
-    t.bigint "exit_id", null: false
+  create_table "routes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "estimated_time"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.uuid "gate_id", null: false
+    t.uuid "exit_id", null: false
     t.index ["exit_id"], name: "index_routes_on_exit_id"
     t.index ["gate_id"], name: "index_routes_on_gate_id"
+    t.index ["id"], name: "index_routes_on_id", unique: true
     t.index ["user_id"], name: "index_routes_on_user_id"
   end
 
-  create_table "stations", force: :cascade do |t|
+  create_table "stations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_stations_on_id", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -70,6 +76,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_04_024341) do
     t.boolean "guest", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["guest"], name: "index_users_on_guest"
+    t.index ["id"], name: "index_users_on_id", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
