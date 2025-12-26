@@ -23,7 +23,7 @@ class MigrateRailwayCompanyToUuid < ActiveRecord::Migration[7.2]
 
     # 6.新しい外部キーカラムを追加(UUID型)
     add_column :gates, :new_railway_company_id, :uuid
-    # 7.データ移行(userテーブルの新しいid(元uuidカラム)を参照)
+    # 7.データ移行(railway_companiesテーブルの新しいid(元uuidカラム)を参照)
     execute <<-SQL
       UPDATE gates
       SET new_railway_company_id = railway_companies.id
