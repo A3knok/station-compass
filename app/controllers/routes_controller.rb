@@ -68,6 +68,7 @@ class RoutesController < ApplicationController
     @gates_by_company = Gate.grouped_by_company.to_json
     @gates = []
     @categories = Category.all.order(name: :asc)
+    @tags = Tag.all.order(name: :asc)
   end
 
   def set_edit_form_data
