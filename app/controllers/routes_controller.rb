@@ -89,6 +89,6 @@ class RoutesController < ApplicationController
   end
 
   def route_params
-    params.require(:route).permit(:gate_id, :exit_id, :description,:category_id, :estimated_time)
+    params.require(:route).permit(:gate_id, :exit_id, :description, :category_id, :estimated_time)
   end
 end
