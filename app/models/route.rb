@@ -2,6 +2,7 @@ class Route < ApplicationRecord
   belongs_to :user
   belongs_to :gate, optional: true # 自動バリデーションを無効化
   belongs_to :exit, optional: true # 自動バリデーションを無効化
+  belongs_to :category, optional: true # 自動バリデーションを無効化
 
   validates :gate_id, presence: true
   validates :exit_id, presence: true

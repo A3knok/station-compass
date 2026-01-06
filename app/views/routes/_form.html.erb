@@ -71,6 +71,16 @@
     <span style="color: red;">*</span>
     <%= f.number_field :estimated_time, class: "form-control" %>
   </div>
+
+  <div class="mb-3 ps-3 form-group">
+    <strong>
+      <%= f.label :category_id, class: "form-label" %>
+    </strong>
+    <i class="fa-solid fa-list text-info"></i>
+    <%= f.collection_select :category_id, @categories, :id, :name,
+                            { include_blank: 'カテゴリーを選択'},
+                            { class: "form-select" } %>
+  </div>
   
   <div class="d-grid">
     <%= f.submit class: "btn btn-primary btn-lg" %>

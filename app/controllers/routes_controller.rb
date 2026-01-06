@@ -67,6 +67,7 @@ class RoutesController < ApplicationController
     @railway_companies = RailwayCompany.all.order(name: :asc)
     @gates_by_company = Gate.grouped_by_company.to_json
     @gates = []
+    @categories = Category.all.order(name: :asc)
   end
 
   def set_edit_form_data
@@ -88,6 +89,6 @@ class RoutesController < ApplicationController
   end
 
   def route_params
-    params.require(:route).permit(:gate_id, :exit_id, :description, :estimated_time)
+    params.require(:route).permit(:gate_id, :exit_id, :description,:category_id, :estimated_time)
   end
 end
