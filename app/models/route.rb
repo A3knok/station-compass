@@ -12,7 +12,7 @@ class Route < ApplicationRecord
   validates :estimated_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
   # 文字列を配列に変換
-  def tag_names=(names) # 
+  def tag_names=(names) #
     return if names.blank?
 
     tag_names = names.split(",").map(&:strip).uniq.reject(&:blank?) # 配列で返す

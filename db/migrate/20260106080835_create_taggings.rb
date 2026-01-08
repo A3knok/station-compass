@@ -8,6 +8,6 @@ class CreateTaggings < ActiveRecord::Migration[7.2]
     end
 
     # １つのルートに同じタグをつけられないようにする
-    add_index :taggings, [:tag_id, :route_id], unique: true
+    add_index :taggings, [ :tag_id, :route_id ], unique: true
   end
 end
