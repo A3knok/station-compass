@@ -11,6 +11,7 @@ class Route < ApplicationRecord
   validates :description, presence: true, length: { minimum: 10, maximum: 1000 }
   validates :estimated_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
+  # 文字列を配列に変換
   def tag_names=(names) # 
     return if names.blank?
 
@@ -23,6 +24,11 @@ class Route < ApplicationRecord
       tag = Tag.find_or_create_by(name: tag_name.downcase) # 小文字に変換
       self.tags << tag unless self.tags.include?(tag)
     end
+  end
+
+  # 配列を文字列に変換
+  def tag_names
+    tags.pluck(:name).join(",")
   end
 
   def self.ransackable_attributes(auth_object = nil)
