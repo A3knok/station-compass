@@ -34,6 +34,15 @@
           <%= route_description_summary(route, length: 60) %>
         </p>
 
+        <!-- タグリスト -->
+        <% if route.tags.present? %>
+          <div class="mb-4 border-bottom">
+            <% route.tags.each do |tag| %>
+              <span class="d-inline-block me-2 mb-2 p-1 bg-white "><%= tag.name %></span>
+            <% end %>
+          </div>
+        <% end %>
+
         <small class="d-block text-lg-end mb-2">
           <%= t('routes.show.updated_at') %> : 
           <%= l(route.updated_at, format: :route_list) %>

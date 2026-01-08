@@ -81,6 +81,14 @@
                             { include_blank: 'カテゴリーを選択'},
                             { class: "form-select" } %>
   </div>
+
+  <div class="mb-3 ps-3 form-group">
+    <strong>
+      <%= f.label :tag_names, class: "form-label" %>
+    </strong>
+    <i class="fa-solid fa-tags"></i>
+    <%= f.text_field :tag_names, class: "form-control"%>
+  </div>
   
   <div class="d-grid">
     <%= f.submit class: "btn btn-primary btn-lg" %>

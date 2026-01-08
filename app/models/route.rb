@@ -11,6 +11,20 @@ class Route < ApplicationRecord
   validates :description, presence: true, length: { minimum: 10, maximum: 1000 }
   validates :estimated_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
+  def tag_names=(names) # 
+    return if names.blank?
+
+    tag_names = names.split(",").map(&:strip).uniq.reject(&:blank?) # 配列で返す
+
+    self.tags.clear # 既存タグ削除(ルート編集時に古いタグを残さないため)
+
+    tag_names.each do |tag_name|
+      # メソッドの戻り値となる配列
+      tag = Tag.find_or_create_by(name: tag_name.downcase) # 小文字に変換
+      self.tags << tag unless self.tags.include?(tag)
+    end
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     [ "exit_id", "gate_id" ]
   end

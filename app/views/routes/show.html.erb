@@ -65,6 +65,13 @@
             </dl>
           </div>
         </div>
+
+        <!-- タグリスト -->
+        <div class="mb-4">
+          <% @route.tags.each do |tag| %>
+            <span class="d-inline-block me-2 mb-2 p-1 bg-white "><%= tag.name %></span>
+          <% end %>
+        </div>
         <%= render 'routes/action_buttons', route: @route %>
       </div>
     </div>
