@@ -24,7 +24,7 @@ class RoutesController < ApplicationController
   def edit; end
 
   def create
-    @route = current_user.routes.build(route_params)
+    @route = current_user.routes.build(route_params) # セッターメソッド(tag_names)呼び出し
 
     if @route.save
       redirect_to route_path(@route), flash: { show_thanks_modal: true } # モーダル用のflash
@@ -68,6 +68,7 @@ class RoutesController < ApplicationController
     @gates_by_company = Gate.grouped_by_company.to_json
     @gates = []
     @categories = Category.all.order(name: :asc)
+    @tags = Tag.all.order(name: :asc)
   end
 
   def set_edit_form_data
@@ -89,6 +90,6 @@ class RoutesController < ApplicationController
   end
 
   def route_params
-    params.require(:route).permit(:gate_id, :exit_id, :description, :category_id, :estimated_time)
+    params.require(:route).permit(:gate_id, :exit_id, :description, :category_id, :estimated_time, :tag_names)
   end
 end

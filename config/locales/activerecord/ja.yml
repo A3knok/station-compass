@@ -84,3 +84,4 @@ ja:
         description: ルート詳細
         estimated_time: 所要時間(分)
         category_id: カテゴリー
+        tag_names: タグ
