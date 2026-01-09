@@ -8,6 +8,6 @@ class CreateHelpfulMarks < ActiveRecord::Migration[7.2]
     end
 
     # 1人のユーザーが同じルートに複数回「役にたった」をつけられないようにする
-    add_index :helpful_marks, [:user_id, :route_id], unique: true
+    add_index :helpful_marks, [ :user_id, :route_id ], unique: true
   end
 end
