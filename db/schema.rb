@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_01_06_080835) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_09_020315) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -40,6 +40,16 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_06_080835) do
     t.index ["id"], name: "index_gates_on_id", unique: true
     t.index ["railway_company_id"], name: "index_gates_on_railway_company_id"
     t.index ["station_id"], name: "index_gates_on_station_id"
+  end
+
+  create_table "helpful_marks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "route_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["route_id"], name: "index_helpful_marks_on_route_id"
+    t.index ["user_id", "route_id"], name: "index_helpful_marks_on_user_id_and_route_id", unique: true
+    t.index ["user_id"], name: "index_helpful_marks_on_user_id"
   end
 
   create_table "railway_companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -107,6 +117,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_06_080835) do
   add_foreign_key "exits", "stations"
   add_foreign_key "gates", "railway_companies"
   add_foreign_key "gates", "stations"
+  add_foreign_key "helpful_marks", "routes"
+  add_foreign_key "helpful_marks", "users"
   add_foreign_key "routes", "categories"
   add_foreign_key "routes", "exits"
   add_foreign_key "routes", "gates"

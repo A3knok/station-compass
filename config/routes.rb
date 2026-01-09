@@ -23,5 +23,7 @@ Rails.application.routes.draw do
   get "privacy_policy", to: "privacy_policies#privacy_policy"
 
   resources :users, only: %i[show]
-  resources :routes, only: %i[new show create index edit update destroy]
+  resources :routes, only: %i[new show create index edit update destroy] do
+    resource :helpful_marks, only: %i[create destroy]
+  end
 end

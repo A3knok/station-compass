@@ -5,6 +5,7 @@ class Route < ApplicationRecord
   belongs_to :category, optional: true # 自動バリデーションを無効化
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
+  has_many :helpful_marks, dependent: :destroy
 
   validates :gate_id, presence: true
   validates :exit_id, presence: true
@@ -31,6 +32,15 @@ class Route < ApplicationRecord
     tags.pluck(:name).join(",")
   end
 
+  def helpful_by?(user)
+    helpful_marks.exists?(user_id: user.id)
+  end
+
+  def helpful_count
+    helpful_marks.count
+  end
+
+  # ホワイトリストの管理
   def self.ransackable_attributes(auth_object = nil)
     [ "exit_id", "gate_id" ]
   end
