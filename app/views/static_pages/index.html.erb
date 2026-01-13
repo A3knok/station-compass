@@ -30,15 +30,34 @@
       </div>
     <% end %>
 
-    <!-- つの要素も独立した行にする -->
+    <!-- 駅コンパスの使い方説明 -->
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-6">
-        <div class="row g-3 mb-4">
-          <div class="col-md-6">
+        <div class="text-center">
+          <p class="mb-1">- How To Use -</p>
+          <h4 class="mb-4">駅コンパスの使い方</h4>
+        </div>
+        <div class="row g-3 mb-5">
+          <!-- ルート検索 -->
+          <div class="col-lg-4">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-search fa-3x text-danger mb-3"></i>
+                <h6>01. ルート検索</h6>
+                <p class="card-text small">
+                  駅の改札や出口で検索して<br>
+                  <strong class="text-success">最適ルートを調べよう</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ルート投稿 -->
+          <div class="col-lg-4">
             <div class="card h-100">
               <div class="card-body text-center">
                 <i class="fas fa-map-marked-alt fa-3x text-info mb-3"></i>
-                <h6>ルート投稿</h6>
+                <h6>02. ルート投稿</h6>
                 <p class="card-text small">
                   知っている便利なルートを投稿して<br>
                   <strong class="text-success">みんなの役に立とう</strong>
@@ -47,11 +66,12 @@
             </div>
           </div>
           
-          <div class="col-md-6">
+          <!-- 情報交換 -->
+          <div class="col-lg-4">
             <div class="card h-100">
               <div class="card-body text-center">
                 <i class="fa-solid fa-comments fa-3x text-warning mb-3"></i>
-                <h6>情報交換</h6>
+                <h6>03. 情報交換</h6>
                 <p class="card-text small">
                   「このルート使いやすい！」<br>
                   <strong class="text-success">リアルな声が聞ける</strong>
@@ -59,7 +79,40 @@
               </div>
             </div>
           </div>
-        </div>  
+        </div>
+
+        <div class="text-center">
+          <p class="mb-1">- More Features -</p>
+          <h4 class="mb-4">そのほかの機能</h4>
+
+          <div class="card">
+            <div class="card-body text-start p-5">
+              <div class="d-flex align-items-center border-bottom pb-4 mb-4">
+                <i class="fa-regular fa-circle-check fa-2x text-success me-3"></i>
+                <div>
+                  <h6 class="mb-0">リアクション</h6>
+                  <p class="mb-0">「役に立った」ボタンを押して反応を見える化</p>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center border-bottom pb-4 mb-4">
+                <i class="fa-regular fa-circle-check fa-2x text-success me-3"></i>
+                <div>
+                  <h6 class="mb-0">ランキング</h6>
+                  <p class="mb-0">反応が集まった人気ルートがひと目で分かるランキング</p>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center">
+                <i class="fa-regular fa-circle-check fa-2x text-success me-3"></i>
+                <div>
+                  <h6 class="mb-0">周辺施設情報</h6>
+                  <p class="mb-0">出口周辺の施設情報をMAPで表示</p>
+                </div>              
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
