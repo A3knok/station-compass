@@ -37,6 +37,10 @@ ja:
     edit:
       title: ルート編集
   
+  stations:
+    index:
+      title: 駅一覧
+  
   privacy_policies:
     privacy_policy:
       title: プライバシーポリシー
