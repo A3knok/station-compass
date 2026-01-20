@@ -1,7 +1,9 @@
 class RanksController < ApplicationController
-  def ranks
-    # 
-    route_ids = Helpful_mark.group(:route_id).order('count(:route_id) desc').pluck(:route_id)
+  def index
+    @station = Station.find(params[:station_id])
+
+    # カウンターキャッシュを使って「役に立った」数で並び替え
+    @routes = Route.joins(:exit).where(exits: { station_id: @station.id }).order(helpful_marks_count: :desc).limit(5)
     
   end
 end

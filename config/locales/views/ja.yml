@@ -42,6 +42,10 @@ ja:
     index:
       title: 駅一覧
   
+  ranks:
+    index:
+      title: 人気ルートランキング
+  
   privacy_policies:
     privacy_policy:
       title: プライバシーポリシー
