@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     # 駅は以下のルート一覧
     resources :routes, only: %i[index]
     # 駅に属するランキング
-    get 'ranks', to: 'ranks#index'
+    get "ranks", to: "ranks#index"
   end
 
   resources :routes, except: %i[index] do
