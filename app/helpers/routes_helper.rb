@@ -25,4 +25,24 @@ module RoutesHelper
       nil
     end
   end
+
+  # ランキングの順位に関するメソッド
+  def calculate_rank(routes)
+    current_rank = 0
+    previous_count = nil # 評価数の初期値
+    show_rank = true
+
+    routes.map.with_index do |route, index|
+      if previous_count != route.helpful_marks_count
+        current_rank = index + 1
+        show_rank = true
+      else
+        show_rank = false
+      end
+
+      previous_count = route.helpful_marks_count
+
+      { route: route, rank: current_rank, show_rank: show_rank }
+    end
+  end
 end

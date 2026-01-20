@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_01_09_020315) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_19_071522) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_09_020315) do
     t.uuid "gate_id", null: false
     t.uuid "exit_id", null: false
     t.uuid "category_id"
+    t.integer "helpful_marks_count", default: 0, null: false
     t.index ["category_id"], name: "index_routes_on_category_id"
     t.index ["exit_id"], name: "index_routes_on_exit_id"
     t.index ["gate_id"], name: "index_routes_on_gate_id"

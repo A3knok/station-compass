@@ -34,8 +34,17 @@ ja:
     index:
       title: ルート一覧
       total_routes_count: 投稿総数
+      rank: ランキング
     edit:
       title: ルート編集
+  
+  stations:
+    index:
+      title: 駅一覧
+  
+  ranks:
+    index:
+      title: 人気ルートランキング
   
   privacy_policies:
     privacy_policy:

@@ -1,0 +1,11 @@
+<div class="rank_area bg-white">
+  <h6 class="p-2 mb-0 rank-title border-bottom fw-bold"><%= t('routes.index.rank') %></h6>
+  <div class="d-flex align-items-center p-3">
+    <i class="fa-solid fa-ranking-star fa-2x me-3"></i>
+    <div>
+      <strong><%= link_to "評価の高いルートランキング", station_ranks_path(station) %></strong>
+      <small class="mb-0 d-block text-muted">みんなが「役に立った」と評価したルートランキングを紹介</small>
+    </div>
+    
+  </div>
+</div>

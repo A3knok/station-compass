@@ -37,9 +37,10 @@
               show_actions: false %>
         </div>
       </div>
-      <!-- 右側：検索フォーム -->
+      <!-- 右側：検索フォーム, ランキング -->
       <div class="col-12 col-lg-4 order-1 order-lg-2 mb-4 mb-lg-0">
-        <%= render 'routes/search_form', route: @routes %>
+          <div class="mb-5"><%= render 'routes/search_form', route: @routes %></div>
+          <div class="mb-5"><%= render 'routes/ranking', station: @station %></div>
       </div>
     </div>
   </div>

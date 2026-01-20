@@ -14,7 +14,7 @@ class RoutesController < ApplicationController
   end
 
   def show
-    redirect_to routes_path, alert: "投稿が見つかりません" if @route.nil?
+    redirect_to station_routes_path(@route), alert: "投稿が見つかりません" if @route.nil?
   end
 
   def new
