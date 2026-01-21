@@ -77,6 +77,6 @@ gem "devise-i18n"
 gem "ransack"
 
 # 画像アップロード、画像編集用
-gem 'carrierwave', '2.2.2'
-gem 'mini_magick'
-gem 'mimemagic', '~> 0.4.3'
+gem "carrierwave", "2.2.2"
+gem "mini_magick"
+gem "mimemagic", "~> 0.4.3"

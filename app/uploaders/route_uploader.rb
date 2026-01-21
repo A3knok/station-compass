@@ -28,7 +28,7 @@ class RouteUploader < CarrierWave::Uploader::Base
 
   # サムネイル版（詳細ページ用）
   version :thumb do
-    process resize_to_fit: [800, 600]
+    process resize_to_fit: [ 800, 600 ]
   end
   #
   # def scale(width, height)
@@ -43,7 +43,7 @@ class RouteUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # ファイルサイズの上限（10MB）
