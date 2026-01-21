@@ -35,7 +35,17 @@ class RoutesController < ApplicationController
   end
 
   def update
-    if @route.update(route_params)
+    # images以外の要素を更新
+    if @route.update(route_params_without_images)
+
+      # nilを安全に空配列として扱う
+      new_images = Array(params[:route][:images]).reject(&:blank?)
+
+      if new_images.any?
+        @route.images = new_images
+        @route.save
+      end
+
       redirect_to route_path(@route), success: t("flash_messages.routes.update.success")
     else
       flash.now[:danger] = t("flash_messages.routes.update.failure")
@@ -90,6 +100,10 @@ class RoutesController < ApplicationController
   end
 
   def route_params
+    params.require(:route).permit(:gate_id, :exit_id, :description, :category_id, :estimated_time, :tag_names, { images: [] }, :images_cache)
+  end
+
+  def route_params_without_images
     params.require(:route).permit(:gate_id, :exit_id, :description, :category_id, :estimated_time, :tag_names)
   end
 end
