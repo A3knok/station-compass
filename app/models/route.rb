@@ -1,4 +1,7 @@
 class Route < ApplicationRecord
+  # Uploaderをマウント
+  mount_uploaders :images, ::RouteUploader
+
   belongs_to :user
   belongs_to :gate, optional: true # 自動バリデーションを無効化
   belongs_to :exit, optional: true # 自動バリデーションを無効化
