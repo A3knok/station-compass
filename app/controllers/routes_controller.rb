@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_action :set_station
+  before_action :set_station, only: %i[index]
   before_action :set_route, only: %i[ show edit update destroy ]
   before_action :check_route_owner, only: %i[ edit update destroy ]
   before_action :set_search_form_data, only: %i[ index ]
