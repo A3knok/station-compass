@@ -1,8 +1,14 @@
 class Route < ApplicationRecord
+  # Uploaderをマウント
+  mount_uploaders :images, ::RouteUploader
+
   belongs_to :user
   belongs_to :gate, optional: true # 自動バリデーションを無効化
   belongs_to :exit, optional: true # 自動バリデーションを無効化
   belongs_to :category, optional: true # 自動バリデーションを無効化
+
+  # Gateを通じてstationにアクセス
+  has_one :station, through: :gate
 
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
@@ -47,6 +53,6 @@ class Route < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    [ "gate", "exit" ]
+    [ "gate", "exit", "tags", "taggings", "station" ]
   end
 end

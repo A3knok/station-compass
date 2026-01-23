@@ -40,3 +40,6 @@
 /node_modules
 
 /config/credentials/development.key
+
+# Ignore uploaded files in development
+/public/uploads
