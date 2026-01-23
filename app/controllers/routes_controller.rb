@@ -1,6 +1,6 @@
 class RoutesController < ApplicationController
-  before_action :set_route, only: %i[ show edit update destroy ]
   before_action :set_station
+  before_action :set_route, only: %i[ show edit update destroy ]
   before_action :check_route_owner, only: %i[ edit update destroy ]
   before_action :set_search_form_data, only: %i[ index ]
   before_action :set_new_form_data, only: %i[ new create edit update ]
@@ -9,8 +9,8 @@ class RoutesController < ApplicationController
 
 
   def index
-    @q = Route.ransack(params[:q])
-    @routes = @q.result(distinct: true).includes(:gate, :exit).order(created_at: :desc)
+    @q = @station.routes.ransack(params[:q])
+    @routes = @q.result(distinct: true).includes(:gate, :exit, :tags).order(created_at: :desc)
   end
 
   def show
@@ -65,7 +65,9 @@ class RoutesController < ApplicationController
   end
 
   def set_station
-    @station = Station.find_by(name: "渋谷駅")
+    Rails.logger.debug "params[:station_id]: #{params[:station_id].inspect}"
+    Rails.logger.debug "params[:station_id].class: #{params[:station_id].class}"
+    @station = Station.find(params[:station_id])
   end
 
   def check_route_owner
@@ -95,8 +97,10 @@ class RoutesController < ApplicationController
   end
 
   def set_search_form_data
-    @exits = Exit.order(name: :asc)
-    @gates = Gate.order(name: :asc)
+    @exits = @station.exits.order(name: :asc)
+    @gates = @station.gates.order(name: :asc)
+    @Categories = Category.all
+    @tags = Tag.all
   end
 
   def route_params

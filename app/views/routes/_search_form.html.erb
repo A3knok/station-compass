@@ -1,4 +1,5 @@
-<%= search_form_for @q, url: station_routes_path(route) do |f| %>
+<%= search_form_for @q, url: station_routes_path(@station) do |f| %>
+  <!-- 改札検索 -->
   <div class="mb-3">
     <i class="fas fa-location-dot text-success me-1"></i>
     <strong>
@@ -10,6 +11,7 @@
                             { class: "form-select" } %>
   </div>
   
+  <!-- 出口検索 -->
   <div class="mb-3">
     <i class="fas fa-flag-checkered text-danger me-1"></i>
     <strong>
@@ -19,6 +21,23 @@
     <%= f.collection_select :exit_id_eq, @exits, :id, :display_name,
                             { include_blank: 'すべて'},
                             { class: "form-select" } %>
+  </div>
+
+  <!-- タグ検索 -->
+  <div class="mb-3">
+    <i class="fas fa-tags text-dark me-1"></i>
+    <strong>
+      <%= f.label :tags_name_in, Tag.human_attribute_name(:name), class: "form-label" %>
+    </strong>
+    
+    <%= f.collection_select :tags_name_in, 
+                            @tags,
+                            :name,
+                            :name,
+                            { include_blank: 'すべて'},
+                            { multiple: true,
+                              class: "form-select",
+                              data: { controller: "slim-select" } } %>
   </div>
 
   <div class="d-grid">
