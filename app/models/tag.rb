@@ -4,8 +4,8 @@ class Tag < ApplicationRecord
 
   validates :name, uniqueness: true, presence: true
   validates :name, format: {
-    without: /,/, 
-    message: "にカンマを含めることはできません" 
+    without: /,/,
+    message: "にカンマを含めることはできません"
   }
 
   def self.ransackable_attributes(auth_object = nil)
