@@ -28,7 +28,7 @@
           <div class="card-body">
             <dl class="row mb-0">
               <dt class="col-sm-4 text-muted"><%= t('.station') %></dt>
-              <dd class="col-sm-8"><%= @station.name %></dd>
+              <dd class="col-sm-8"><%= @route.station.name %></dd>
 
               <dt class="col-sm-4 text-muted"><%= t('.gate') %></dt>
               <dd class="col-sm-8"><%= @route.gate.name %></dd>
@@ -63,8 +63,49 @@
                 </dd>
               <% end %>
             </dl>
+
+            <!-- 画像表示 -->
+            <% if @route.images.present? %>
+              <div class="mt-4">
+                <div id="routeCarousel" class="carousel slide">
+                  <!-- カルーセル本体 -->
+                  <div class="carousel-inner">
+                    <% @route.images.each_with_index do |image, index| %>
+                      <div class="carousel-item <%= 'active' if index == 0 %>">
+                        <%= image_tag image.thumb.url, class: "img-fluid rounded" %>
+                      </div>
+                    <% end %>      
+                  </div>
+
+                  <!-- 前へボタン -->
+                  <button class="carousel-control-prev" type="button" data-bs-target="#routeCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  </button>
+
+                  <!-- 次へボタン -->
+                  <button class="carousel-control-next" type="button" data-bs-target="#routeCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+            <% end %>
+
+            <!-- やくに立ったボタン -->
+            <div class="text-end">
+              <%= render "helpful_button", route: @route %>
+            </div>
           </div>
         </div>
+
+        <!-- タグリスト -->
+        <div class="mb-4">
+          <% @route.tags.each do |tag| %>
+            <span class="d-inline-block me-2 mb-2 p-1 bg-white "><%= tag.name %></span>
+          <% end %>
+        </div>
+
+        <!-- カテゴリー -->
+
         <%= render 'routes/action_buttons', route: @route %>
       </div>
     </div>

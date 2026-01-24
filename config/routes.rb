@@ -23,5 +23,15 @@ Rails.application.routes.draw do
   get "privacy_policy", to: "privacy_policies#privacy_policy"
 
   resources :users, only: %i[show]
-  resources :routes, only: %i[new show create index edit update destroy]
+
+  resources :stations, only: %i[index] do
+    # 駅は以下のルート一覧
+    resources :routes, only: %i[index]
+    # 駅に属するランキング
+    get "ranks", to: "ranks#index"
+  end
+
+  resources :routes, except: %i[index] do
+    resource :helpful_marks, only: %i[create destroy]
+  end
 end
