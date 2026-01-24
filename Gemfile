@@ -20,6 +20,7 @@ gem "cssbundling-rails"
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
+gem "sassc-rails"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -75,3 +76,8 @@ gem "devise-i18n"
 
 # 検索用
 gem "ransack"
+
+# 画像アップロード、画像編集用
+gem "carrierwave", "2.2.2"
+gem "mini_magick"
+gem "mimemagic", "~> 0.4.3"

@@ -1,8 +1,14 @@
 class Route < ApplicationRecord
+  # Uploaderをマウント
+  mount_uploaders :images, ::RouteUploader
+
   belongs_to :user
   belongs_to :gate, optional: true # 自動バリデーションを無効化
   belongs_to :exit, optional: true # 自動バリデーションを無効化
   belongs_to :category, optional: true # 自動バリデーションを無効化
+
+  # Gateを通じてstationにアクセス
+  has_one :station, through: :gate
 
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
@@ -14,12 +20,12 @@ class Route < ApplicationRecord
   validates :estimated_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
   # 文字列を配列に変換
-  def tag_names=(names) #
-    return if names.blank?
-
-    tag_names = names.split(",").map(&:strip).uniq.reject(&:blank?) # 配列で返す
-
+  def tag_names=(names)
     self.tags.clear # 既存タグ削除(ルート編集時に古いタグを残さないため)
+
+    return if names.blank?
+    # カンマ区切りを分割し、前後の空白を削除、重複を排除
+    tag_names = names.split(",").map(&:strip).uniq.reject(&:blank?)
 
     tag_names.each do |tag_name|
       # メソッドの戻り値となる配列
@@ -47,6 +53,6 @@ class Route < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    [ "gate", "exit" ]
+    [ "gate", "exit", "tags", "taggings", "station" ]
   end
 end
