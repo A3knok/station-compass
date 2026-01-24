@@ -1,4 +1,12 @@
 @import "bootstrap/scss/bootstrap";
+@import "slim-select/dist/slimselect";
+
+// slim-selectのコンテナに適用されたBootstrapのCSS変数のみを無効化
+.ss-main,
+.ss-single-selected {
+  --bs-form-select-bg-img: none !important;
+  --bs-form-select-bg-icon: none !important;
+}
 
 body {
   font-family: "Inter", "Noto Sans JP", sans-serif;
