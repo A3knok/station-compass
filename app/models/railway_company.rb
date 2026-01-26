@@ -6,10 +6,10 @@ class RailwayCompany < ApplicationRecord
     joins(:gates)
       .select("railway_companies.id", "railway_companies.name", "gates.station_id")
       .order("railway_companies.name")
-      .group_by{ |obj| obj.station_id }
+      .group_by { |obj| obj.station_id }
       .transform_values { |companies|
         companies.map { |company|
-          { id: company.id, name:company.name }
+          { id: company.id, name: company.name }
         }
       }
   end
