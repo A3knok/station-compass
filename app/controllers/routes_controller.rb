@@ -65,8 +65,6 @@ class RoutesController < ApplicationController
   end
 
   def set_station
-    Rails.logger.debug "params[:station_id]: #{params[:station_id].inspect}"
-    Rails.logger.debug "params[:station_id].class: #{params[:station_id].class}"
     @station = Station.find(params[:station_id])
   end
 
@@ -76,9 +74,11 @@ class RoutesController < ApplicationController
 
   def set_new_form_data
     @exits = Exit.order(name: :asc)
+    @stations = Station.order(name: :asc)
     @railway_companies = RailwayCompany.all.order(name: :asc)
+    @companies_by_station = RailwayCompany.grouped_by_station.to_json
     @gates_by_company = Gate.grouped_by_company.to_json
-    @gates = []
+    @gates = [] # フォーム用の初期値
     @categories = Category.all.order(name: :asc)
     @tags = Tag.all.order(name: :asc)
   end
