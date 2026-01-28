@@ -22,8 +22,7 @@ railway_companies = railway_companies_data.map do |company_data|
 end
 
 stations_data = [
-  { name: "渋谷駅" },
-  { name: "新宿駅" }
+  { name: "渋谷駅" }
 ]
 
 stations = stations_data.map do |station_data|
