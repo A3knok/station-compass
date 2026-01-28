@@ -10,7 +10,7 @@ class RoutesController < ApplicationController
 
   def index
     @q = @station.routes.ransack(params[:q])
-    @routes = @q.result(distinct: true).includes(:gate, :exit, :tags).order(created_at: :desc)
+    @routes = @q.result(distinct: true).includes(:gate, :exit, :tags, :category).order(created_at: :desc)
   end
 
   def show
@@ -99,7 +99,7 @@ class RoutesController < ApplicationController
   def set_search_form_data
     @exits = @station.exits.order(name: :asc)
     @gates = @station.gates.order(name: :asc)
-    @Categories = Category.all
+    @categories = Category.all
     @tags = Tag.all
   end
 

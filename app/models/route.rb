@@ -49,10 +49,10 @@ class Route < ApplicationRecord
 
   # ホワイトリストの管理
   def self.ransackable_attributes(auth_object = nil)
-    [ "exit_id", "gate_id" ]
+    [ "exit_id", "gate_id", "category_id" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    [ "gate", "exit", "tags", "taggings", "station" ]
+    [ "gate", "exit", "tags", "taggings", "station", "category" ]
   end
 end
