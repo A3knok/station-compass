@@ -50,3 +50,76 @@
     <i class="fas fa-plus"></i>
   <% end %>
 <% end %>
+
+<div id="map" style="height: 400px;"></div>
+
+<script>
+  function initMap() {
+    const currentLatLng = { lat: <%= @station.latitude %>, lng: <%= @station.longitude%> };
+
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: currentLatLng,
+      zoom: 16,
+    });
+
+    // 駅に青いピンを立てる
+    new google.maps.Marker({
+      map: map,
+      position: currentLatLng,
+      title: "<%= @station.name %>",
+      icon: {
+        url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+      }
+    });
+
+    const service = new google.maps.places.PlacesService(map);
+
+    // locationから半径500mの範囲でtypeを検索
+    service.nearbySearch( 
+      {
+        location: currentLatLng,
+        radius: 400,
+        type: "shopping_mall"
+      },
+      // 検索結果をresult, 状態をstatusに渡す
+      // callback関数の実行
+      (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          results.forEach(place => createMarker(place, map));
+        } else {
+          console.error("場所が見つかりません:", status);
+        }
+      }
+    );
+  }
+
+  let currentInfoWindow = null;
+
+  function createMarker(place, map) {
+    const marker = new google.maps.Marker({
+      map: map,
+      position: place.geometry.location
+    });
+
+    const contentString = `
+        <div style="padding: 10px; max-width: 250px;">
+          <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: bold;">${place.name}</h3>
+          <p style="margin: 0; font-size: 14px; color: #666;">${place.vicinity || ""}</p>
+        </div>
+      `;
+
+    const infoWindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    marker.addListener("click", () => {
+      if(currentInfoWindow) {
+        currentInfoWindow.close();
+      }
+      infoWindow.open(map, marker);
+      currentInfoWindow = infoWindow; 
+    });
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.dig(:google, :maps_api_key) %>&libraries=places&callback=initMap" async defer></script>

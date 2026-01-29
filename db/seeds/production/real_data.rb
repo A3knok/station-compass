@@ -22,12 +22,14 @@ railway_companies = railway_companies_data.map do |company_data|
 end
 
 stations_data = [
-  { name: "渋谷駅" }
+  { name: "渋谷駅", latitude: 35.658611, longitude: 139.701111 }
 ]
 
 stations = stations_data.map do |station_data|
   Station.find_or_create_by!(station_data)
 end
+
+puts "Stationデータを #{Station.count} 件作成しました"
 
 shibuya_station = Station.find_by(name: "渋谷駅")
 
