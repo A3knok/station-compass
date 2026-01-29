@@ -46,6 +46,10 @@ ja:
     index:
       title: 人気ルートランキング
   
+  contacts:
+    new:
+      title: お問い合わせ
+  
   privacy_policies:
     privacy_policy:
       title: プライバシーポリシー

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :routes, dependent: :destroy
   has_many :helpful_marks, dependent: :destroy
   has_many :helpful_routes, through: :helpful_marks, source: :route
+  has_many :contacts, dependent: :destroy
   # validatableを除外してカスタマイズ
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable

@@ -34,4 +34,6 @@ Rails.application.routes.draw do
   resources :routes, except: %i[index] do
     resource :helpful_marks, only: %i[create destroy]
   end
+
+  resources :contacts, only: %i[new create]
 end

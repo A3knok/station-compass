@@ -69,6 +69,8 @@ ja:
       route:
         create: 作成
         update: 更新
+      contact:
+        create: 送信
 
     label:
       user:
@@ -85,3 +87,6 @@ ja:
         estimated_time: 所要時間(分)
         category_id: カテゴリー
         tag_names: タグ
+      contact:
+        subject: 件名
+        body: お問い合わせ内容
