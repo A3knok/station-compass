@@ -1,3 +1,10 @@
+<div style="background: yellow; padding: 10px;">
+  <p>defined?(resource): <%= defined?(resource) %></p>
+  <p>resource: <%= resource.inspect if defined?(resource) %></p>
+  <p>resource.errors: <%= resource.errors.inspect if defined?(resource) %></p>
+  <p>resource.errors.any?: <%= resource.errors.any? if defined?(resource) %></p>
+</div>
+
 <% if defined?(resource) && resource.errors.any? %>
   <div class="alert alert-danger">
     <ul class="mb-0">

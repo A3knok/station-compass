@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   # DeviseをUserモデルに適用する
   devise_for :users, controllers: {
     sessions: "users/sessions",
-    registrations: "users/registrations"
+    registrations: "users/registrations",
+    password: "users/password"
   }
 
   devise_scope :user do

@@ -11,7 +11,8 @@ ja:
     registrations:
       new:
         title: 新規登録
-  
+      edit:
+        title: パスワードの再設定  
   users:
     show:
       title: マイページ
