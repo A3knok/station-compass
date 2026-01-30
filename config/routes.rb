@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # 開発環境のみメール確認画面を表示
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+  
   # CI / LoadBalancer 用のヘルスチェック
   get "/healthz", to: proc { [ 200, {}, [ "OK" ] ] }
 

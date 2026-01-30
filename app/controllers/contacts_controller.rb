@@ -4,10 +4,10 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.new(contact_params)
+    @contact = current_user.contacts.build(contact_params)
 
     if @contact.save
-      Contact.contact_mail(@contact).deliver_later #非同期でメール送信
+      ContactMailer.contact_mail(@contact).deliver_now #非同期でメール送信
       redirect_to root_path, success: t("flash_messages.contacts.create.success")
     else
       render :new
