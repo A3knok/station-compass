@@ -1,0 +1,41 @@
+<%= content_for(:title, t('.title')) %>
+
+<div class="page-container">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="station-sign-bar mb-3"></div>
+
+        <h2 class="text-center mb-5">
+          <i class="fa-regular fa-circle-question me-2 text-info"></i>
+          <%= t('.title') %>
+        </h2>
+
+        <%= form_with model: @contact do |f| %>
+          <div class="mb-3 ps-3 form-group">
+            <strong>
+              <%= f.label :subject, class: "form-label" %>
+            </strong>
+            <i class="fa-solid fa-map-location-dot text-warning"></i>
+            <span style="color: red;">*</span>
+            <%= f.text_field :subject, class: "form-control" %>
+          </div>
+
+          <div class="mb-3 ps-3 form-group">
+            <strong>
+              <%= f.label :body, class: "form-label" %>
+            </strong>
+            <i class="fa-solid fa-map-location-dot text-warning"></i>
+            <span style="color: red;">*</span>
+            <%= f.text_area :body, rows: 10, class: "form-control" %>
+          </div>
+
+          <div class="d-grid">
+            <%= f.submit class: "btn btn-primary btn-lg" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
