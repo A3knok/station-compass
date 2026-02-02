@@ -34,8 +34,11 @@
           <div class="field mb-3">
             <strong>
               <%= f.label :current_password, class: "form-label" %>
-              </strong>
-              <%= f.password_field :current_password, autocomplete: "current-password", class: "mb-5 form-control" %>
+            </strong>
+            <%= f.password_field :current_password, autocomplete: "current-password", class: "mb-2 form-control" %>
+            <small class="text-muted d-block mb-5">
+              本人確認のため、情報を変更する際は必ず入力してください
+            </small>
           </div>
 
           <div class="d-grid">

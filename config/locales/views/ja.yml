@@ -7,12 +7,19 @@ ja:
     sessions:
       new:
         title: ログイン
-
+    
     registrations:
       new:
         title: 新規登録
       edit:
-        title: パスワードの再設定  
+        title: パスワードの変更
+
+    passwords:
+      new:
+        title: パスワード再設定
+      edit:
+        title: パスワード再設定
+
   users:
     show:
       title: マイページ
