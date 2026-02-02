@@ -66,6 +66,9 @@ ja:
         update: 更新
       user_session:
         create: ログイン
+      user_password:
+        create: 送信
+        update: 登録
       route:
         create: 作成
         update: 更新
