@@ -58,9 +58,11 @@ ja:
     new:
       title: お問い合わせ
   
-  privacy_policies:
+  pages:
     privacy_policy:
       title: プライバシーポリシー
+    terms:
+      title: 利用規約
 
   header:
     login: ログイン
