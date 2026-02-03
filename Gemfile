@@ -54,6 +54,8 @@ group :development, :test do
 
   gem "rspec-rails"
   gem "factory_bot_rails"
+
+  gem "dotenv-rails"
 end
 
 group :development do
@@ -72,6 +74,9 @@ end
 
 # 認証用
 gem "devise"
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 
 # 日本語化
 gem "rails-i18n", "~> 7.0.0"

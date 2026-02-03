@@ -29,6 +29,7 @@
             </div>
         <% end %>
 
+        <%= button_to "googleでログイン", user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } %>
         <%= link_to "パスワードをお忘れの方はこちら", new_user_password_path, class: "d-block text-center" %>
 
         <%#= render "devise/shared/links" %>

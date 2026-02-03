@@ -5,6 +5,8 @@ ja:
       signed_out: ログアウトしました
     registrations:
       signed_up: ユーザー登録が完了しました
+    omniauth_callbacks:
+      success: ログインしました
     failure:
       invalid: メールアドレスまたはパスワードが正しくありません
       already_authenticated: 既にログインしています
