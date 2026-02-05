@@ -90,7 +90,7 @@ GEM
       debug_inspector (>= 1.2.0)
     bootsnap (1.21.1)
       msgpack (~> 1.2)
-    brakeman (8.0.1)
+    brakeman (8.0.2)
       racc
     builder (3.3.0)
     byebug (13.0.0)
@@ -213,6 +213,8 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.3)
+    meta-tags (2.22.3)
+      actionpack (>= 6.0.0)
     method_source (1.1.0)
     mimemagic (0.4.3)
       nokogiri (~> 1)
@@ -513,6 +515,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   letter_opener_web
+  meta-tags
   mimemagic (~> 0.4.3)
   mini_magick
   omniauth
