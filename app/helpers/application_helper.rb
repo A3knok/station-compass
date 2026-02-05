@@ -38,19 +38,19 @@ module ApplicationHelper
       canonical: request.original_url,
       og: {
         title: :title,
-        type: 'website',
+        type: "website",
         url: request.original_url,
-        image: image_url('ogp.png'), # OGP画像のパス
+        image: image_url("ogp.png"), # OGP画像のパス
         site_name: :site,
         description: :description,
-        locale: 'ja_JP'
+        locale: "ja_JP"
       },
       twitter: {
         card: "summary_large_image",
         site: "@a3_knok_RUNTEQ",
         title: :title,
         description: :description,
-        image: image_url('ogp.png')
+        image: image_url("ogp.png")
       }
     }
   end
