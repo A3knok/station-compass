@@ -89,3 +89,6 @@ gem "ransack"
 gem "carrierwave", "2.2.2"
 gem "mini_magick"
 gem "mimemagic", "~> 0.4.3"
+
+# OGP設定用
+gem "meta-tags"
