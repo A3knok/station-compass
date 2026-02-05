@@ -1,10 +1,10 @@
-<% if current_user&.id == @route.user_id %>
+<% if current_user&.id == route.user_id %>
   <div class="d-flex flex-column flex-lg-row gap-2">
-    <%= link_to edit_route_path(@route), class: "btn btn-outline-primary btn-sm w-100 w-lg-auto" do %>
+    <%= link_to edit_route_path(route), class: "btn btn-outline-primary btn-sm w-100 w-lg-auto" do %>
       <i class="fas fa-pen me-1"></i>
       <span><%= t('defaults.edit')%></span>
     <% end %>
-    <%= link_to route_path(@route), class: "btn btn-outline-danger btn-sm w-100 w-lg-auto", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } do %>
+    <%= link_to route_path(route), class: "btn btn-outline-danger btn-sm w-100 w-lg-auto", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } do %>
       <i class="fas fa-trash me-1"></i>
       <span><%= t('defaults.delete')%></span>
     <% end %>

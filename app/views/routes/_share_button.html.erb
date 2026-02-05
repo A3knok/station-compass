@@ -1,7 +1,7 @@
 <div>
   <%= link_to share_twitter_url(
-              url: route_url(@route),
-              text: "#{@route.station.name}の#{@route.exit.name}出口への行き方を発見！"
+              url: route_url(route),
+              text: "#{route.station.name}の#{route.exit.name}出口への行き方を発見！"
               ),
               target: "_blank",
               rel: "noopener noreferrer",

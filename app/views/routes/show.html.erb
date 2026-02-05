@@ -110,11 +110,11 @@
 
         <!-- アクションボタン -->
         <div class="mb-4">
-          <%= render 'routes/action_buttons' %>
+          <%= render 'routes/action_buttons', route: @route %>
         </div>
         
         <!-- シェアボタン -->
-        <%= render 'routes/share_button' %>
+        <%= render 'routes/share_button', route: @route %>
       </div>
     </div>
   </div>
