@@ -50,6 +50,11 @@ ja:
               blank: "を選択してください"
             description:
               too_short: "は10文字以上で入力してください"
+        
+        category:
+          attribute:
+            name:
+              
   
   defaults:
     show: 詳細
