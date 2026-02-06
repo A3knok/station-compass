@@ -100,13 +100,21 @@
         <!-- タグリスト -->
         <div class="mb-4">
           <% @route.tags.each do |tag| %>
-            <span class="d-inline-block me-2 mb-2 p-1 bg-white "><%= tag.name %></span>
+            <span class="d-inline-block me-2 mb-2 px-2 bg-white ">
+              <%= tag.name %>
+            </span>
           <% end %>
         </div>
 
         <!-- カテゴリー -->
 
-        <%= render 'routes/action_buttons', route: @route %>
+        <!-- アクションボタン -->
+        <div class="mb-4">
+          <%= render 'routes/action_buttons', route: @route %>
+        </div>
+        
+        <!-- シェアボタン -->
+        <%= render 'routes/share_button', route: @route %>
       </div>
     </div>
   </div>

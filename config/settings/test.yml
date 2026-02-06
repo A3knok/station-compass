@@ -1,0 +1,3 @@
+action_mailer:
+  from: "test-noreply@example.com"
+  bcc: "test-contact@example.com"

@@ -1,5 +1,16 @@
 puts "本番環境用データ作成中..."
 
+# カテゴリーの作成
+categories_data = [
+  { name: "旅行" },
+  { name: "仕事" },
+  { name: "日常" }
+]
+
+categories = categories_data.each do |category|
+  Category.find_or_create_by!(category)
+end
+
 railway_companies_data = [
   { name: "JR東日本" },
   { name: "東京メトロ / 東急電鉄" },
@@ -11,28 +22,32 @@ railway_companies = railway_companies_data.map do |company_data|
 end
 
 stations_data = [
-  { name: "渋谷駅" }
+  { name: "渋谷駅", latitude: 35.658611, longitude: 139.701111 }
 ]
 
 stations = stations_data.map do |station_data|
   Station.find_or_create_by!(station_data)
 end
 
+puts "Stationデータを #{Station.count} 件作成しました"
+
 shibuya_station = Station.find_by(name: "渋谷駅")
 
-shibuya_gates = [
-  { name: "ハチ公改札(JR)", railway_company: railway_companies[0] },
-  { name: "中央改札", railway_company: railway_companies[0] },
-  { name: "南改札", railway_company: railway_companies[0] },
-  { name: "新南改札", railway_company: railway_companies[0] },
-  { name: "ハチ公改札(メトロ)", railway_company: railway_companies[1] },
-  { name: "渋谷ヒカリエ1改札", railway_company: railway_companies[1] },
-  { name: "渋谷ヒカリエ2改札", railway_company: railway_companies[1] },
-  { name: "スクランブルスクエア方面改札", railway_company: railway_companies[1] },
-  { name: "宮益坂中央改札", railway_company: railway_companies[1] },
-  { name: "宮益坂東改札", railway_company: railway_companies[1] },
-  { name: "中央口改札", railway_company: railway_companies[2] }
-]
+if shibuya_station
+  shibuya_gates = [
+    { name: "ハチ公改札(JR)", railway_company: railway_companies[0] },
+    { name: "中央改札", railway_company: railway_companies[0] },
+    { name: "南改札", railway_company: railway_companies[0] },
+    { name: "新南改札", railway_company: railway_companies[0] },
+    { name: "ハチ公改札(メトロ)", railway_company: railway_companies[1] },
+    { name: "渋谷ヒカリエ1改札", railway_company: railway_companies[1] },
+    { name: "渋谷ヒカリエ2改札", railway_company: railway_companies[1] },
+    { name: "スクランブルスクエア方面改札", railway_company: railway_companies[1] },
+    { name: "宮益坂中央改札", railway_company: railway_companies[1] },
+    { name: "宮益坂東改札", railway_company: railway_companies[1] },
+    { name: "中央口改札", railway_company: railway_companies[2] }
+  ]
+end
 
 shibuya_gates.each do |gate_data|
   # 検索または作成

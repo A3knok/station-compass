@@ -7,11 +7,19 @@ ja:
     sessions:
       new:
         title: ログイン
-
+    
     registrations:
       new:
         title: 新規登録
-  
+      edit:
+        title: パスワードの変更
+
+    passwords:
+      new:
+        title: パスワード再設定
+      edit:
+        title: パスワード再設定
+
   users:
     show:
       title: マイページ
@@ -46,9 +54,15 @@ ja:
     index:
       title: 人気ルートランキング
   
-  privacy_policies:
+  contacts:
+    new:
+      title: お問い合わせ
+  
+  pages:
     privacy_policy:
       title: プライバシーポリシー
+    terms:
+      title: 利用規約
 
   header:
     login: ログイン

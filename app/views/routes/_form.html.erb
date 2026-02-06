@@ -1,9 +1,26 @@
 <%= form_with model: route do |f| %>
   <div class="mb-3 ps-3 form-group">
-    <div>
-      <strong class="d-block">駅名</strong>
-      <span><%= route.station.name %></span>
-    </div>
+    <strong>
+      <%= label_tag :filter_station_id, t('routes.station'), class: "form-label " %>
+    </strong>
+    <i class="fa-solid fa-train text-secondary"></i>
+    <%= select_tag :filter_station_id,
+                    # <option>の生成
+                    options_from_collection_for_select(
+                      @stations,
+                      :id,
+                      :name,
+                      route.gate&.station&.id # 編集時は選択済みの状態にする
+                    ),
+                    {
+                      include_blank: '駅を選択',
+                      class: "form-select",
+                      # stimulusに値を渡す
+                      data: {
+                        gate_filter_target: "station",
+                        action: "change->gate-filter#filterCompanies"
+                      }
+                    } %>
   </div>
 
   <div class="mb-3 ps-3 form-group">
@@ -36,7 +53,10 @@
     </strong>
     <i class="fas fa-location-dot text-success"></i>
     <span style="color: red;">*</span>
-    <%= f.collection_select :gate_id, @gates, :id, :name, 
+    <%= f.collection_select :gate_id,
+                            @gates,
+                            :id,
+                            :name, 
                             { include_blank: '出発地を選択'},
                             { class: "form-select",
                               data: { gate_filter_target: "gate" }

@@ -24,10 +24,14 @@
               <%= f.password_field :password, autocomplete: "current-password", class: "mb-5 form-control" %>
             </div>
 
-            <div class="d-grid">
+            <div class="d-grid mb-5">
               <%= f.submit t('helpers.submit.user_session.create'), class: "btn btn-primary btn-lg" %>
             </div>
         <% end %>
+
+        <%= button_to "googleでログイン", user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } %>
+        <%= link_to "パスワードをお忘れの方はこちら", new_user_password_path, class: "d-block text-center" %>
+
         <%#= render "devise/shared/links" %>
       </div>
     </div>
