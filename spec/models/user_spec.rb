@@ -198,7 +198,10 @@ RSpec.describe User, type: :model do
     let(:user) { create(:user) }
 
     context "パスワードを更新しない場合" do
-      
+      it "パスワードのバリデーションがスキップされること" do
+        user.name = "新しい名前"
+        
+      end
     end
   end
 
