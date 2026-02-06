@@ -7,10 +7,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     user_path(resource)
   end
 
+  def after_update_path_for(resource)
+    user_path(resource)
+  end
+
   private
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :name ])
-    devise_parameter_sanitizer.permit(:account_update, keys: [ :password, :password_confirmation, :current_password ])
+    devise_parameter_sanitizer.permit(:account_update, keys: [ :name, :email,  :password, :password_confirmation, :current_password ])
   end
 end
