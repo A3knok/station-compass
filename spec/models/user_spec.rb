@@ -71,4 +71,135 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "アソシエーション" do
+    it { should have_many(:routes).dependent(:destroy) }
+    it { should have_many(:helpful_marks).dependent(:destroy) }
+    it { should have_many(:helpful_routes).through(:helpful_routes).source(:route) }
+    it { should have_many(:contacts).dependent(:destroy) }
+  end
+
+  describe "ゲストユーザー機能" do
+    describe ".guest_user" do 
+      context "初回呼び出し時" do
+        it "ゲストユーザーを作成できること" do
+          expect { User.guest_user }.to change(User, :count).by(1)
+        end
+
+        it "作成されたゲストユーザーが正しい属性を持つこと" do
+          guest = User.guest_user
+          expect(guest.email).to eq("guest@example.com")
+          expect(guest.name).to eq("ゲストユーザー")
+          expect(guest.guest).to be true
+          expect(guest).to be_persisted
+        end
+
+        it "パスワードがランダム生成されること" do
+          guest = User.guest_user
+          expect(guest.encrypted_password).to be_present
+        end
+      end
+
+      context "2回目以降の呼び出し時" do
+        let(:guest1) { User.guest_user }
+
+        it "既存のゲストユーザーを返すこと" do
+          expect(User.guest_user).not_to change(User, :count)
+        end
+
+        it "同じユーザーインスタンスを返すこと" do
+          guest2 = User.guest_user
+          expect(guest1.id).to eq(guest2.id)
+        end
+      end
+    end
+
+    describe "#guest?" do
+      context "ゲストユーザーの場合" do
+        it "trueを返すこと" do
+          guest = User.guest_user
+          expect(guest.guest?).to be true
+        end
+      end
+
+      context "一般ユーザーの場合" do
+        it "falseを返すこと" do
+          user = create(:user)
+          expect(user.guest?).to be false 
+        end
+      end
+    end
+  end
+
+  describe "OAuth認証機能" do
+    describe "#oauth_user?" do
+      context "providerとuidが存在する場合" do
+        it "trueを返すこと" do
+          user = create(:user, provider: "google_oauth2", uid: "123456789")
+          expect(user.oauth_user?).to be true
+        end
+      end
+
+      context "providerまたはuidが存在しない場合" do
+        it "falseを返すこと" do
+          user = create(:user, provider: nil, uid: nil)
+          expect(user).to be false
+        end
+      end
+    end
+
+    describe ".form_omniauth" do
+      let(:auth_hash) do
+        OmniAuth::AuthHash.new(
+          provider: "google_oauth2",
+          uid: "123456789",
+          info: {
+            email: "oauth_user@example.com",
+            name: "OAuth User"
+          }
+        )
+      end
+
+      context "初回認証時" do
+        it "新しいユーザーを作成すること" do
+          expect {
+            User.form_omniauth(auth_hash)
+        }.to change(User, :count).by(1)
+        end
+
+        it "作成されたユーザーが正しい属性をもつこと" do
+          user = User.form_omniauth(auth_hash)
+          expect(user.name).to eq("OAuth User")
+          expect(user.email).to eq("oauth_user@example.com")
+          expect(user.provider).to eq("google_oauth2")
+          expect(user.uid).to eq("123456789")
+          expect(user.encrypted_password).to be_present
+        end
+      end
+
+      context "2回目認証時" do
+        it "既存のユーザーを返すこと" do
+          user1 = User.form_omniauth(auth_hash)
+          expect {
+            User.form_omniauth(auth_hash)
+        }.not_to change(User, :count)
+        end
+
+        it "同じユーザーインスタンスを返すこと" do
+          user1 = User.form_omniauth(auth_hash)
+          user2 = User.form_omniauth(auth_hash)
+          expect(user1.id).to eq(user2.id)
+        end
+      end
+    end
+  end
+
+  describe "パスワード更新時の挙動" do
+    let(:user) { create(:user) }
+
+    context "パスワードを更新しない場合" do
+      
+    end
+  end
+
 end
