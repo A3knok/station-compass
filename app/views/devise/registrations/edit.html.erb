@@ -10,6 +10,13 @@
         <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), class: "mb-3") do |f| %>
           <div class="field mb-3">
             <strong>
+              <%= f.label :name, class: "form-label" %>
+            </strong>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name",  class: "form-control" %>
+          </div>
+
+          <div class="field mb-3">
+            <strong>
               <%= f.label :email, class: "form-label" %>
             </strong>
             <%= f.email_field :email, autofocus: true, autocomplete: "email",  class: "form-control" %>

@@ -12,7 +12,7 @@ ja:
       new:
         title: 新規登録
       edit:
-        title: パスワードの変更
+        title: アカウント情報の変更
 
     passwords:
       new:
