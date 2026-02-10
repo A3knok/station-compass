@@ -3,8 +3,8 @@ class Route < ApplicationRecord
   mount_uploaders :images, ::RouteUploader
 
   belongs_to :user
-  belongs_to :gate, optional: true # 自動バリデーションを無効化
-  belongs_to :exit, optional: true # 自動バリデーションを無効化
+  belongs_to :gate
+  belongs_to :exit
   belongs_to :category, optional: true # 自動バリデーションを無効化
 
   # Gateを通じてstationにアクセス
@@ -14,8 +14,8 @@ class Route < ApplicationRecord
   has_many :tags, through: :taggings
   has_many :helpful_marks, dependent: :destroy
 
-  validates :gate_id, presence: true
-  validates :exit_id, presence: true
+  validates :gate, presence: true
+  validates :exit, presence: true
   validates :description, presence: true, length: { minimum: 10, maximum: 1000 }
   validates :estimated_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
@@ -24,7 +24,7 @@ class Route < ApplicationRecord
     self.tags.clear # 既存タグ削除(ルート編集時に古いタグを残さないため)
 
     return if names.blank?
-    # カンマ区切りを分割し、前後の空白を削除、重複を排除
+    # カンマで文字列を区切って分割し、前後の空白を削除、重複を排除、空文字を削除
     tag_names = names.split(",").map(&:strip).uniq.reject(&:blank?)
 
     tag_names.each do |tag_name|

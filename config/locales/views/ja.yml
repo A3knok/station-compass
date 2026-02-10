@@ -29,6 +29,7 @@ ja:
   
   routes:
     railway_company: 鉄道会社
+    station: 駅名
     new:
       title: 新規投稿
     show:
