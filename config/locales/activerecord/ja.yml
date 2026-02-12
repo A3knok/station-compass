@@ -44,12 +44,17 @@ ja:
               
         route:
           attributes:
-            gate_id:
+            gate:
               blank: "を選択してください"
-            exit_id:
+            exit:
               blank: "を選択してください"
             description:
               too_short: "は10文字以上で入力してください"
+        
+        category:
+          attribute:
+            name:
+              
   
   defaults:
     show: 詳細
@@ -83,13 +88,14 @@ ja:
         password_confirmation: パスワード(確認用)
       route:
         railway_company: 鉄道会社
-        gate_id: 出発地
-        exit_id: 目的地
+        gate: 出発地
+        exit: 目的地
         railway_company_id: 鉄道会社
         description: ルート詳細
         estimated_time: 所要時間(分)
         category_id: カテゴリー
         tag_names: タグ
+        images: 画像添付
       contact:
         subject: 件名
         body: お問い合わせ内容

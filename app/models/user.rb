@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
   # 一般ユーザーにゲストユーザーのメールアドレスを使って登録させない
   def forbid_guest_email
-    if email == "guest@example.com" && !guest # !guestは一派ユーザー
+    if email == "guest@example.com" && !guest # !guestは一般ユーザー
       errors.add(:email, "このメールアドレスは使用できません")
     end
   end

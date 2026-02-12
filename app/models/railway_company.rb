@@ -2,6 +2,8 @@ class RailwayCompany < ApplicationRecord
   has_many :gates, dependent: :destroy
   has_many :stations, through: :gates
 
+  validates :name, presence: true
+
   def self.grouped_by_station
     joins(:gates)
       .select("railway_companies.id", "railway_companies.name", "gates.station_id")
