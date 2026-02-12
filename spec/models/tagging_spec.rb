@@ -50,7 +50,7 @@ RSpec.describe Tagging, type: :model do
 
   describe "アソシエーション" do
     it { should belong_to(:tag) }
-    it { should belong_to(:route) }  
+    it { should belong_to(:route) }
   end
 
   describe "Ransackの設定" do

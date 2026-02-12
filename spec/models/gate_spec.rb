@@ -69,11 +69,11 @@ RSpec.describe Gate, type: :model do
         let!(:gate_a) { create(:gate, name: "A改札", railway_company: company1) }
         let!(:gate_b) { create(:gate, name: "B改札", railway_company: company1) }
 
-        it "Gateが名前順にソートされていること" do          
+        it "Gateが名前順にソートされていること" do
           result = Gate.grouped_by_company
 
           names = result[company1.id].map { |x| x[:name] }
-          expect(names).to eq(["A改札", "B改札", "C改札"])
+          expect(names).to eq([ "A改札", "B改札", "C改札" ])
         end
       end
 
@@ -86,7 +86,7 @@ RSpec.describe Gate, type: :model do
 
       context "1つのRailwayCompanyに1つのGateのみ紐づいている場合" do
         let!(:single_company) { create(:railway_company, name: "単独会社") }
-        let!(:single_gate) { create(:gate, name: "単独改札", railway_company: single_company)}
+        let!(:single_gate) { create(:gate, name: "単独改札", railway_company: single_company) }
 
         it "正常にグループ化されること" do
           result = Gate.grouped_by_company

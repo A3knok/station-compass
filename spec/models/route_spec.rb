@@ -45,7 +45,7 @@ RSpec.describe Route, type: :model do
         route = build(:route, :long_description)
         expect(route).to be_invalid
         expect(route.errors[:description]).to include("は1000文字以内で入力してください")
-      end 
+      end
 
       it "estimated_timeが無い場合に無効であること" do
         route = build(:route, estimated_time: nil)
@@ -100,29 +100,29 @@ RSpec.describe Route, type: :model do
     context "正常系" do
       it "カンマ区切りのタグ名を設定できること" do
         route.tag_names = "tag1, tag2, tag3"
-        expect(route.tags.pluck(:name)).to match_array(["tag1", "tag2", "tag3"])
+        expect(route.tags.pluck(:name)).to match_array([ "tag1", "tag2", "tag3" ])
       end
 
       it "タグ名が小文字に変換されること" do
         route.tag_names = "TAG1, Tag2, Tag3"
-        expect(route.tags.pluck(:name)).to match_array(["tag1", "tag2", "tag3"])
+        expect(route.tags.pluck(:name)).to match_array([ "tag1", "tag2", "tag3" ])
       end
 
       it "タグの重複が排除されること" do
         route.tag_names = "tag1, tag2, tag3, tag3"
-        expect(route.tags.pluck(:name)).to match_array(["tag1", "tag2", "tag3"])
+        expect(route.tags.pluck(:name)).to match_array([ "tag1", "tag2", "tag3" ])
       end
 
       it "既存のタグがクリアされること" do
         tag1 = create(:tag, name: "old_tag")
         route.tags << tag1
         route.tag_names = "new_tag"
-        expect(route.tags.pluck(:name)).to eq(["new_tag"])
+        expect(route.tags.pluck(:name)).to eq([ "new_tag" ])
       end
 
       it "前後の空白が削除されること" do
         route.tag_names = " tag1 , tag2 "
-        expect(route.tags.pluck(:name)).to match_array(["tag1", "tag2"])
+        expect(route.tags.pluck(:name)).to match_array([ "tag1", "tag2" ])
       end
     end
 
@@ -137,7 +137,7 @@ RSpec.describe Route, type: :model do
 
       it "空白のタグが作成されないこと" do
         route.tag_names = "tag1, , tag2"
-        expect(route.tags.pluck(:name)).to match_array(["tag1", "tag2"])
+        expect(route.tags.pluck(:name)).to match_array([ "tag1", "tag2" ])
       end
 
       it "空白のみの文字列を渡したときにタグが作成されないこと" do
@@ -154,7 +154,7 @@ RSpec.describe Route, type: :model do
       it "タグ名がカンマ区切りで返されること" do
         tag1 = create(:tag, name: "tag1")
         tag2 = create(:tag, name: "tag2")
-        route.tags << [tag1, tag2]
+        route.tags << [ tag1, tag2 ]
         expect(route.tag_names).to eq("tag1,tag2")
       end
 

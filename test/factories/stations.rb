@@ -8,9 +8,9 @@ FactoryBot.define do
     trait :at_south_pole do
       name { "南極地点" }
       latitude { -90 }
-      longitude { 0 }  
+      longitude { 0 }
     end
-    
+
     trait :at_north_pole do
       name { "北極地点" }
       latitude { 90 }

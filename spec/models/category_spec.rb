@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Category, type: :model do  
+RSpec.describe Category, type: :model do
   describe "バリデーション" do
     context "正常系" do
       it "すべてのバリデーションが機能しているか" do
@@ -13,7 +13,7 @@ RSpec.describe Category, type: :model do
       it "nameがない場合に無効であること" do
         category = Category.new(name: nil)
         expect(category).to be_invalid
-        expect(category.errors[:name]).to include("を入力してください") 
+        expect(category.errors[:name]).to include("を入力してください")
       end
 
       it "nameが空文字の場合に無効であること" do

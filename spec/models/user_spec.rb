@@ -79,7 +79,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "ゲストユーザー機能" do
-    describe ".guest_user" do 
+    describe ".guest_user" do
       context "初回呼び出し時" do
         it "ゲストユーザーを作成できること" do
           expect { User.guest_user }.to change(User, :count).by(1)
@@ -102,7 +102,7 @@ RSpec.describe User, type: :model do
       context "2回目以降の呼び出し時" do
         it "既存のゲストユーザーを返すこと" do
           guest1 = User.guest_user
-          expect{ guest1 }.not_to change(User, :count)
+          expect { guest1 }.not_to change(User, :count)
         end
 
         it "同じユーザーインスタンスを返すこと" do
@@ -124,7 +124,7 @@ RSpec.describe User, type: :model do
       context "一般ユーザーの場合" do
         it "falseを返すこと" do
           user = create(:user)
-          expect(user.guest?).to be false 
+          expect(user.guest?).to be false
         end
       end
     end

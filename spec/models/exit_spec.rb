@@ -39,7 +39,7 @@ RSpec.describe Exit, type: :model do
 
   describe "アソシエーション" do
     it { should have_many(:routes).dependent(:destroy) }
-    it { should belong_to(:station) }  
+    it { should belong_to(:station) }
   end
 
   describe "Ransackの設定" do

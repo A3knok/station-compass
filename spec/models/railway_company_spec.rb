@@ -15,7 +15,7 @@ RSpec.describe RailwayCompany, type: :model do
         expect(railway_company).to be_invalid
         expect(railway_company.errors[:name]).to include("を入力してください")
       end
-    
+
       it "nameが空文字の場合に無効であること" do
         railway_company = RailwayCompany.new(name: "")
         expect(railway_company).to be_invalid
