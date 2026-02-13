@@ -1,4 +1,6 @@
 class RanksController < ApplicationController
+  skip_before_action :check_guest_user, only: %i[index]
+
   def index
     @station = Station.find(params[:station_id])
 

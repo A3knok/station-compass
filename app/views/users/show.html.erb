@@ -48,7 +48,7 @@
           </dl>
         </div>
 
-        <% unless @user.oauth_user? %>
+        <% unless @user.oauth_user? || @user.guest? %>
           <%= link_to "アカウント情報の変更", edit_user_registration_path %>
         <% end %>
       </div>
