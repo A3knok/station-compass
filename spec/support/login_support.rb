@@ -6,6 +6,6 @@ module LoginSupport
     fill_in "パスワード", with: "password123"
     click_button "ログイン"
 
-    expect(page).to have_content("ログインしました")  # ← 追加
+    expect(page).to have_content("ログインしました")
   end
 end

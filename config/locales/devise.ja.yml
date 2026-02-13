@@ -15,3 +15,4 @@ ja:
       invalid: メールアドレスまたはパスワードが正しくありません
       already_authenticated: 既にログインしています
       guest_user: ゲストユーザーはこの操作を実行できません
+      unauthenticated: ログインが必要です

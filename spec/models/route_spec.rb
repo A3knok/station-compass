@@ -12,15 +12,15 @@ RSpec.describe Route, type: :model do
 
     context "異常系" do
       it "gateがない場合に無効であること" do
-        route = build(:route, gate: nil)
+        route = build(:route, gate_id: nil)
         expect(route).to be_invalid
-        expect(route.errors[:gate]).to include("を選択してください")
+        expect(route.errors[:gate_id]).to include("を選択してください")
       end
 
       it "exitがない場合に無効であること" do
-        route = build(:route, exit: nil)
+        route = build(:route, exit_id: nil)
         expect(route).to be_invalid
-        expect(route.errors[:exit]).to include("を選択してください")
+        expect(route.errors[:exit_id]).to include("を選択してください")
       end
 
       it "descriptionがない場合に無効であること" do

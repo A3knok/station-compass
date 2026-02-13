@@ -46,17 +46,12 @@ ja:
               
         route:
           attributes:
-            gate:
+            gate_id:
               blank: "を選択してください"
-            exit:
+            exit_id:
               blank: "を選択してください"
             description:
-              too_short: "は10文字以上で入力してください"
-        
-        category:
-          attribute:
-            name:
-              
+              too_short: "は10文字以上で入力してください"             
   
   defaults:
     show: 詳細

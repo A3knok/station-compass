@@ -14,8 +14,8 @@ class Route < ApplicationRecord
   has_many :tags, through: :taggings
   has_many :helpful_marks, dependent: :destroy
 
-  validates :gate, presence: true
-  validates :exit, presence: true
+  validates :gate_id, presence: true
+  validates :exit_id, presence: true
   validates :description, presence: true, length: { minimum: 10, maximum: 1000 }
   validates :estimated_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
 

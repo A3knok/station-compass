@@ -49,11 +49,11 @@
 
   <div class="mb-3 ps-3 form-group">
     <strong>
-      <%= f.label :gate, class: "form-label" %>
+      <%= f.label :gate_id, class: "form-label" %>
     </strong>
     <i class="fas fa-location-dot text-success"></i>
     <span style="color: red;">*</span>
-    <%= f.collection_select :gate,
+    <%= f.collection_select :gate_id,
                             @gates,
                             :id,
                             :name, 
@@ -65,11 +65,11 @@
 
   <div class="mb-3 ps-3 form-group">
     <strong>
-      <%= f.label :exit, class: "form-label" %>
+      <%= f.label :exit_id, class: "form-label" %>
     </strong>
     <i class="fas fa-flag-checkered text-danger"></i>
     <span style="color: red;">*</span>
-    <%= f.collection_select :exit, @exits, :id, :display_name,
+    <%= f.collection_select :exit_id, @exits, :id, :display_name,
                             { include_blank: '目的地を選択'},
                             { class: "form-select" } %>
   </div>

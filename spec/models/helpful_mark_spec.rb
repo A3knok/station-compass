@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe HelpfulMark, type: :model do
   describe "バリデーション" do
-    let(:user) { build(:user) }
-    let(:route) { build(:route) }
+    let(:user) { create(:user) }
+    let(:route) { create(:route) }
 
     context "正常系" do
       it "すべてのバリデーションが有効であること" do
