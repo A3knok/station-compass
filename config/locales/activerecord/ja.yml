@@ -41,6 +41,8 @@ ja:
             password_confirmation:
               blank: "を再入力してください"
               confirmation: "とパスワードの入力が一致しません"
+            current_password:
+              invalid: が正しくありません
               
         route:
           attributes:
