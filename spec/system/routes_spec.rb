@@ -128,6 +128,26 @@ RSpec.describe "Routes", type: :system do
           expect(current_path).to eq route_path(route)
         end
       end
+
+      context "異常系" do
+        it "ルート詳細が空の場合、更新に失敗する" do
+          visit edit_route_path(route)
+          fill_in "ルート詳細", with: ""
+          click_button "更新"
+
+          expect(page).to have_content("ルート更新に失敗しました")
+          expect(current_path).to eq edit_route_path(route)
+        end
+
+        it "所要時間が未入力の場合、更新に失敗する" do
+          visit edit_route_path(route)
+          fill_in "所要時間(分)", with: ""
+          click_button "更新"
+
+          expect(page).to have_content("ルート更新に失敗しました")
+          expect(current_path).to eq edit_route_path(route)
+        end
+      end
     end
   end
 end
