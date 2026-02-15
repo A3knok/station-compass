@@ -87,16 +87,21 @@ RSpec.describe "Routes", type: :system do
       context "正常系" do
         it "フォームの入力値が正常の場合投稿成功する" do
           visit new_route_path
+
+          unique_description = "テストルート詳細_#{Time.current.to_i}"
+
           select station.name, from: "駅名"
           select railway_company.name, from: "鉄道会社"
           select gate.name, from: "出発地"
           select exit.name, from: "目的地"
-          fill_in "ルート詳細", with: "テストルート詳細(10文字以上)"
+          fill_in "ルート詳細", with: unique_description
           fill_in "所要時間(分)", with: 5
           click_button "作成"
 
           expect(page).to have_content("投稿ありがとうございます!")
-          expect(current_path).to eq route_path(Route.last)
+          
+          new_route = Route.find_by(description: unique_description)
+          expect(current_path).to eq route_path(new_route)
         end
       end
 
