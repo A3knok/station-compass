@@ -14,8 +14,8 @@ RSpec.describe "Searches", type: :system do
   let!(:category1) { create(:category) }
   let!(:category2) { create(:category) }
 
-  let!(:tag1) { create(:tag) }
-  let!(:tag2) { create(:tag) }
+  let!(:tag1) { create(:tag, name: "旅行") }
+  let!(:tag2) { create(:tag, name: "仕事") }
 
   let!(:route1) { create(:route, gate: gate1, exit: exit1, category: category1) }
   let!(:route2) { create(:route, gate: gate2, exit: exit2, category: category2) }
@@ -48,7 +48,6 @@ RSpec.describe "Searches", type: :system do
       end
     end
     
-
     describe "チェックボックス検索" do
       context "1つのカテゴリーを選択した場合" do
         it "そのカテゴリーのルートのみ表示される" do
@@ -73,8 +72,39 @@ RSpec.describe "Searches", type: :system do
     end
 
     describe "オートコンプリート検索" do
-      it "タグを入力して検索できる" do
+      it "タグを入力して検索できる", js: true do
+        puts page.html
+    
+        # スクリーンショットを保存
+        save_screenshot("debug_search_form.png")
 
+        find("#q_tags_name_in", visible: :all).select("旅")
+        click_button "検索"
+
+        expect(page).to have_content(route1.description)
+        expect(page).not_to have_content(route2.description)
+      end
+    end
+
+    describe "複合検索" do
+      it "出口とカテゴリーを組み合わせて検索できる", js: true do
+        select exit1.name, from: "目的地"
+        check category1.name
+        click_button "検索"
+
+        expect(page).to have_content(route1.description)
+        expect(page).not_to have_content(route2.description)
+      end
+
+      it "出口とカテゴリーが一致しない場合は結果が表示されない", js: true do
+        select exit1.name, from: "目的地"
+        check category2.name
+        click_button "検索"
+
+        expect(page).not_to have_content(route1.description)
+        expect(page).not_to have_content(route2.description)
+        
+        expect(page).to have_content("まだルートが投稿されていません")
       end
     end
   end

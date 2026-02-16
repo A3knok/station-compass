@@ -6,6 +6,8 @@ ja:
       gate: 地点
       exit: 地点
       railway_company: 鉄道会社
+      category: カテゴリー
+      tag: タグ
     attributes:
       user:
         name: ユーザー名
@@ -25,6 +27,12 @@ ja:
       
       exit:
         name: 地点名
+
+      category:
+        name: カテゴリー
+      
+      tag:
+        name: タグ
 
     errors:
       messages:
