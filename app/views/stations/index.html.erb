@@ -1,18 +1,50 @@
 <%= content_for(:title, t('.title')) %>
 
+<!-- お知らせバナー -->
+<div class="alert alert-info text-center mb-0 rounded-0 border-0 py-3" role="alert">
+  <div class="container">
+    <i class="fas fa-info-circle me-2"></i>
+    現在は <strong class="mx-1">渋谷駅</strong> のみ対応しています。今後、他の駅も順次追加予定です!
+  </div>
+</div>
+
 <div class="page-container">
   <div class="container py-5">
     <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6">
+      <div class="col-md-10 col-lg-8">
         <div class="station-sign-bar mb-3"></div>
-        <h2 class="text-center mb-5">
+        <h2 class="text-center mb-2">
           <i class="fa-solid fa-train-subway me-2 text-primary"></i>
           <%= t('.title') %>
         </h2>
+        <p class="text-center text-muted mb-5">駅を選択してルートを探しましょう</p>
 
-        <div>
-          <% @stations.each do |station| %>
-            <%= link_to station.name, station_routes_path(station) %>
+        <div class="station-list-wrapper bg-white rounded-3 shadow-sm overflow-hidden">
+          <% @stations.each_with_index do |station, index| %>
+            <%= link_to station_routes_path(station), class: "station-list-item text-decoration-none d-block" do %>
+              <div class="d-flex align-items-center p-4 <%= 'border-bottom' unless index == @stations.length - 1 %>">
+                <div class="station-number me-3">
+                  <%= sprintf('%02d', index + 1) %>
+                </div>
+                <div class="station-icon-minimal me-3">
+                  <i class="fa-solid fa-train-subway text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 text-dark station-name"><%= station.name %></h5>
+                  <div class="d-flex align-items-center text-muted small">
+                    <span class="me-3">
+                      <i class="fas fa-route me-1"></i>
+                      <%= station.routes.count %>件
+                    </span>
+                    <span>
+                      <i class="fas fa-door-open me-1"></i>
+                      <%= station.exits.count %>出口
+                    </span>
+                  </div>
+                </div>
+                <i class="fas fa-chevron-right text-muted"></i>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>
