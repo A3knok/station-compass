@@ -32,7 +32,7 @@ RSpec.describe Category, type: :model do
   end
 
   describe "アソシエーション" do
-    it { should have_many(:taggings).dependent(:destroy) }
+    it { should have_many(:routes).dependent(:destroy) }
   end
 
   describe "Ransackの設定" do

@@ -27,7 +27,7 @@
   <div class="mb-3">
     <i class="fas fa-flag-checkered text-danger me-1"></i>
     <strong>
-      <%= f.label :category_id_in, Route.human_attribute_name(:category_id), class: "form-label" %>
+      <%= f.label :category_id_in, Category.model_name.human, class: "form-label" %>
     </strong>
     
     <%= f.collection_check_boxes :category_id_in, @categories, :id, :name %>
@@ -37,7 +37,7 @@
   <div class="mb-3">
     <i class="fas fa-tags text-dark me-1"></i>
     <strong>
-      <%= f.label :tags_name_in, Tag.human_attribute_name(:name), class: "form-label" %>
+      <%= f.label :tags_name_in, Tag.model_name.human, class: "form-label" %>
     </strong>
     
     <%= f.select :tags_name_in, 

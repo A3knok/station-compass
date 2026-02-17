@@ -6,6 +6,8 @@ ja:
       gate: 地点
       exit: 地点
       railway_company: 鉄道会社
+      category: カテゴリー
+      tag: タグ
     attributes:
       user:
         name: ユーザー名
@@ -26,6 +28,12 @@ ja:
       exit:
         name: 地点名
 
+      category:
+        name: カテゴリー
+      
+      tag:
+        name: タグ
+
     errors:
       messages:
         blank: "を入力してください"
@@ -41,20 +49,17 @@ ja:
             password_confirmation:
               blank: "を再入力してください"
               confirmation: "とパスワードの入力が一致しません"
+            current_password:
+              invalid: が正しくありません
               
         route:
           attributes:
-            gate:
+            gate_id:
               blank: "を選択してください"
-            exit:
+            exit_id:
               blank: "を選択してください"
             description:
-              too_short: "は10文字以上で入力してください"
-        
-        category:
-          attribute:
-            name:
-              
+              too_short: "は10文字以上で入力してください"             
   
   defaults:
     show: 詳細

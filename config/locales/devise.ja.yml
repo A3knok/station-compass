@@ -5,9 +5,14 @@ ja:
       signed_out: ログアウトしました
     registrations:
       signed_up: ユーザー登録が完了しました
+      updated: "アカウント情報を変更しました"
+    passwords:
+      send_instructions: パスワードリセット手順を送信しました
+      send_paranoid_instructions: パスワードリセット手順を送信しました
     omniauth_callbacks:
       success: ログインしました
     failure:
       invalid: メールアドレスまたはパスワードが正しくありません
       already_authenticated: 既にログインしています
       guest_user: ゲストユーザーはこの操作を実行できません
+      unauthenticated: ログインが必要です

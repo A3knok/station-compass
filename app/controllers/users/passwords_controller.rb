@@ -23,10 +23,11 @@ class Users::PasswordsController < Devise::PasswordsController
 
   protected
 
+  def after_sending_reset_password_instructions_path_for(resource_name)
+    new_user_session_path
+  end
+
   def after_resetting_password_path_for(resource)
-    Rails.logger.debug "===== after_resetting_password_path_for が呼ばれました ====="
-    Rails.logger.debug "resource: #{resource.inspect}"
-    Rails.logger.debug "user_path(resource): #{user_path(resource)}"
     user_path(resource)
   end
 

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :route do
-    description { "rspec用のテストルートです" }
+    sequence(:description) { |n| "rspec用のテストルート#{n}" }
     estimated_time { 5 }
     helpful_marks_count { 0 }
     images { [] }

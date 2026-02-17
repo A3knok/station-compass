@@ -7,7 +7,7 @@ categories_data = [
   { name: "日常" }
 ]
 
-categories = categories_data.each do |category|
+categories = categories_data.map do |category|
   Category.find_or_create_by!(category)
 end
 
@@ -26,7 +26,10 @@ stations_data = [
 ]
 
 stations = stations_data.map do |station_data|
-  Station.find_or_create_by!(station_data)
+  Station.find_or_create_by!(name: station_data[:name]) do |station|
+    station.latitude = station_data[:latitude]
+    station.longitude = station_data[:longitude]
+  end
 end
 
 puts "Stationデータを #{Station.count} 件作成しました"
