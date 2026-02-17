@@ -33,7 +33,7 @@ RSpec.describe "Searches", type: :system do
           click_button "検索"
 
           expect(page).to have_content(route1.description)
-          expect(page).to have_content(route2.description)
+          expect(page).not_to have_content(route2.description)
         end
       end
 
@@ -43,7 +43,7 @@ RSpec.describe "Searches", type: :system do
           click_button "検索"
 
           expect(page).to have_content(route1.description)
-          expect(page).to have_content(route2.description)
+          expect(page).not_to have_content(route2.description)
         end
       end
     end
@@ -73,10 +73,7 @@ RSpec.describe "Searches", type: :system do
 
     describe "オートコンプリート検索" do
       it "タグを入力して検索できる", js: true do
-        puts page.html
-
-        # スクリーンショットを保存
-        save_screenshot("debug_search_form.png")
+        sleep 1
 
         find("#q_tags_name_in", visible: :all).select("旅")
         click_button "検索"

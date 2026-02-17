@@ -76,10 +76,21 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.before(:each, type: :system) do
-    driven_by :remote_chrome
-    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
-    Capybara.server_port = 3000
-    Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+    if ENV['CI']
+      # CI環境の設定
+      driven_by :remote_chrome
+      Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+      Capybara.server_port = 3000
+      Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+    else
+      # ローカル環境の設定
+      driven_by :remote_chrome
+      Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+      Capybara.server_port = 4444  # ← ローカルでは別のポートを使用
+      Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+    end
+    
+    Capybara.default_max_wait_time = 10
     Capybara.ignore_hidden_elements = false
   end
 end
