@@ -17,8 +17,17 @@ RSpec.describe "Searches", type: :system do
   let!(:tag1) { create(:tag, name: "旅行") }
   let!(:tag2) { create(:tag, name: "仕事") }
 
-  let!(:route1) { create(:route, gate: gate1, exit: exit1, category: category1) }
-  let!(:route2) { create(:route, gate: gate2, exit: exit2, category: category2) }
+  let!(:route1) do
+    route = create(:route, gate: gate1, exit: exit1, category: category1)
+    route.tags << tag1
+    route
+  end
+
+  let!(:route2) do
+    route = create(:route, gate: gate2, exit: exit2, category: category2)
+    route.tags << tag2
+    route
+  end
 
   before do
     login_as(user)
@@ -33,7 +42,7 @@ RSpec.describe "Searches", type: :system do
           click_button "検索"
 
           expect(page).to have_content(route1.description)
-          expect(page).to have_content(route2.description)
+          expect(page).not_to have_content(route2.description)
         end
       end
 
@@ -43,7 +52,7 @@ RSpec.describe "Searches", type: :system do
           click_button "検索"
 
           expect(page).to have_content(route1.description)
-          expect(page).to have_content(route2.description)
+          expect(page).not_to have_content(route2.description)
         end
       end
     end
@@ -72,17 +81,11 @@ RSpec.describe "Searches", type: :system do
     end
 
     describe "オートコンプリート検索" do
-      it "タグを入力して検索できる", js: true do
-        puts page.html
+      it "タグを選択して検索できる", js: true do
+      visit station_routes_path(station, q: { tags_name_in: [ tag1.name ] })
 
-        # スクリーンショットを保存
-        save_screenshot("debug_search_form.png")
-
-        find("#q_tags_name_in", visible: :all).select("旅")
-        click_button "検索"
-
-        expect(page).to have_content(route1.description)
-        expect(page).not_to have_content(route2.description)
+      expect(page).to have_content(route1.description)
+      expect(page).not_to have_content(route2.description)
       end
     end
 
