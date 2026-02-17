@@ -89,7 +89,7 @@ RSpec.configure do |config|
       Capybara.server_port = 4444  # ← ローカルでは別のポートを使用
       Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
     end
-    
+
     Capybara.default_max_wait_time = 10
     Capybara.ignore_hidden_elements = false
   end
