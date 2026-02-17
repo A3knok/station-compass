@@ -46,6 +46,12 @@ jobs:
         with:
           node-version: "18"
           cache: 'yarn'
+        
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build assets
+        run: bundle exec rails assets:precompile
 
       - name: Set up database
         run: |
