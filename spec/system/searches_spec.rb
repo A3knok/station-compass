@@ -73,9 +73,13 @@ RSpec.describe "Searches", type: :system do
 
     describe "オートコンプリート検索" do
       it "タグを入力して検索できる", js: true do
-        sleep 1
+        sleep 2
 
-        find("#q_tags_name_in", visible: :all).select("旅")
+        tag_id = tag1.id
+        find("#q_tags_name_in", visible: :all).set(tag_id)
+
+        sleep 0.5
+
         click_button "検索"
 
         expect(page).to have_content(route1.description)
