@@ -87,5 +87,5 @@ RSpec.describe "Helpfuls", type: :system do
         end
       end
     end
-  end  
+  end
 end

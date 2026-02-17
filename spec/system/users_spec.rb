@@ -11,7 +11,7 @@ RSpec.describe "Users", type: :system do
           fill_in "パスワード", with: "password"
           fill_in "パスワード(確認用)", with: "password"
           click_button "登録"
-          
+
           expect(page).to have_content("ユーザー登録が完了しました")
 
           created_user = User.last
@@ -27,7 +27,7 @@ RSpec.describe "Users", type: :system do
           fill_in "パスワード", with: "password"
           fill_in "パスワード(確認用)", with: "password"
           click_button "登録"
-          
+
           expect(page).to have_content("メールアドレスを入力してください")
           expect(current_path).to eq new_user_registration_path
         end
@@ -56,7 +56,7 @@ RSpec.describe "Users", type: :system do
           fill_in "パスワード", with: ""
           fill_in "パスワード(確認用)", with: ""
           click_button "登録"
-          
+
           expect(page).to have_content("パスワードを入力してください")
           expect(current_path).to eq new_user_registration_path
         end
@@ -70,7 +70,7 @@ RSpec.describe "Users", type: :system do
           fill_in "パスワード", with: "password"
           fill_in "パスワード(確認用)", with: "password123"
           click_button "登録"
-          
+
           expect(page).to have_content("パスワード(確認用)とパスワードの入力が一致しません")
           expect(current_path).to eq new_user_registration_path
         end
@@ -79,14 +79,14 @@ RSpec.describe "Users", type: :system do
       context "ゲストユーザーのメールアドレスで登録しようとした場合" do
         it "ユーザー新規登録が失敗する" do
           User.guest_user
-          
+
           visit new_user_registration_path
           fill_in "ユーザー名", with: "テストユーザー"
           fill_in "メールアドレス", with: "guest@example.com"
           fill_in "パスワード", with: "password"
           fill_in "パスワード(確認用)", with: "password"
           click_button "登録"
-          
+
           expect(page).to have_content("メールアドレスはすでに使用されています")
           expect(current_path).to eq new_user_registration_path
         end
@@ -109,7 +109,7 @@ RSpec.describe "Users", type: :system do
           expect(current_path).to eq new_user_session_path
 
           expect(ActionMailer::Base.deliveries.size).to eq 1
-          expect(ActionMailer::Base.deliveries.last.to).to eq [created_user.email]
+          expect(ActionMailer::Base.deliveries.last.to).to eq [ created_user.email ]
         end
       end
     end
@@ -129,7 +129,7 @@ RSpec.describe "Users", type: :system do
           click_button "更新"
 
           expect(page).to have_content("アカウント情報を変更しました")
-        end  
+        end
       end
 
       context "現在のパスワードが未入力の場合" do

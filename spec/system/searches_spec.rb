@@ -47,7 +47,7 @@ RSpec.describe "Searches", type: :system do
         end
       end
     end
-    
+
     describe "チェックボックス検索" do
       context "1つのカテゴリーを選択した場合" do
         it "そのカテゴリーのルートのみ表示される" do
@@ -74,7 +74,7 @@ RSpec.describe "Searches", type: :system do
     describe "オートコンプリート検索" do
       it "タグを入力して検索できる", js: true do
         puts page.html
-    
+
         # スクリーンショットを保存
         save_screenshot("debug_search_form.png")
 
@@ -103,7 +103,7 @@ RSpec.describe "Searches", type: :system do
 
         expect(page).not_to have_content(route1.description)
         expect(page).not_to have_content(route2.description)
-        
+
         expect(page).to have_content("まだルートが投稿されていません")
       end
     end

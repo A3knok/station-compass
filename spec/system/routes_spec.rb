@@ -24,7 +24,7 @@ RSpec.describe "Routes", type: :system do
         expect(current_path).to eq new_user_session_path
       end
     end
-    
+
     context "ルート一覧画面にアクセスした場合" do
       it "アクセス失敗する" do
         visit station_routes_path(station)
@@ -62,7 +62,7 @@ RSpec.describe "Routes", type: :system do
         expect(current_path).to eq stations_path
       end
     end
-    
+
     context "ルート一覧画面にアクセスした場合" do
       it "ルート一覧が表示される" do
         visit station_routes_path(station)
@@ -99,7 +99,7 @@ RSpec.describe "Routes", type: :system do
           click_button "作成"
 
           expect(page).to have_content("投稿ありがとうございます!")
-          
+
           new_route = Route.find_by(description: unique_description)
           expect(current_path).to eq route_path(new_route)
         end

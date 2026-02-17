@@ -30,7 +30,7 @@ RSpec.describe "RouteRankings", type: :system do
           row.all("td")[2].text.to_i # ランキングページの3番目のtd（評価数）
         end
 
-        expect(counts).to eq([3, 2, 1])
+        expect(counts).to eq([ 3, 2, 1 ])
       end
 
       it "各ルートの役に立った数が正しく表示される" do
@@ -61,7 +61,7 @@ RSpec.describe "RouteRankings", type: :system do
           row["data-route-id"]
         end
 
-        expect(route_ids[0..1]).to eq([route2.id, route1.id])
+        expect(route_ids[0..1]).to eq([ route2.id, route1.id ])
       end
     end
   end
