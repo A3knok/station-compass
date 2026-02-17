@@ -82,9 +82,7 @@ RSpec.describe "Searches", type: :system do
 
     describe "オートコンプリート検索" do
       it "タグを選択して検索できる", js: true do
-      select tag1.name, from: 'q_tags_name_in'
-
-      click_button "検索"
+      visit station_routes_path(@station, q: { tags_name_in: [tag1.id] })
 
       expect(page).to have_content(route1.description)
       expect(page).not_to have_content(route2.description)
