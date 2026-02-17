@@ -24,7 +24,7 @@
                 <% route = item[:route]  %>
                 <% rank = item[:rank] %>
                 <% show_rank = item[:show_rank] %>
-                <tr>
+                <tr class="ranking-item" data-route-id="<%= route.id %>">
                   <td>
                     <% if show_rank %>
                       <span><%= rank %>位</span>
