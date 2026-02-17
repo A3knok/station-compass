@@ -80,7 +80,7 @@ RSpec.describe "Searches", type: :system do
           const select = document.querySelector('#q_tags_name_in');
           if (select) {
             select.value = '#{tag_id}';
-            
+          #{'  '}
             // changeイベントを発火（Slim Selectに変更を通知）
             const event = new Event('change', { bubbles: true });
             select.dispatchEvent(event);
