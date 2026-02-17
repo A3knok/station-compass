@@ -24,11 +24,12 @@ jobs:
       chrome:
         image: selenium/standalone-chromium
         ports:
-          - 4444:4444
+          - 4445:4444
     
     env:
       RAILS_ENV: test
       DATABASE_URL: postgres://postgres:password@localhost:5432/myapp_test
+      SELENIUM_DRIVER_URL: http://localhost:4445/wd/hub
 
     steps:
       - name: Checkout code
