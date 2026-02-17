@@ -76,7 +76,16 @@ RSpec.describe "Searches", type: :system do
         sleep 2
 
         tag_id = tag1.id
-        find("#q_tags_name_in", visible: :all).set(tag_id)
+        page.execute_script(<<~JS)
+          const select = document.querySelector('#q_tags_name_in');
+          if (select) {
+            select.value = '#{tag_id}';
+            
+            // changeイベントを発火（Slim Selectに変更を通知）
+            const event = new Event('change', { bubbles: true });
+            select.dispatchEvent(event);
+          }
+        JS
 
         sleep 0.5
 
