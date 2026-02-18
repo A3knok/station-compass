@@ -11,6 +11,14 @@ export default class extends Controller {
   connect() {
     this.disableSelect(this.railwayCompanyTarget)
     this.disableSelect(this.gateTarget)
+
+    if(this.stationTarget.value) {
+      this.filterCompanies()
+
+      if(this.railwayCompanyTarget.value) {
+        this.filterGates()
+      }
+    }
   }
 
   filterCompanies() {
