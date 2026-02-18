@@ -1,45 +1,48 @@
 <%= search_form_for @q, url: station_routes_path(@station) do |f| %>
   <!-- 改札検索 -->
-  <div class="mb-3">
-    <i class="fas fa-location-dot text-success me-1"></i>
-    <strong>
+  <div class="search-item mb-4">
+    <div class="search-item-header mb-2">
+      <i class="fas fa-location-dot text-success me-1"></i>
       <%= f.label :gate_id_eq, Route.human_attribute_name(:gate_id), class: "form-label" %>
-    </strong>
-    
+    </div>    
     <%= f.collection_select :gate_id_eq, @gates, :id, :name, 
                             { include_blank: 'すべて' },
                             { class: "form-select" } %>
   </div>
   
   <!-- 出口検索 -->
-  <div class="mb-3">
-    <i class="fas fa-flag-checkered text-danger me-1"></i>
-    <strong>
+  <div class="search-item mb-4">
+    <div class="search-item-header mb-2">
+      <i class="fas fa-flag-checkered text-danger me-1"></i>
       <%= f.label :exit_id_eq, Route.human_attribute_name(:exit_id), class: "form-label" %>
-    </strong>
-    
+    </div>
     <%= f.collection_select :exit_id_eq, @exits, :id, :display_name,
                             { include_blank: 'すべて'},
                             { class: "form-select" } %>
   </div>
 
   <!-- カテゴリー検索 -->
-  <div class="mb-3">
-    <i class="fas fa-flag-checkered text-danger me-1"></i>
-    <strong>
+  <div class="search-item mb-4">
+    <div class="search-item-header mb-3">
+      <i class="fa-solid fa-list text-info me-1"></i>
       <%= f.label :category_id_in, Category.model_name.human, class: "form-label" %>
-    </strong>
-    
-    <%= f.collection_check_boxes :category_id_in, @categories, :id, :name %>
+    </div>
+    <div class="category-checkboxes">
+      <%= f.collection_check_boxes :category_id_in, @categories, :id, :name do |b| %>
+        <div class="form-check mb-2">
+          <%= b.check_box class: "form-check-input" %>
+          <%= b.label class: "form-check-label" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <!-- タグ検索 -->
-  <div class="mb-3">
-    <i class="fas fa-tags text-dark me-1"></i>
-    <strong>
+  <div class="search-item mb-4">
+    <div class="search-item-header mb-2">
+      <i class="fas fa-tags text-dark me-1"></i>
       <%= f.label :tags_name_in, Tag.model_name.human, class: "form-label" %>
-    </strong>
-    
+    </div>
     <%= f.select :tags_name_in, 
                   @tags.map { |tag| [tag.name, tag.name] },
                   { include_blank: false },
@@ -49,7 +52,9 @@
                   } %>
   </div>
 
-  <div class="d-grid">
-    <%= f.submit t('defaults.search'), class: "btn btn-primary btn-lg" %>
+  <!-- 検索ボタン -->
+  <div class="d-grid gap-2">
+    <%= f.submit t('defaults.search'), class: "btn btn-primary btn-lg py-3" %>
+    <%= link_to "条件をクリア", station_routes_path(@station), class: "btn btn-outline-secondary" %>
   </div>
 <% end %>

@@ -1,139 +1,183 @@
 <%= form_with model: route do |f| %>
-  <div class="mb-3 ps-3 form-group">
-    <strong>
-      <%= label_tag :filter_station_id, t('routes.station'), class: "form-label " %>
-    </strong>
-    <i class="fa-solid fa-train text-secondary"></i>
-    <%= select_tag :filter_station_id,
-                    # <option>の生成
-                    options_from_collection_for_select(
-                      @stations,
-                      :id,
-                      :name,
-                      route.gate&.station&.id # 編集時は選択済みの状態にする
-                    ),
-                    {
-                      include_blank: '駅を選択',
-                      class: "form-select",
-                      # stimulusに値を渡す
-                      data: {
-                        gate_filter_target: "station",
-                        action: "change->gate-filter#filterCompanies"
-                      }
-                    } %>
-  </div>
-
-  <div class="mb-3 ps-3 form-group">
-    <strong>
-      <%= label_tag :railway_company_id, t('routes.railway_company'), class: "form-label " %>
-    </strong>
-    <i class="fa-solid fa-train text-secondary"></i>
-    <%= select_tag :railway_company_id,
-                    # <option>の生成
-                    options_from_collection_for_select(
-                      @railway_companies,
-                      :id,
-                      :name,
-                      route.gate&.railway_company_id # 編集時は選択済みの状態にする
-                    ),
-                    {
-                      include_blank: '路線を選択',
-                      class: "form-select",
-                      # stimulusに値を渡す
-                      data: {
-                        gate_filter_target: "railwayCompany",
-                        action: "change->gate-filter#filterGates"
-                      }
-                    } %>
-  </div>
-
-  <div class="mb-3 ps-3 form-group">
-    <strong>
-      <%= f.label :gate_id, class: "form-label" %>
-    </strong>
-    <i class="fas fa-location-dot text-success"></i>
-    <span style="color: red;">*</span>
-    <%= f.collection_select :gate_id,
-                            @gates,
-                            :id,
-                            :name, 
-                            { include_blank: '出発地を選択'},
-                            { class: "form-select",
-                              data: { gate_filter_target: "gate" }
-                            } %>
-  </div>
-
-  <div class="mb-3 ps-3 form-group">
-    <strong>
-      <%= f.label :exit_id, class: "form-label" %>
-    </strong>
-    <i class="fas fa-flag-checkered text-danger"></i>
-    <span style="color: red;">*</span>
-    <%= f.collection_select :exit_id, @exits, :id, :display_name,
-                            { include_blank: '目的地を選択'},
-                            { class: "form-select" } %>
-  </div>
-  
-  <div class="mb-3 ps-3 form-group">
-    <strong>
-      <%= f.label :description, class: "form-label" %>
-    </strong>
-    <i class="fa-solid fa-map-location-dot text-warning"></i>
-    <span style="color: red;">*</span>
-    <%= f.text_area :description, class: "form-control" %>
-  </div>
-  
-  <div class="mb-3 ps-3 form-group">
-    <strong>
-      <%= f.label :estimated_time, class: "form-label" %>
-    </strong>
-    <i class="fas fa-history text-info"></i>
-    <span style="color: red;">*</span>
-    <%= f.number_field :estimated_time, class: "form-control" %>
-  </div>
-
-  <!-- 画像フィールド -->
-  <div class="mb-3 ps-3 form-group">
-    <strong>
-      <%= f.label :images, class: "form-label" %>
-    </strong>
-
-    <!-- 既存の画像表示 -->
-  <% if @route.images.present? %>
-    <div class="mb-4">
-      <h6>現在の画像</h6>
-      <div class="d-flex gap-2 flex-wrap">
-        <% @route.images.each do |image| %>
-          <%= image_tag image.thumb.url, class: "img-thumbnail", style: "width: 150px; height: 150px; object-fit: cover;" %>
-        <% end %>
+  <div class="container">
+    <!-- ステップ1:ルート情報の選択 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">
+          <i class="fas fa-route me-2"></i>
+          ルート情報を選択
+        </h5>
       </div>
-      <small class="text-muted">※新しい画像を選択すると、既存の画像は置き換えられます</small>
+      <div class="card-body">
+        <!-- 駅選択 -->
+        <div class="mb-3">
+          <strong>
+            <%= label_tag :filter_station_id, t('routes.station'), class: "form-label " %>
+          </strong>
+          <i class="fa-solid fa-train text-secondary"></i>
+          <%= select_tag :filter_station_id,
+                          # <option>の生成
+                          options_from_collection_for_select(
+                            @stations,
+                            :id,
+                            :name,
+                            route.gate&.station&.id # 編集時は選択済みの状態にする
+                          ),
+                          {
+                            include_blank: '駅を選択',
+                            class: "form-select",
+                            # stimulusに値を渡す
+                            data: {
+                              gate_filter_target: "station",
+                              action: "change->gate-filter#filterCompanies"
+                            }
+                          } %>
+        </div>
+
+        <!-- 鉄道会社選択 -->
+        <div class="mb-3">
+          <strong>
+            <%= label_tag :railway_company_id, t('routes.railway_company'), class: "form-label " %>
+          </strong>
+          <i class="fa-solid fa-train text-secondary"></i>
+          <%= select_tag :railway_company_id,
+                          # <option>の生成
+                          options_from_collection_for_select(
+                            @railway_companies,
+                            :id,
+                            :name,
+                            route.gate&.railway_company_id # 編集時は選択済みの状態にする
+                          ),
+                          {
+                            include_blank: '路線を選択',
+                            class: "form-select",
+                            # stimulusに値を渡す
+                            data: {
+                              gate_filter_target: "railwayCompany",
+                              action: "change->gate-filter#filterGates"
+                            }
+                          } %>
+        </div>
+
+        <!-- 改札選択 -->
+        <div class="mb-3">
+          <strong>
+            <%= f.label :gate_id, class: "form-label" %>
+          </strong>
+          <i class="fas fa-location-dot text-success"></i>
+          <span style="color: red;">*</span>
+          <%= f.collection_select :gate_id,
+                                  @gates,
+                                  :id,
+                                  :name, 
+                                  { include_blank: '出発地を選択'},
+                                  { class: "form-select",
+                                    data: { gate_filter_target: "gate" }
+                                  } %>
+        </div>
+
+        <!-- 出口選択 -->
+        <div class="mb-3">
+          <strong>
+            <%= f.label :exit_id, class: "form-label" %>
+          </strong>
+          <i class="fas fa-flag-checkered text-danger"></i>
+          <span style="color: red;">*</span>
+          <%= f.collection_select :exit_id, @exits, :id, :display_name,
+                                  { include_blank: '目的地を選択'},
+                                  { class: "form-select" } %>
+        </div>
+      </div>
     </div>
-  <% end %>
 
-    <%= f.file_field :images, class: "form-control", multiple: true, accept: "image/*" %>
-    <%= f.hidden_field :images_cache %>
-  </div>
+    <!-- ステップ2:ルートの詳細 -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-success text-white">
+        <h5 class="mb-0">
+          <i class="fas fa-info-circle me-2"></i>
+          ルートの詳細を入力
+        </h5>
+      </div>
 
-  <div class="mb-3 ps-3 form-group">
-    <strong>
-      <%= f.label :category_id, class: "form-label" %>
-    </strong>
-    <i class="fa-solid fa-list text-info"></i>
-    <%= f.collection_select :category_id, @categories, :id, :name,
-                            { include_blank: 'カテゴリーを選択'},
-                            { class: "form-select" } %>
-  </div>
+      <div class="card-body">
+        <!-- ルート詳細入力 -->
+        <div class="mb-3">
+          <strong>
+            <%= f.label :description, class: "form-label" %>
+          </strong>
+          <i class="fa-solid fa-map-location-dot text-warning"></i>
+          <span style="color: red;">*</span>
+          <%= f.text_area :description, class: "form-control" %>
+        </div>
+        
+        <!-- 所要時間入力 -->
+        <div class="mb-3">
+          <strong>
+            <%= f.label :estimated_time, class: "form-label" %>
+          </strong>
+          <i class="fas fa-history text-info"></i>
+          <span style="color: red;">*</span>
+          <%= f.number_field :estimated_time, class: "form-control" %>
+        </div>
+      </div>
+    </div>
 
-  <div class="mb-3 ps-3 form-group">
-    <strong>
-      <%= f.label :tag_names, class: "form-label" %>
-    </strong>
-    <i class="fa-solid fa-tags"></i>
-    <%= f.text_field :tag_names, class: "form-control"%>
-  </div>
-  
-  <div class="d-grid">
-    <%= f.submit class: "btn btn-primary btn-lg" %>
+    <!-- ステップ3:画像・タグ(任意) -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-warning text-white">
+        <h5 class="mb-0">
+          <i class="fas fa-image me-2"></i>
+          画像・カテゴリー・タグ(任意)
+        </h5>
+      </div>
+      <div class="card-body">
+
+      <!-- 画像添付フィールド -->
+      <div class="mb-3">
+        <strong>
+          <%= f.label :images, class: "form-label" %>
+        </strong>
+
+        <!-- 既存の画像表示 -->
+        <% if @route.images.present? %>
+          <div class="mb-4">
+            <h6>現在の画像</h6>
+            <div class="d-flex gap-2 flex-wrap">
+              <% @route.images.each do |image| %>
+                <%= image_tag image.thumb.url, class: "img-thumbnail", style: "width: 150px; height: 150px; object-fit: cover;" %>
+              <% end %>
+            </div>
+            <small class="text-muted">※新しい画像を選択すると、既存の画像は置き換えられます</small>
+          </div>
+        <% end %>
+
+        <%= f.file_field :images, class: "form-control", multiple: true, accept: "image/*" %>
+        <%= f.hidden_field :images_cache %>
+      </div>
+
+      <!-- カテゴリー選択 -->
+      <div class="mb-3">
+        <strong>
+          <%= f.label :category_id, class: "form-label" %>
+        </strong>
+        <i class="fa-solid fa-list text-info"></i>
+        <%= f.collection_select :category_id, @categories, :id, :name,
+                                { include_blank: 'カテゴリーを選択'},
+                                { class: "form-select" } %>
+      </div>
+
+      <!-- タグ入力 -->
+      <div class="mb-3">
+        <strong>
+          <%= f.label :tag_names, class: "form-label" %>
+        </strong>
+        <i class="fa-solid fa-tags"></i>
+        <%= f.text_field :tag_names, class: "form-control"%>
+      </div>
+      
+      <div class="d-grid">
+        <%= f.submit class: "btn btn-primary btn-lg" %>
+      </div>
+    </div>
   </div>
 <% end %>

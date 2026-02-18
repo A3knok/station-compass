@@ -3,20 +3,30 @@
 <div class="page-container">
   <div class="container py-5">
     <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6">
+      <div class="col-md-10 col-lg-8">
         <div class="station-sign-bar mb-3"></div>
-        <h2 class="text-center mb-5">
-          <i class="fas fa-ranking-star me-2 text-primary"></i>
-          <%= t('.title') %>
-        </h2>
-        <div>
-          <table>
-            <thead>
+          <div class="text-center">
+            <h2 class="mb-2">
+              <i class="fas fa-ranking-star me-2 text-primary"></i>
+              <%= t('.title') %>
+            </h2>
+            <p class="text-center text-muted mb-5">
+              みんなが「役に立った」と評価したルートをランキング形式でご紹介
+            </p>
+          </div>
+
+        <div class="bg-white rounded-3 shadow-sm overflow-hidden">
+          <table class="table table-hover mb-0 ranking-table">
+            <thead class="table-light">
               <tr>
-                <th>順位</th>
-                <th>ルート</th>
-                <th>評価数</th>
-                <th></th>
+                <th class="text-center col-2 col-md-1" style="width: 100px">順位</th>
+                <th class="col-7 col-md-8">ルート</th>
+                <th class="text-center col-2 col-md-2">
+                  <i class="fas fa-thumbs-up text-primary me-1 d-none d-md-inline"></i>
+                  <span class="d-none d-md-inline" style="width: 120px;">評価数</span>
+                  <span class="d-md-none">評価</span>
+                </th>
+
               </tr>
             </thead>
             <tbody>
@@ -24,29 +34,32 @@
                 <% route = item[:route]  %>
                 <% rank = item[:rank] %>
                 <% show_rank = item[:show_rank] %>
-                <tr class="ranking-item" data-route-id="<%= route.id %>">
-                  <td>
-                    <% if show_rank %>
-                      <span><%= rank %>位</span>
-                    <% else %>
-                      <span>-</span>
-                    <% end %>
-                  </td>
 
-                  <td>
-                    <span class="text-muted">
-                      <i class="fas fa-location-dot text-success me-1"></i>
-                      <%= route.gate&.name || "出発地未設定" %>
-                      <i class="fas fa-arrow-right mx-2 text-muted"></i>
-                      <i class="fas fa-flag-checkered text-danger me-1"></i>
-                      <%= route.exit&.display_name || "目的地未設定" %>
-                    </span>
-                  </td>
+                <%= link_to route_path(route), class: "text-decoration-none" do %>
+                  <tr class="ranking-item " data-route-id="<%= route.id %>">
+                    <!-- 順位 -->
+                    <td class="text-center">
+                      <%= rank_badge_desktop(rank, show_rank) %>
+                      <%= rank_badge_mobile(rank, show_rank) %>
+                    </td>
 
-                  <td>
-                    <span><%= route.helpful_marks_count %></span>
-                  </td>
-                </tr>
+                    <!-- ルート -->
+                    <td>
+                      <span class="text-muted">
+                        <i class="fas fa-location-dot text-success me-1"></i>
+                        <%= route.gate&.name || "出発地未設定" %>
+                        <i class="fas fa-arrow-right mx-2 text-muted"></i>
+                        <i class="fas fa-flag-checkered text-danger me-1"></i>
+                        <%= route.exit&.display_name || "目的地未設定" %>
+                      </span>
+                    </td>
+
+                    <!-- 評価数 -->
+                    <td class="text-center">
+                      <span><%= route.helpful_marks_count %></span>
+                    </td>
+                  </tr>
+                <% end %>
               <% end %>
             </tbody>
           </table>
