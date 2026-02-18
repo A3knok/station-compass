@@ -3,7 +3,7 @@
 <div class="page-container">
   <div class="container py-5">
     <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6">
+      <div class="col-md-10 col-lg-8">
         <div class="station-sign-bar mb-3"></div>
 
         <h2 class="text-center mb-5">
@@ -11,9 +11,10 @@
           <%= t('.title') %>
         </h2>
       <%= render 'shared/error_messages', resource: @route %>
-      <div class="form-container" data-controller="gate-filter"
-          data-gate-filter-gates-by-company-value="<%= @gates_by_company %>"
-          data-gate-filter-companies-by-station-value="<%= @companies_by_station %>">
+      <div class="form-container p-4 bg-white rounded shadow-sm"
+            data-controller="gate-filter"
+            data-gate-filter-gates-by-company-value="<%= @gates_by_company %>"
+            data-gate-filter-companies-by-station-value="<%= @companies_by_station %>">
         <%= render 'form', route: @route %>
       </div>
     </div>

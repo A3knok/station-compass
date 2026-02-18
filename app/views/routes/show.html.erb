@@ -3,118 +3,170 @@
 <div class="page-container">
   <div class="container py-5">
     <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6">
+      <div class="col-12 col-md-10 col-lg-8">
         <div class="station-sign-bar mb-3"></div>
 
-        <h2 class="text-center mb-5">
+        <h2 class="text-center mb-4">
           <i class="fas fa-map-marked-alt me-2 text-info"></i>
           <%= t('.title') %>
         </h2>
 
-        <div class="row mb-4 g-3">
-          <%= route_info_card("fas fa-door-open", "primary", :gate_id, @route.gate.name) %>
-          <%= route_info_card("fas fas fa-map-marker-alt", "success", :exit_id, @route.exit.name) %>
-          <%= route_info_card("fas fa-clock", "warning", :estimated_time, "#{@route.estimated_time}分") %>
-        </div>
+        <!-- カテゴリーとタグ(目立たせる) -->
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+          <!-- カテゴリー -->
+          <% if @route.category.present? %>
+            <span class="badge bg-info text-white px-3 py-2 fs-6">
+              <i class="fas fa-folder me-1"></i>
+              <%= @route.category.name %>
+            </span>
+          <% end %>
 
-        <!-- ルート詳細エリア -->
-        <div class="card mb-4">
-          <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">
-              <i class="fas fa-info-circle me-2"></i>
-              <span class="text-center"><%= t('.title') %></span>
-            </h4>
-          </div>
-          <div class="card-body">
-            <dl class="row mb-0">
-              <dt class="col-sm-4 text-muted"><%= t('.station') %></dt>
-              <dd class="col-sm-8"><%= @route.station.name %></dd>
-
-              <dt class="col-sm-4 text-muted"><%= t('.gate') %></dt>
-              <dd class="col-sm-8"><%= @route.gate.name %></dd>
-              
-              <dt class="col-sm-4 text-muted"><%= t('.exit') %></dt>
-              <dd class="col-sm-8"><%= @route.exit.display_name %></dd>
-              
-              <dt class="col-sm-4 text-muted"><%= t('.route_text') %></dt>
-              <!-- 改行をHTMLタグに変換 -->
-              <dd class="col-sm-8">
-                <div class="route-description">
-                  <%= simple_format(@route.description) %>
-                </div>
-              </dd>
-              
-              <dt class="col-sm-4 text-muted"><%= t('.created_at') %></dt>
-              <dd class="col-sm-8"><%= l(@route.created_at, format: :route_list) %></dd>
-
-              <dt class="col-sm-4 <%= route_freshness_class(@route) %>">
-                <%= t('.updated_at') %>
-              </dt>
-              <dd class="col-sm-8 mb-0 <%= route_freshness_class(@route) %>">
-                <%= l(@route.updated_at, format: :route_list) %>
-              </dd>
-
-              <% if route_freshness_message(@route).present? %>
-                <dt class="col-sm-4"></dt>
-                <dd class="col-sm-8 mb-0 <%= route_freshness_class(@route) %>">
-                  <small class="mb-2">
-                    <%= route_freshness_message(@route) %>
-                  </small>
-                </dd>
-              <% end %>
-            </dl>
-
-            <!-- 画像表示 -->
-            <% if @route.images.present? %>
-              <div class="mt-4">
-                <div id="routeCarousel" class="carousel slide">
-                  <!-- カルーセル本体 -->
-                  <div class="carousel-inner">
-                    <% @route.images.each_with_index do |image, index| %>
-                      <div class="carousel-item <%= 'active' if index == 0 %>">
-                        <%= image_tag image.thumb.url, class: "img-fluid rounded" %>
-                      </div>
-                    <% end %>      
-                  </div>
-
-                  <!-- 前へボタン -->
-                  <button class="carousel-control-prev" type="button" data-bs-target="#routeCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  </button>
-
-                  <!-- 次へボタン -->
-                  <button class="carousel-control-next" type="button" data-bs-target="#routeCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  </button>
-                </div>
-              </div>
-            <% end %>
-
-            <!-- やくに立ったボタン -->
-            <div class="text-end">
-              <%= render "helpful_button", route: @route %>
-            </div>
-          </div>
-        </div>
-
-        <!-- タグリスト -->
-        <div class="mb-4">
+          <!-- タグ -->
           <% @route.tags.each do |tag| %>
-            <span class="d-inline-block me-2 mb-2 px-2 bg-white ">
+            <span class="badge bg-light text-dark border border-secondary px-3 py-2 fs-6">
+              <i class="fas fa-tag me-1"></i>
               <%= tag.name %>
             </span>
           <% end %>
         </div>
 
-        <!-- カテゴリー -->
+        <!-- 基本情報カード(改札・出口・所要時間) -->
+        <div class="row mb-4 g-3">
+          <%= route_info_card("fas fa-door-open", "primary", :gate_id, @route.gate.name) %>
+          <%= route_info_card("fas fa-map-marker-alt", "success", :exit_id, @route.exit.name) %>
+          <%= route_info_card("fas fa-clock", "warning", :estimated_time, "#{@route.estimated_time}分") %>
+        </div>
 
-        <!-- アクションボタン -->
-        <div class="mb-4">
-          <%= render 'routes/action_buttons', route: @route %>
+        <!-- ルート詳細エリア -->
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+              <i class="fas fa-route me-2"></i>
+              <%= t('.route_text') %>
+            </h4>
+          </div>
+          <div class="card-body">
+            <!-- ルートの詳細説明 -->
+            <div class="route-description bg-light p-4 rounded mb-4">
+              <%= simple_format(@route.description) %>
+            </div>
+
+            <!-- 画像表示 -->
+            <% if @route.images.present? %>
+              <div class="mb-4">
+                <h5 class="mb-3">
+                  <i class="fas fa-images me-2 text-secondary"></i>
+                  ルートの写真
+                </h5>
+                <div id="routeCarousel" class="carousel slide">
+                  <div class="carousel-inner">
+                    <% @route.images.each_with_index do |image, index| %>
+                      <div class="carousel-item <%= 'active' if index == 0 %>">
+                        <%= image_tag image.thumb.url, class: "d-block w-100 rounded", style: "max-height: 500px; object-fit: cover;" %>
+                      </div>
+                    <% end %>      
+                  </div>
+
+                  <% if @route.images.size > 1 %>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#routeCarousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#routeCarousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+
+            <!-- 駅情報(控えめに) -->
+            <div class="border-top pt-3 mb-3">
+              <small class="text-muted d-block mb-1">
+                <i class="fas fa-train me-1"></i>
+                <%= t('.station') %>: <%= @route.station.name %>
+              </small>
+              <small class="text-muted d-block mb-1">
+                <i class="fas fa-door-open me-1"></i>
+                <%= t('.gate') %>: <%= @route.gate.name %>
+              </small>
+              <small class="text-muted d-block">
+                <i class="fas fa-sign-out-alt me-1"></i>
+                <%= t('.exit') %>: <%= @route.exit.display_name %>
+              </small>
+            </div>
+
+            <!-- 作成日時・更新日時(控えめに) -->
+            <div class="border-top pt-3">
+              <div class="row g-2 text-muted small">
+                <div class="col-sm-6">
+                  <i class="fas fa-calendar-plus me-1"></i>
+                  <%= t('.created_at') %>: <%= l(@route.created_at, format: :route_list) %>
+                </div>
+                <div class="col-sm-6 <%= route_freshness_class(@route) %>">
+                  <i class="fas fa-calendar-check me-1"></i>
+                  <%= t('.updated_at') %>: <%= l(@route.updated_at, format: :route_list) %>
+                  <% if route_freshness_message(@route).present? %>
+                    <br>
+                    <small><%= route_freshness_message(@route) %></small>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- カードフッター: アクションボタン -->
+          <% if current_user&.id == @route.user_id %>
+            <div class="card-footer bg-white border-top">
+              <div class="d-flex justify-content-end gap-2">
+                <%= link_to edit_route_path(@route), class: "btn btn-primary" do %>
+                  <i class="fas fa-pen me-2"></i>
+                  <span><%= t('defaults.edit')%></span>
+                <% end %>
+                <%= link_to route_path(@route), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } do %>
+                  <i class="fas fa-trash me-2"></i>
+                  <span><%= t('defaults.delete')%></span>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- 役に立ったボタン(独立したエリア・目立たせる) -->
+        <div class="card mb-4 shadow-sm border-2 border-success">
+          <div class="card-body text-center py-4">
+            <h5 class="mb-3">
+              <i class="fas fa-lightbulb me-2 text-warning"></i>
+              このルートは役に立ちましたか?
+            </h5>
+            <%= render "helpful_button", route: @route %>
+          </div>
         </div>
         
         <!-- シェアボタン -->
+        <div>
+          <p class="text-center">- SNSで共有 -</p>
+        </div>
         <%= render 'routes/share_button', route: @route %>
+      </div>
+    </div>
+  </div>
+
+  <!-- モーダルウィンドウ -->
+  <div class="modal fade" id="thanksModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="thanksModalLabel">投稿ありがとうございます!</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          他にも知っているルートを共有しませんか?
+        </div>
+
+        <div class="modal-footer">
+          <%= link_to "続けて投稿する", new_route_path, class: "btn btn-primary" %>
+        </div>
       </div>
     </div>
   </div>

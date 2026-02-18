@@ -395,6 +395,16 @@ a {
   }
 }
 
+// 検索フォーム
+.search-item {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+  
+.search-item:nth-of-type(4) {
+  border-bottom: none !important;
+}
+
 /*-----------------
 投稿詳細画面(show)
 -----------------*/
@@ -451,20 +461,55 @@ dd.route-fresh {
 }
 
 /*-----------------
-検索フォーム
+ランキング画面
 -----------------*/
-.search-item {
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+
+/* 基本スタイル */
+.rank-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 14px;
 }
-  
-.search-item:nth-of-type(4) {
-  border-bottom: none !important;
+
+/* 1位 - ゴールド */
+.rank-badge.rank-1 {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #333;
+  box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+}
+
+
+/* 2位 - シルバー */
+.rank-badge.rank-2 {
+  background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+  color: #333;
+  box-shadow: 0 2px 4px rgba(192, 192, 192, 0.3);
+}
+
+/* 3位以下 */
+.rank-number {
+  color: #666;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+/* アイコンのスタイル */
+.rank-badge i {
+  margin-right: 4px;
 }
 
 /*-----------------
 レスポンシブ
 -----------------*/
+/* レスポンシブ対応: lg以上の画面で幅を自動調整 */
+@media (min-width: 992px) {
+  .w-lg-auto {
+    width: auto !important;
+  }
+}
+
 @media (max-width: 768px) {
   // フローティングボタン
   .floating-action-button {
