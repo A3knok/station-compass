@@ -49,7 +49,7 @@ module RoutesHelper
   # ランク表示(PC版）
   def rank_badge_desktop(rank, show_rank)
     return content_tag(:span, "-", class: "text-muted") unless show_rank
-    
+
     case rank
     when 1
       content_tag(:span, class: "rank-badge rank-1 d-none d-md-inline") do
@@ -69,7 +69,7 @@ module RoutesHelper
   # ランク表示(mobile版）
   def rank_badge_mobile(rank, show_rank)
     return content_tag(:span, "", class: "text-muted") unless show_rank
-    
+
     case rank
     when 1
       content_tag(:span, class: "rank-badge rank-1 d-inline d-md-none") do
