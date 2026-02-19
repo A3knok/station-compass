@@ -85,24 +85,24 @@ Rails.application.configure do
 
   # Gmail SMTP設定
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
+    address: "smtp.gmail.com",
     port: 587,
-    domain: 'gmail.com',
-    user_name: ENV['GMAIL_USERNAME'],
-    password: ENV['GMAIL_APP_PASSWORD'],
+    domain: "gmail.com",
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_APP_PASSWORD"],
     authentication: :plain,
     enable_starttls_auto: true
   }
 
   # デフォルトの送信元アドレス
   config.action_mailer.default_options = {
-    from: ENV['GMAIL_USERNAME']
+    from: ENV["GMAIL_USERNAME"]
   }
 
   # 本番環境のURLを設定（RenderのドメインをここにURL設定）
   config.action_mailer.default_url_options = {
     host: "station-compass-app.onrender.com",
-    protocol: 'https'
+    protocol: "https"
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
