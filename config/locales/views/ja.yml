@@ -7,6 +7,7 @@ ja:
     sessions:
       new:
         title: ログイン
+        create_user: 新規登録
     
     registrations:
       new:
