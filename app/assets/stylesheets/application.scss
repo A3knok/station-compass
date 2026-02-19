@@ -59,6 +59,15 @@ a {
     transition: transform 0.3s ease;
   }
 }
+/*-----------------
+セレクトボックスが無効化されている場合のスタイル
+-----------------*/
+select:disabled {
+  background-color: #f0f0f0;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 
 /*-----------------
 共通コンテンツ
@@ -479,7 +488,6 @@ dd.route-fresh {
   color: #333;
   box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
 }
-
 
 /* 2位 - シルバー */
 .rank-badge.rank-2 {
