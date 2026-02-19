@@ -14,7 +14,7 @@
           <strong>
             <%= label_tag :filter_station_id, t('routes.station'), class: "form-label " %>
           </strong>
-          <i class="fa-solid fa-train text-secondary"></i>
+          <i class="fa-solid fa-city text-secondary"></i>
           <span style="color: red;">*</span>
           <%= select_tag :filter_station_id,
                           # <option>の生成
@@ -40,7 +40,7 @@
           <strong>
             <%= label_tag :railway_company_id, t('routes.railway_company'), class: "form-label " %>
           </strong>
-          <i class="fa-solid fa-train text-secondary"></i>
+          <i class="fa-solid fa-train text-info"></i>
           <span style="color: red;">*</span>
           <%= select_tag :railway_company_id,
                           # <option>の生成
@@ -139,6 +139,7 @@
         <strong>
           <%= f.label :images, class: "form-label" %>
         </strong>
+        <i class="fa-regular fa-image"></i>
 
         <!-- 既存の画像表示 -->
         <% if @route.images.present? %>
@@ -162,7 +163,7 @@
         <strong>
           <%= f.label :category_id, class: "form-label" %>
         </strong>
-        <i class="fa-solid fa-list text-info"></i>
+        <i class="fa-solid fa-list"></i>
         <%= f.collection_select :category_id, @categories, :id, :name,
                                 { include_blank: 'カテゴリーを選択'},
                                 { class: "form-select" } %>
