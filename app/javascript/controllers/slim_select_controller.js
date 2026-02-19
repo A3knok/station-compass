@@ -13,11 +13,14 @@ export default class extends Controller {
     // slim-select v2の初期化方法
     this.slimSelect = new SlimSelect({
       select: this.element,
-      placeholder: "タグを選択",
-      searchPlaceholder: "タグを検索",
-      searchText: "該当なし",
-      allowDeselect: true,
-      hideSelectedOption: true, // 追加: 選択済みオプションを隠す
+      settings: {  // ← settings オブジェクトで囲む
+        placeholderText: "タグを選択(複数選択可)",
+        searchPlaceholder: "タグを検索",
+        searchText: "該当なし", 
+        allowDeselect: true,
+        hideSelectedOption: true,
+        closeOnSelect: false,
+      }
     })
 
     // 初期化後に元のselectタグを強制的に非表示
