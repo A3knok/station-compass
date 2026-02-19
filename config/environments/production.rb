@@ -101,7 +101,7 @@ Rails.application.configure do
 
   # 本番環境のURLを設定（RenderのドメインをここにURL設定）
   config.action_mailer.default_url_options = {
-    host: 'station-compass-app.onrender.com',
+    host: "station-compass-app.onrender.com",
     protocol: 'https'
   }
 
