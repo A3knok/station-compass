@@ -15,6 +15,7 @@
             <%= label_tag :filter_station_id, t('routes.station'), class: "form-label " %>
           </strong>
           <i class="fa-solid fa-train text-secondary"></i>
+          <span style="color: red;">*</span>
           <%= select_tag :filter_station_id,
                           # <option>の生成
                           options_from_collection_for_select(
@@ -40,6 +41,7 @@
             <%= label_tag :railway_company_id, t('routes.railway_company'), class: "form-label " %>
           </strong>
           <i class="fa-solid fa-train text-secondary"></i>
+          <span style="color: red;">*</span>
           <%= select_tag :railway_company_id,
                           # <option>の生成
                           options_from_collection_for_select(

@@ -3,7 +3,7 @@ class RoutesController < ApplicationController
   before_action :set_route, only: %i[ show edit update destroy ]
   before_action :check_route_owner, only: %i[ edit update destroy ]
   before_action :set_search_form_data, only: %i[ index ]
-  before_action :set_new_form_data, only: %i[ new create edit update ]
+  before_action :set_new_form_data, only: %i[ new create ]
   before_action :set_edit_form_data, only: %i[ edit update ]
   skip_before_action :check_guest_user, only: %i[ index show ]
 
@@ -85,8 +85,12 @@ class RoutesController < ApplicationController
 
   def set_edit_form_data
     @exits = Exit.order(name: :asc)
+    @stations = Station.order(name: :asc)
     @railway_companies = RailwayCompany.all.order(name: :asc)
+    @companies_by_station = RailwayCompany.grouped_by_station.to_json
     @gates_by_company = Gate.grouped_by_company.to_json
+    @categories = Category.all.order(name: :asc)
+    @tags = Tag.all.order(name: :asc)
 
     if @route.gate&.railway_company_id
       @gates = Gate.where(railway_company_id: @route.gate.railway_company_id)

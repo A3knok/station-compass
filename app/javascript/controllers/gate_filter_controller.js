@@ -11,6 +11,31 @@ export default class extends Controller {
   connect() {
     this.disableSelect(this.railwayCompanyTarget)
     this.disableSelect(this.gateTarget)
+
+    //  編集時: 駅が既に選択されている場合は絞り込み処理を実行
+    if(this.stationTarget.value) {
+      // 既存の鉄道会社IDを保存
+      const selectedCompanyId = this.railwayCompanyTarget.value
+      
+      // 既存の改札IDを保存
+      const selectedGateId = this.gateTarget.value
+
+      // 鉄道会社の絞り込みを実行
+      this.filterCompanies()
+
+      // 絞り込み後、既存の鉄道会社のIDを復元
+      if (selectedCompanyId) {
+        this.railwayCompanyTarget.value = selectedCompanyId
+
+        // 改札の絞り込みを実行
+        this.filterGates()
+
+        // 絞り込み実行後、既存の改札のIDを復元
+        if(selectedGateId) {
+          this.gateTarget.value = selectedGateId
+        }
+      }
+    }
   }
 
   filterCompanies() {
@@ -70,7 +95,8 @@ export default class extends Controller {
   // option追加の処理  
   addOptions(selectElement,items) {
     items.forEach(item => {
-      const option = new Option(item.name, item.id)
+      // <option value=item.id>id.name</option>がoptionに代入される
+      const option = new Option(item.name, item.id) 
       selectElement.add(option)
     })
   }
