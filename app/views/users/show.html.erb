@@ -3,42 +3,35 @@
 <div class="page-container station-atmosphere">
   <div class="container py-5">
     <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6">
+      <div class="col-md-10 col-lg-8">
         <div class="station-sign-bar mb-3"></div>
 
         <h2 class="text-center mb-5">
           <i class="fas fa-user me-2 text-primary"></i>
           <%= t('.title') %>
         </h2>
-
+        
         <div class="border rounded-3 shadow-sm p-4 mb-4 bg-white">
-          <dl class="row mb-0 align-items-center">
-            <!-- 名前 -->
-            <dt class="col-6 fw-bold d-flex align-items-center mb-3">
-              <i class="fas fa-user text-primary me-2"></i>
-              <%= t('.name') %>
-            </dt>
-            <dd class="col-6 align-items-center text-end mb-3">
-              <span class="fs-6 fw-normal text-dark"><%= @user.name %></span>
-            </dd>
+          <!-- ユーザー名とアカウント情報変更ボタン -->
+          <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-user text-primary fs-4 me-3"></i>
+              <h3 class="mb-0"><%= @user.name %></h3>
+            </div>
+            
+            <% unless @user.oauth_user? || @user.guest? %>
+              <%= link_to edit_user_registration_path, class: "btn btn-outline-primary btn-sm" do %>
+                <i class="fas fa-cog me-1"></i>
+                <span class="d-none d-md-inline">設定</span>
+              <% end %>
+            <% end %>
+          </div>
 
-            <!-- 投稿数 -->
-            <dt class="col-6 fw-bold d-flex align-items-center mb-3">
-              <i class="fas fa-newspaper text-success me-2"></i>
-              <%= t('users.show.post_count') %>
-            </dt>
-            <dd class="col-6 d-flex align-items-center justify-content-end mb-3">
-              <span class="badge bg-success fs-6"><%= @total_routes_count %>件</span>
-            </dd>
-
-            <!-- 区切り線 -->
-            <dt class="col-12"><hr class="my-3"></dt>
-            <dd class="col-12"></dd>
-
+          <dl class="row mb-0">
             <!-- 投稿履歴 -->
             <dt class="col-12 fw-bold mb-3">
               <i class="fas fa-history text-info me-2"></i>
-              <%= t('.history') %>
+              <%= t('.history') %> <%= @total_routes_count %>件
             </dt>
             <dd class="col-12">
               <%= render 'routes/route', routes: @recent_routes,
@@ -47,10 +40,6 @@
             </dd>
           </dl>
         </div>
-
-        <% unless @user.oauth_user? || @user.guest? %>
-          <%= link_to "アカウント情報の変更", edit_user_registration_path %>
-        <% end %>
       </div>
     </div>
   </div>
