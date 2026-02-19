@@ -34,6 +34,10 @@ ja:
       tag:
         name: タグ
 
+      contact:
+        subject: 件名
+        body: お問い合わせ内容
+
     errors:
       messages:
         blank: "を入力してください"
@@ -59,7 +63,7 @@ ja:
             exit_id:
               blank: "を選択してください"
             description:
-              too_short: "は10文字以上で入力してください"             
+              too_short: "は10文字以上で入力してください"          
   
   defaults:
     show: 詳細
