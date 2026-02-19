@@ -7,6 +7,7 @@ ja:
     sessions:
       new:
         title: ログイン
+        create_user: 新規登録
     
     registrations:
       new:
@@ -69,7 +70,7 @@ ja:
     login: ログイン
     logout: ログアウト
     sign_up: 新規登録
-    routes: ルート一覧
+    routes: 駅別ルート
     my_page: マイページ
 
   footer:

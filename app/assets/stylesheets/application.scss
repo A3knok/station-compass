@@ -59,15 +59,6 @@ a {
     transition: transform 0.3s ease;
   }
 }
-/*-----------------
-セレクトボックスが無効化されている場合のスタイル
------------------*/
-select:disabled {
-  background-color: #f0f0f0;
-  color: #999;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
 
 /*-----------------
 共通コンテンツ
@@ -112,9 +103,15 @@ select:disabled {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/*-----------------
-投稿フォーム
------------------*/
+// セレクトボックスが無効化されている場合のスタイル
+select:disabled {
+  background-color: #f0f0f0;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+// 投稿フォーム(new, edit)
 .form-container {
   background: #ffffff;
   border-radius: 12px;
@@ -145,6 +142,7 @@ select:disabled {
   }
 }
 
+/*
 .page-container .form-group {
   position: relative;
   padding-left: 8px;
@@ -165,6 +163,7 @@ select:disabled {
     border-radius: 2px;
   }
 }
+  */
 
 // セレクトボックスに駅の券売機的なスタイル
 .page-container .form-select {
@@ -287,6 +286,47 @@ select:disabled {
   .ja-title {
     color: #212529;
     font-size: 1.6rem;
+  }
+}
+
+/*-----------------
+ログイン画面
+-----------------*/
+// googleログイン
+.google-login-btn {
+  border-color: #db4437;
+  color: #db4437;
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #db4437;
+    border-color: #db4437;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(219, 68, 55, 0.3);
+  }
+
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+// ゲストログイン
+.guest-login-btn {
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+  }
+
+  i {
+    font-size: 1.2rem;
   }
 }
 
