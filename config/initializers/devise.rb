@@ -26,7 +26,7 @@ Devise.setup do |config|
   # with default "from" parameter.
 
   # メールの送信元アドレスを設定
-  config.mailer_sender = ENV['GMAIL_USERNAME'] || 'from@example.com'
+  config.mailer_sender = ENV["GMAIL_USERNAME"] || "from@example.com"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
