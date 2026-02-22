@@ -13,7 +13,7 @@ RSpec.describe "Helpfuls", type: :system do
       end
 
       it "役に立ったボタンが表示される" do
-        expect(page).to have_css("i.fa-regular.fa-heart")
+        expect(page).to have_css("i.fa-regular fa-thumbs-up")
       end
 
       it "役に立ったのカウントが０と表示される" do
@@ -23,7 +23,7 @@ RSpec.describe "Helpfuls", type: :system do
       it "役に立ったボタンを押すと登録される" do
         expect {
           find(".btn-helpful").click
-          expect(page).to have_css("i.fa-solid.fa-heart")
+          expect(page).to have_css("i.fa-solid fa-thumbs-up")
         }.to change(HelpfulMark, :count).by(1)
       end
 
@@ -36,7 +36,7 @@ RSpec.describe "Helpfuls", type: :system do
 
       it "塗りつぶしアイコンが表示される" do
         find(".btn-helpful").click
-        expect(page).to have_css("i.fa-solid.fa-heart")
+        expect(page).to have_css("i.fa-solid fa-thumbs-up")
       end
     end
 
@@ -49,7 +49,7 @@ RSpec.describe "Helpfuls", type: :system do
       it "役に立ったボタンを押すと削除される" do
         expect {
             find(".btn-helpful").click
-            expect(page).to have_css("i.fa-regular.fa-heart")
+            expect(page).to have_css("i.fa-regular fa-thumbs-up")
           }.to change(HelpfulMark, :count).by(-1)
       end
 
@@ -62,7 +62,7 @@ RSpec.describe "Helpfuls", type: :system do
 
       it "塗りつぶされていないアイコンが表示される" do
           find(".btn-helpful").click
-          expect(page).to have_css("i.fa-regular.fa-heart")
+          expect(page).to have_css("i.fa-regular fa-thumbs-up")
       end
     end
 
