@@ -2,14 +2,16 @@
   <%= button_to route_helpful_marks_path(route),
                 method: :delete,
                 class: "btn btn-helpful" do %>
-    <i class="fa-solid fa-heart text-danger"></i>
+    <i class="fa-solid fa-thumbs-up text-primary"></i>
     <%= route.helpful_count %>
+    <span class="ms-2"><%= t('routes.show.helpful') %></span>
   <% end %>
 <% else %>
   <%= button_to route_helpful_marks_path(route),
                 method: :post,
                 class: "btn btn-helpful" do %>
-    <i class="fa-regular fa-heart"></i>
+    <i class="fa-regular fa-thumbs-up"></i>
     <%= route.helpful_count %>
+    <span class="ms-2"><%= t('routes.show.helpful') %></span>
   <% end %>
 <% end %>
