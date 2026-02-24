@@ -94,11 +94,13 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-  # デバッグ用：APIキーの存在確認（最初の数文字のみ表示）
-  if ENV["SENDGRID_API_KEY"].present?
-    Rails.logger.info "SendGrid API Key is set: #{ENV['SENDGRID_API_KEY'][0..5]}..."
+  # credentials からAPIキーを取得してデバッグ
+  api_key = Rails.application.credentials.dig(:sendgrid, :api_key)
+
+  if api_key.present?
+    Rails.logger.info "SendGrid API Key is set: #{api_key[0..5]}..."
   else
-    Rails.logger.error "SendGrid API Key is NOT set!"
+    Rails.logger.error "SendGrid API Key is NOT set in credentials!"
   end
 
   # デフォルトの送信元アドレス
