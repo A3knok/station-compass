@@ -42,6 +42,7 @@ ja:
       route_text: ルート説明
       created_at: 作成日時
       updated_at: 最終更新日
+      helpful: 役に立った
     index:
       title: ルート一覧
       total_routes_count: 投稿総数
