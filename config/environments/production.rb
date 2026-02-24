@@ -78,30 +78,30 @@ Rails.application.configure do
   # caching is enabled.
   config.action_mailer.perform_caching = false
 
-  # メール送信の設定
+  # メール送信の設定（SendGrid）
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
 
-  # Gmail SMTP設定
+  # SendGrid SMTP設定
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "smtp.sendgrid.net",
     port: 587,
-    domain: "gmail.com",
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_APP_PASSWORD"],
+    domain: "stationcompass.com",
+    user_name: "apikey",
+    password: Rails.application.credentials.dig(:sendgrid, :api_key),
     authentication: :plain,
     enable_starttls_auto: true
   }
 
   # デフォルトの送信元アドレス
   config.action_mailer.default_options = {
-    from: ENV["GMAIL_USERNAME"]
+    from: "info@stationcompass.com"
   }
 
   # 本番環境のURLを設定（RenderのドメインをここにURL設定）
   config.action_mailer.default_url_options = {
-    host: "station-compass-app.onrender.com",
+    host: "stationcompass.com",
     protocol: "https"
   }
 
