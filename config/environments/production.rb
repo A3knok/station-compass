@@ -97,10 +97,18 @@ Rails.application.configure do
   # credentials からAPIキーを取得してデバッグ
   api_key = Rails.application.credentials.dig(:sendgrid, :api_key)
 
+  # デバッグ用（puts を使う）
   if api_key.present?
-    Rails.logger.info "SendGrid API Key is set: #{api_key[0..5]}..."
+    puts "✅ SendGrid API Key is set: #{api_key[0..5]}..."
   else
-    Rails.logger.error "SendGrid API Key is NOT set in credentials!"
+    puts "❌ SendGrid API Key is NOT set in credentials!"
+  end
+
+  # RAILS_MASTER_KEY の確認
+  if ENV["RAILS_MASTER_KEY"].present?
+    puts "✅ RAILS_MASTER_KEY is set"
+  else
+    puts "❌ RAILS_MASTER_KEY is NOT set!"
   end
 
   # デフォルトの送信元アドレス
