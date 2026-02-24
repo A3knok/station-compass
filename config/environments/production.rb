@@ -105,7 +105,7 @@ Rails.application.configure do
   end
 
   # RAILS_MASTER_KEY の確認
-  if ENV['RAILS_MASTER_KEY'].present?
+  if ENV["RAILS_MASTER_KEY"].present?
     puts "✅ RAILS_MASTER_KEY is set"
   else
     puts "❌ RAILS_MASTER_KEY is NOT set!"
