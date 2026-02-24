@@ -94,6 +94,13 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
+  # デバッグ用：APIキーの存在確認（最初の数文字のみ表示）
+  if ENV['SENDGRID_API_KEY'].present?
+    Rails.logger.info "SendGrid API Key is set: #{ENV['SENDGRID_API_KEY'][0..5]}..."
+  else
+    Rails.logger.error "SendGrid API Key is NOT set!"
+  end
+
   # デフォルトの送信元アドレス
   config.action_mailer.default_options = {
     from: "info@stationcompass.com"
