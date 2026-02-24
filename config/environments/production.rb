@@ -81,7 +81,7 @@ Rails.application.configure do
   # メール送信の設定（SendGrid）
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # SendGrid SMTP設定
   config.action_mailer.smtp_settings = {
