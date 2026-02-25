@@ -78,45 +78,17 @@ Rails.application.configure do
   # caching is enabled.
   config.action_mailer.perform_caching = false
 
-  # メール送信の設定（SendGrid）
-  config.action_mailer.delivery_method = :smtp
+  # SendGrid Web API の設定
+  config.action_mailer.delivery_method = :sendgrid_actionmailer
+  config.action_mailer.sendgrid_actionmailer_settings = {
+    api_key: Rails.application.credentials.dig(:sendgrid, :api_key),
+    raise_delivery_errors: true
+  }
+
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
-  # SendGrid SMTP設定
-  config.action_mailer.smtp_settings = {
-    address: "smtp.sendgrid.net",
-    port: 587,
-    domain: "stationcompass.com",
-    user_name: "apikey",
-    password: Rails.application.credentials.dig(:sendgrid, :api_key),
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
-
-  # credentials からAPIキーを取得してデバッグ
-  api_key = Rails.application.credentials.dig(:sendgrid, :api_key)
-
-  # デバッグ用（puts を使う）
-  if api_key.present?
-    puts "✅ SendGrid API Key is set: #{api_key[0..5]}..."
-  else
-    puts "❌ SendGrid API Key is NOT set in credentials!"
-  end
-
-  # RAILS_MASTER_KEY の確認
-  if ENV["RAILS_MASTER_KEY"].present?
-    puts "✅ RAILS_MASTER_KEY is set"
-  else
-    puts "❌ RAILS_MASTER_KEY is NOT set!"
-  end
-
-  # デフォルトの送信元アドレス
-  config.action_mailer.default_options = {
-    from: "info@stationcompass.com"
-  }
-
-  # 本番環境のURLを設定（RenderのドメインをここにURL設定）
+  # メール内のURLを生成するための設定
   config.action_mailer.default_url_options = {
     host: "stationcompass.com",
     protocol: "https"
