@@ -77,7 +77,7 @@ Rails.application.configure do
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   config.action_mailer.perform_caching = false
-  
+
   # SendGrid ActionMailer の設定
   config.action_mailer.delivery_method = :sendgrid_actionmailer
 
