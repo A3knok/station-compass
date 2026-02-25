@@ -18,7 +18,7 @@ Devise.setup do |config|
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
-  # config.parent_controller = 'DeviseController'
+  # config.parent_controller = 'DevZiseController'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -26,7 +26,7 @@ Devise.setup do |config|
   # with default "from" parameter.
 
   # メールの送信元アドレスを設定
-  config.mailer_sender = ENV["GMAIL_USERNAME"] || "from@example.com"
+  config.mailer_sender = "info@stationcompass.com"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
