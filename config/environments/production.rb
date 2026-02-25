@@ -78,12 +78,8 @@ Rails.application.configure do
   # caching is enabled.
   config.action_mailer.perform_caching = false
 
-  # SendGrid Web API の設定
+  # SendGrid ActionMailer の設定
   config.action_mailer.delivery_method = :sendgrid_actionmailer
-  config.action_mailer.sendgrid_actionmailer_settings = {
-    api_key: Rails.application.credentials.dig(:sendgrid, :api_key),
-    raise_delivery_errors: true
-  }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
