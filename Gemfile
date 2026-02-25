@@ -40,7 +40,7 @@ gem "bootsnap", require: false
 gem "config"
 
 # SendGrid用(メール送信)
-gem "sendgrid-ruby"
+# gem "sendgrid-ruby"
 gem "sendgrid-actionmailer"
 
 group :development, :test do

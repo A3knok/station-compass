@@ -80,9 +80,13 @@ Rails.application.configure do
 
   # SendGrid ActionMailer の設定
   config.action_mailer.delivery_method = :sendgrid_actionmailer
-
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
+
+  # SendGridの設定
+  config.action_mailer.sendgrid_actionmailer_settings = {
+    api_key: Rails.application.credentials.dig(:sendgrid, :api_key)
+  }
 
   # メール内のURLを生成するための設定
   config.action_mailer.default_url_options = {
