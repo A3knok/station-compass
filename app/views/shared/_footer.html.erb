@@ -1,11 +1,11 @@
 <div class="text-center my-3">
   &copy;
-  <span class="px-2"><%= Date.today.year %></span>
-  <span class="border-start border-dark px-2"><%= t('footer.copyright') %></span>
+  <span class="pe-2"><%= Date.today.year %></span>
+  <span class="pe-2"><%= t('footer.copyright') %></span>
   <span class="border-start border-dark px-2"><%= link_to "利用規約", terms_path, class: "text-decoration-none text-body"  %></span>
   <span class="border-start border-dark px-2"><%= link_to "プライバシーポリシー", privacy_policy_path, class: "text-decoration-none text-body"  %></span>
 
-  <% if user_signed_in? %>
+  <% if user_signed_in? && !current_user.guest? %>
     <span class="border-start border-dark px-2"><%= link_to "お問い合わせ", new_contact_path, class: "text-decoration-none text-body" %></span>
   <% end %>
 </div>
