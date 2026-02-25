@@ -546,7 +546,6 @@ DEPENDENCIES
   sassc-rails
   selenium-webdriver
   sendgrid-actionmailer
-  sendgrid-ruby
   shoulda-matchers (~> 6.0)
   sprockets-rails
   stimulus-rails
