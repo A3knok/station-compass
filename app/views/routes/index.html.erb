@@ -1,6 +1,6 @@
 <%= content_for(:title, t('.title')) %>
 
-<div class="alert alert-info text-center mb-0 rounded-0 border-0" role="alert">
+<div id="route-index" class="alert alert-info text-center mb-0 rounded-0 border-0" role="alert">
   <i class="fas fa-info-circle me-2"></i>
   現在は<strong>渋谷駅</strong>のみ対応しています。今後、他の駅も順次追加予定です!
 </div>
@@ -22,7 +22,7 @@
 
     <div class="row">
       <!-- 左側：投稿一覧 -->
-      <div class="col-12 col-lg-8 order-2 order-lg-1">
+      <div id="step2" class="col-12 col-lg-8 order-2 order-lg-1">
         <!-- 投稿総数 -->
         <div class="d-flex justify-content-between align-items-center border-bottom mb-4 count-area">
           <h6>
@@ -41,7 +41,7 @@
       </div>
 
       <!-- 右側：検索フォーム, ランキング -->
-      <div class="col-12 col-lg-4 order-1 order-lg-2 mb-4 mb-lg-0">
+      <div id="step1" class="col-12 col-lg-4 order-1 order-lg-2 mb-4 mb-lg-0">
         <div class="position-sticky" style="top: 20px;">
           <!-- 検索フォーム -->
           <div class="bg-white rounded-3 shadow-sm p-4 mb-4">
@@ -80,10 +80,14 @@
 
 <!-- 新規投稿ボタン(ゲストユーザー以外) -->
 <% if !current_user&.guest? %>
-  <%= link_to new_route_path, class: "floating-action-button", title: "新規投稿" do %>
-    <i class="fas fa-plus"></i>
-  <% end %>
+  <div id="step3">
+    <%= link_to new_route_path, class: "floating-action-button", title: "新規投稿" do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
+  </div>
 <% end %>
+
+
 
 <!-- Google Maps JavaScript -->
 <script>
