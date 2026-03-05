@@ -1,7 +1,19 @@
 import { driver } from "driver.js";
 
 export function setUpDriver() {
-  const isGuest = document.body.dataset.isGuest === 'true'
+  // 定数定義
+  const STORAGE_KEY = "guide_completed"
+  
+  // boolean型
+  // ローカルストレージから値を取得→値が保存されていないためnull(null === "true"はfalse)
+  const isGuideCompleted = localStorage.getItem(STORAGE_KEY) === 'true'
+
+  if (isGuideCompleted) {
+    return;
+  }
+
+  // boolean型
+  const isGuest = document.body.dataset.isGuest === 'true' //値とデータ型の完全一致
 
   const driverObj = driver({
     animate: true,
@@ -9,7 +21,10 @@ export function setUpDriver() {
     overlayOpacity: 0.5,
     showButtons: true,
     prevBtnText: "戻る",
-    nextBtnText: "次へ"
+    nextBtnText: "次へ",
+    onDestroyed: () => {
+      localStorage.setItem(STORAGE_KEY, 'true')
+    }
   });
 
   // ゲストユーザーの場合は3ステップ
