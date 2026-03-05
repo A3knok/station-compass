@@ -3,7 +3,6 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap/dist/js/bootstrap"
 import { setUpDriver } from "./driver";
-import "driver.js/dist/driver.css";
 
 window.bootstrap = bootstrap;
 
