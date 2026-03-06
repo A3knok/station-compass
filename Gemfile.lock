@@ -537,7 +537,7 @@ DEPENDENCIES
   pg (~> 1.1)
   pry-byebug
   pry-rails
-  puma (>= 5.0)
+  puma (~> 7.0)
   rails (~> 7.2.3)
   rails-i18n (~> 7.0.0)
   ransack
