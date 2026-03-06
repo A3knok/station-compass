@@ -1,38 +1,52 @@
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
-      <h2 class="text-center mb-5">
-        <i class="fas fa-user me-2"></i>
-        <%= t('users.show.title') %>
-      </h2>
+<%= content_for(:title, t('.title')) %>
 
-      <dl class="row mb-0">
-        <dt class="col-4 fw-bold"><%= t('.name')%></dt>
-        <dd class="col-8 text-end mb-3"><%= @user.name %></dd>
+<div class="page-container station-atmosphere">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="station-sign-bar mb-3"></div>
 
-        <dt class="col-4 fw-bold"><%= t('.post_count')%></dt>
-        <dd class="col-8 text-end mb-5">0</dd>
-
-        <dt class="col-12 fw-bold"><%= t('.history')%></dt>
-        <dd>
-          <div class="d-flex">
-            <div class="flex-grow-1 me-3">
-              <span>投稿概要</span>
+        <h2 class="text-center mb-5">
+          <i class="fas fa-user me-2 text-primary"></i>
+          <%= t('.title') %>
+        </h2>
+        
+        <div class="border rounded-3 shadow-sm p-4 mb-4 bg-white">
+          <!-- ユーザー名とアカウント情報変更ボタン -->
+          <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-user text-primary fs-4 me-3"></i>
+              <h3 class="mb-0"><%= @user.name %></h3>
             </div>
-            <div class="d-flex gap-2">
-              <%= link_to root_path, class: "btn btn-sm" do %>
-                <i class="fa-solid fa-pen"></i>
-                <span><%= t('helpers.submit.user.edit')%></span>
+            
+            <% unless @user.oauth_user? || @user.guest? %>
+              <%= link_to edit_user_registration_path, class: "btn btn-outline-primary btn-sm" do %>
+                <i class="fas fa-cog me-1"></i>
+                <span class="d-none d-md-inline">設定</span>
               <% end %>
-              <%= link_to root_path, class: "btn btn-sm" do %>
-                <i class="fa-solid fa-trash"></i>
-                <span><%= t('helpers.submit.user.destroy')%></span>
-              <% end %>
-            </div>
+            <% end %>
           </div>
-        </dd>
-      </dl>
 
+          <dl class="row mb-0">
+            <!-- 投稿履歴 -->
+            <dt class="col-12 fw-bold mb-3">
+              <i class="fas fa-history text-info me-2"></i>
+              <%= t('.history') %> <%= @total_routes_count %>件
+            </dt>
+            <dd class="col-12">
+              <%= render 'routes/route', routes: @recent_routes,
+                                          station: @station,
+                                          show_actions: true %>
+            </dd>
+          </dl>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<% if !current_user&.guest? %>
+  <%= link_to new_route_path, class: "floating-action-button", title: "新規投稿" do %>
+    <i class="fas fa-plus"></i>
+  <% end %>
+<% end %>

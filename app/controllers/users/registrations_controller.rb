@@ -1,8 +1,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters
   skip_before_action :authenticate_user!, only: %i[new create]
+  skip_before_action :check_guest_user, only: %i[new create]
 
   def after_sign_up_path_for(resource)
+    user_path(resource)
+  end
+
+  def after_update_path_for(resource)
     user_path(resource)
   end
 
@@ -10,5 +15,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :name ])
+    devise_parameter_sanitizer.permit(:account_update, keys: [ :name, :email,  :password, :password_confirmation, :current_password ])
   end
 end

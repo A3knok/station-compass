@@ -4,3 +4,10 @@ ja:
       create:
         success: ルート投稿が完了しました
         failure: ルート投稿に失敗しました
+      update:
+        success: ルートを更新しました
+        failure: ルート更新に失敗しました
+    
+    contacts:
+      create:
+        success: お問い合わせ内容を送信しました

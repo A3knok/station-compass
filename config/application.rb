@@ -14,7 +14,7 @@ module Myapp
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w[assets tasks])
+    # config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -27,6 +27,7 @@ module Myapp
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.i18n.default_locale = :ja
+    config.time_zone = "Tokyo"
     config.generators do |g|
       g.skip_routes true
       g.helper false

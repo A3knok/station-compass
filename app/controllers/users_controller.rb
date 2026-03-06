@@ -1,8 +1,15 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show] # 特定のユーザー情報を取得してインスタンス変数にセット
   before_action :check_owner, only: %i[show]
+  skip_before_action :check_guest_user, only: %i[show]
 
-  def show;	end
+  def show
+    @recent_routes = @user.routes.includes(:gate, :exit)
+                    .limit(5)
+                    .order(created_at: :desc)
+    @total_routes_count = @user.routes.count
+    @station = Station.find_by(name: "渋谷駅")
+  end
 
   private
 

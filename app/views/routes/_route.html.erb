@@ -1,0 +1,100 @@
+<%
+  # 親ビューの“意図”を正しく受け取り意図しないエラーを防ぐ[.fetch]
+  routes_data = local_assigns.fetch(:routes, false)
+  show_actions = local_assigns.fetch(:show_actions, false)
+  custom_card_class = local_assigns.fetch(:card_class, 'card shadow-sm')
+%>
+
+<% if routes_data.present? %>
+  <% routes_data.each do |route| %>
+    <div class="<%= custom_card_class %> mb-3">
+      <div class="card-body">
+        <!-- カテゴリー・タグ・鮮度(上部) -->
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+          <!-- カテゴリー -->
+          <% if route.category.present? %>
+            <span class="badge bg-info text-white">
+              <i class="fas fa-folder me-1"></i>
+              <%= route.category.name %>
+            </span>
+          <% end %>
+
+          <!-- タグ(最大3つまで表示) -->
+          <% route.tags.first(3).each do |tag| %>
+            <span class="badge bg-light text-dark border border-secondary">
+              <i class="fas fa-tag me-1"></i>
+              <%= tag.name %>
+            </span>
+          <% end %>
+
+          <!-- タグが4つ以上ある場合 -->
+          <% if route.tags.size > 3 %>
+            <span class="badge bg-light text-muted border">
+              +<%= route.tags.size - 3 %>
+            </span>
+          <% end %>
+
+          <!-- 情報鮮度管理メッセージ -->
+          <small class="d-block mb-2 <%= route_freshness_class(route) %>">
+            <%= route_freshness_message(route) %>
+          </small>        
+        </div>
+
+        <!-- 駅名 -->
+        <div class="mb-2">
+          <span class="badge bg-primary bg-opacity-10 text-primary border border-primary">
+            <i class="fas fa-train me-1"></i>
+            <%= route.gate.station&.name %>
+          </span>
+        </div>
+
+        <!-- ルート情報(メイン) -->        
+        <%= link_to route_path(route), class: "text-decoration-none d-block mb-3" do %>
+          <div class="d-flex align-items-center">
+            <span class="text-success me-2">
+              <i class="fas fa-door-open"></i>
+              <strong><%= route.gate&.name || "出発地未設定" %></strong>
+            </span>
+            <i class="fas fa-arrow-right text-muted mx-2"></i>
+            <span class="text-danger">
+              <i class="fas fa-flag-checkered"></i>
+              <strong><%= route.exit&.display_name || "目的地未設定" %></strong>
+            </span>
+          </div>        
+        <% end %>
+
+        <!-- 説明文(簡潔に) -->
+        <p class="text-muted small mb-3 text-break">
+          <%= route_description_summary(route, length: 80) %>
+        </p>
+
+        <!-- フッター(更新日時・アクション) -->
+        <div class="d-flex align-items-center justify-content-between border-top pt-2">
+          <small class="d-block text-lg-end mb-2">
+            <%= t('routes.show.updated_at') %> : 
+            <%= l(route.updated_at, format: :route_list) %>
+          </small>
+
+          <!-- アクションボタン -->
+          <% if show_actions %>
+            <%= render 'routes/action_buttons', route: route %>
+          <% end %>        
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="text-center py-5">
+    <i class="fas fa-inbox text-muted mb-2"></i>
+    <p class="text-muted mb-0">まだルートが投稿されていません</p>
+
+    <% if current_user&.guest? %>
+      <small class="d-block">(会員登録後に投稿できます)</small>
+      <button class="btn btn-secondary mt-2" disabled>
+        最初のルートを作成
+      </button>
+    <% else %>
+      <%= link_to "最初のルートを作成", new_route_path, class: "btn btn-primary mt-2" %>
+    <% end %>
+  </div>
+<% end %>

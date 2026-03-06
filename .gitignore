@@ -40,3 +40,10 @@
 /node_modules
 
 /config/credentials/development.key
+
+# Ignore uploaded files in development
+/public/uploads
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml

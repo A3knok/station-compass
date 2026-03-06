@@ -7,3 +7,14 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+puts "#{Rails.env}環境のseedデータを読み込み中..."
+
+case Rails.env
+when 'development'
+  puts "開発環境用のテストデータを読み込み中..."
+  load Rails.root.join('db', 'seeds', 'production', 'real_data.rb')
+when 'production'
+  puts "本番環境用のテストデータを読み込み中..."
+  load Rails.root.join('db', 'seeds', 'production', 'real_data.rb')
+end
