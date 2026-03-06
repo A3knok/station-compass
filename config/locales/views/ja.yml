@@ -7,11 +7,21 @@ ja:
     sessions:
       new:
         title: ログイン
-
+        reset_password: パスワードの再設定
+        create_user: 新規登録
+    
     registrations:
       new:
         title: 新規登録
-  
+      edit:
+        title: アカウント情報の変更
+
+    passwords:
+      new:
+        title: パスワード再設定
+      edit:
+        title: パスワード再設定
+
   users:
     show:
       title: マイページ
@@ -21,6 +31,7 @@ ja:
   
   routes:
     railway_company: 鉄道会社
+    station: 駅名
     new:
       title: 新規投稿
     show:
@@ -31,6 +42,7 @@ ja:
       route_text: ルート説明
       created_at: 作成日時
       updated_at: 最終更新日
+      helpful: 役に立った
     index:
       title: ルート一覧
       total_routes_count: 投稿総数
@@ -46,15 +58,21 @@ ja:
     index:
       title: 人気ルートランキング
   
-  privacy_policies:
+  contacts:
+    new:
+      title: お問い合わせ
+  
+  pages:
     privacy_policy:
       title: プライバシーポリシー
+    terms:
+      title: 利用規約
 
   header:
     login: ログイン
     logout: ログアウト
     sign_up: 新規登録
-    routes: ルート一覧
+    routes: 駅別ルート
     my_page: マイページ
 
   footer:

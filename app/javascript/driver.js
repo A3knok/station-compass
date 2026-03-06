@@ -1,0 +1,107 @@
+import { driver } from "driver.js";
+
+export function setUpDriver() {
+  // 定数定義
+  const STORAGE_KEY = "guide_completed"
+
+  // テスト環境の場合はガイド非表示
+  const showGuide = document.body.dataset.showGuide === 'true'
+  if (!showGuide) {
+    return;
+  }  
+  
+  // boolean型
+  // ローカルストレージから値を取得→値が保存されていないためnull(null === "true"はfalse)
+  const isGuideCompleted = localStorage.getItem(STORAGE_KEY) === 'true'
+
+  if (isGuideCompleted) {
+    return;
+  }
+
+  // boolean型
+  const isGuest = document.body.dataset.isGuest === 'true' //値とデータ型の完全一致
+
+  const driverObj = driver({
+    animate: true,
+    showProgress: true,
+    overlayOpacity: 0.5,
+    showButtons: true,
+    prevBtnText: "戻る",
+    nextBtnText: "次へ",
+    onDestroyed: () => {
+      localStorage.setItem(STORAGE_KEY, 'true')
+    }
+  });
+
+  // ゲストユーザーの場合は3ステップ
+  if(isGuest) {
+    driverObj.setSteps([
+      {
+        element: "#step1",
+        popover: {
+          title: "出発地・目的地で検索",
+          description: "出発改札と目的出口をセットして検索してください",
+          showButtons: ["next"],
+          side: "top",
+          align: "start"
+        }
+      },
+      {
+        element: "#step2",
+        popover: {
+          title: "カテゴリーとタグ検索",
+          description: "必要に応じてカテゴリー、タグも入れて検索してください",
+          showButtons: ["previous", "next"]
+        }
+      },
+      {
+        element: "#step3",
+        popover: {
+          title: "検索結果",
+          description: "条件に合ったルートが表示されます。検索条件がない場合はすべてのルートが表示されます。",
+          showButtons: ["previous", "close"]
+        }
+      }
+    ]);
+  } else {
+    // 一般ユーザーの場合は4ステップ
+    driverObj.setSteps([
+      {
+        element: "#step1",
+        popover: {
+          title: "出発地・目的地検索",
+          description: "出発改札と目的出口をセットして検索してください",
+          showButtons: ["next"],
+          side: "top",
+          align: "start"
+        }
+      },
+      {
+        element: "#step2",
+        popover: {
+          title: "カテゴリーとタグ検索",
+          description: "必要に応じてカテゴリー、タグも入れて検索してください",
+          showButtons: ["previous", "next"]
+        }
+      },
+      {
+        element: "#step3",
+        popover: {
+          title: "検索結果",
+          description: "条件に合ったルートが表示されます。検索条件がない場合はすべてのルートが表示されます。",
+          showButtons: ["previous", "next"]
+        }
+      },
+      {
+        element: "#step4",
+        popover: {
+          title: "ルート投稿",
+          description: "あなたの知っているルートを投稿して駅迷子ユーザーを助けましょう",
+          showButtons: ["previous", "close"]
+        }
+      }
+    ]);
+  }
+
+  driverObj.drive();
+}

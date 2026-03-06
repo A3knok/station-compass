@@ -45,4 +45,44 @@ module RoutesHelper
       { route: route, rank: current_rank, show_rank: show_rank }
     end
   end
+
+  # ランク表示(PC版）
+  def rank_badge_desktop(rank, show_rank)
+    return content_tag(:span, "-", class: "text-muted") unless show_rank
+
+    case rank
+    when 1
+      content_tag(:span, class: "rank-badge rank-1 d-none d-md-inline") do
+        content_tag(:i, "", class: "fas fa-crown") + " 1位"
+      end
+    when 2
+      content_tag(:span, class: "rank-badge rank-2 d-none d-md-inline") do
+        content_tag(:i, "", class: "fas fa-medal") + " 2位"
+      end
+    else
+      content_tag(:span, class: "rank-number d-none d-md-inline") do
+        "#{rank}位"
+      end
+    end
+  end
+
+  # ランク表示(mobile版）
+  def rank_badge_mobile(rank, show_rank)
+    return content_tag(:span, "", class: "text-muted") unless show_rank
+
+    case rank
+    when 1
+      content_tag(:span, class: "rank-badge rank-1 d-inline d-md-none") do
+        content_tag(:i, "", class: "fas fa-crown")
+      end
+    when 2
+      content_tag(:span, class: "rank-badge rank-2 d-inline d-md-none") do
+        content_tag(:i, "", class: "fas fa-medal")
+      end
+    else
+      content_tag(:span, class: "rank-number d-inline d-md-none") do
+        "#{rank}"
+      end
+    end
+  end
 end

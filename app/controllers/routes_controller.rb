@@ -1,16 +1,17 @@
 class RoutesController < ApplicationController
   before_action :set_station
+  before_action :set_station, only: %i[index]
   before_action :set_route, only: %i[ show edit update destroy ]
   before_action :check_route_owner, only: %i[ edit update destroy ]
   before_action :set_search_form_data, only: %i[ index ]
-  before_action :set_new_form_data, only: %i[ new create edit update ]
+  before_action :set_new_form_data, only: %i[ new create ]
   before_action :set_edit_form_data, only: %i[ edit update ]
   skip_before_action :check_guest_user, only: %i[ index show ]
 
 
   def index
     @q = @station.routes.ransack(params[:q])
-    @routes = @q.result(distinct: true).includes(:gate, :exit, :tags).order(created_at: :desc)
+    @routes = @q.result(distinct: true).includes(:gate, :exit, :tags, :category).order(created_at: :desc)
   end
 
   def show
@@ -65,8 +66,6 @@ class RoutesController < ApplicationController
   end
 
   def set_station
-    Rails.logger.debug "params[:station_id]: #{params[:station_id].inspect}"
-    Rails.logger.debug "params[:station_id].class: #{params[:station_id].class}"
     @station = Station.find(params[:station_id])
   end
 
@@ -76,17 +75,23 @@ class RoutesController < ApplicationController
 
   def set_new_form_data
     @exits = Exit.order(name: :asc)
+    @stations = Station.order(name: :asc)
     @railway_companies = RailwayCompany.all.order(name: :asc)
+    @companies_by_station = RailwayCompany.grouped_by_station.to_json
     @gates_by_company = Gate.grouped_by_company.to_json
-    @gates = []
+    @gates = [] # フォーム用の初期値
     @categories = Category.all.order(name: :asc)
     @tags = Tag.all.order(name: :asc)
   end
 
   def set_edit_form_data
     @exits = Exit.order(name: :asc)
+    @stations = Station.order(name: :asc)
     @railway_companies = RailwayCompany.all.order(name: :asc)
+    @companies_by_station = RailwayCompany.grouped_by_station.to_json
     @gates_by_company = Gate.grouped_by_company.to_json
+    @categories = Category.all.order(name: :asc)
+    @tags = Tag.all.order(name: :asc)
 
     if @route.gate&.railway_company_id
       @gates = Gate.where(railway_company_id: @route.gate.railway_company_id)
@@ -99,7 +104,7 @@ class RoutesController < ApplicationController
   def set_search_form_data
     @exits = @station.exits.order(name: :asc)
     @gates = @station.gates.order(name: :asc)
-    @Categories = Category.all
+    @categories = Category.all
     @tags = Tag.all
   end
 
