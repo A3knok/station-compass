@@ -514,7 +514,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
-  bootsnap
+  bootsnap (~> 1.21)
   brakeman
   capybara
   carrierwave (= 2.2.2)
@@ -549,7 +549,7 @@ DEPENDENCIES
   shoulda-matchers (~> 6.0)
   sprockets-rails
   stimulus-rails
-  turbo-rails
+  turbo-rails (~> 2.0)
   tzinfo-data
   web-console
   webdrivers
