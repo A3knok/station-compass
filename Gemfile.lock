@@ -520,7 +520,7 @@ DEPENDENCIES
   carrierwave (= 2.2.2)
   config
   cssbundling-rails
-  debug
+  debug (= 1.11.1)
   devise
   devise-i18n
   dotenv-rails
