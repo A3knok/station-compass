@@ -53,7 +53,15 @@ jobs:
 
       - name: Build assets
         run: bundle exec rails assets:precompile
-
+        
+      - name: Keep screenshots from failed system tests
+        uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: screenshots
+          path: ${{ github.workspace }}/tmp/screenshots
+          if-no-files-found: ignore
+          
       - name: Set up database
         run: |
           bundle exec rails db:create || true
