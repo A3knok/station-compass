@@ -3,6 +3,12 @@ import { driver } from "driver.js";
 export function setUpDriver() {
   // 定数定義
   const STORAGE_KEY = "guide_completed"
+
+  // テスト環境の場合はガイド非表示
+  const showGuide = document.body.dataset.showGuide === 'true'
+  if (!showGuide) {
+    return;
+  }  
   
   // boolean型
   // ローカルストレージから値を取得→値が保存されていないためnull(null === "true"はfalse)

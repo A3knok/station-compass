@@ -24,7 +24,8 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body data-is-guest="<%= current_user&.guest? ? 'true' : 'false' %>">
+  <body data-is-guest="<%= current_user&.guest? ? 'true' : 'false' %>"
+        data-show-guide="<%= Rails.env.test? ? 'false' : 'true' %>">
     <%= render 'shared/header' %>
     <%= render 'shared/flash_messages' %>
 
