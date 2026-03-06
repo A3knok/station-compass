@@ -9,3 +9,6 @@ application.register("gate-filter", GateFilterController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import SlimSelectController from "./slim_select_controller"
+application.register("slim-select", SlimSelectController)

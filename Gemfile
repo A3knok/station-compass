@@ -20,6 +20,7 @@ gem "cssbundling-rails"
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
+gem "sassc-rails"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -36,6 +37,12 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+gem "config"
+
+# SendGrid用(メール送信)
+# gem "sendgrid-ruby"
+gem "sendgrid-actionmailer"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -48,6 +55,11 @@ group :development, :test do
 
   gem "pry-byebug"
   gem "pry-rails"
+
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+
+  gem "dotenv-rails"
 end
 
 group :development do
@@ -55,16 +67,22 @@ group :development do
   gem "web-console"
   gem "better_errors"
   gem "binding_of_caller"
+  gem "letter_opener_web"
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "webdrivers"
+  gem "shoulda-matchers", "~> 6.0"
 end
 
 # 認証用
 gem "devise"
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 
 # 日本語化
 gem "rails-i18n", "~> 7.0.0"
@@ -72,3 +90,11 @@ gem "devise-i18n"
 
 # 検索用
 gem "ransack"
+
+# 画像アップロード、画像編集用
+gem "carrierwave", "2.2.2"
+gem "mini_magick"
+gem "mimemagic", "~> 0.4.3"
+
+# OGP設定用
+gem "meta-tags"

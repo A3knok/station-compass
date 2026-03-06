@@ -1,4 +1,13 @@
-@import "bootstrap/scss/bootstrap";
+@import "application.bootstrap";
+@import "slim-select/dist/slimselect";
+@import "driver.js/dist/driver";
+
+// slim-selectのコンテナに適用されたBootstrapのCSS変数のみを無効化
+.ss-main,
+.ss-single-selected {
+  --bs-form-select-bg-img: none !important;
+  --bs-form-select-bg-icon: none !important;
+}
 
 body {
   font-family: "Inter", "Noto Sans JP", sans-serif;
@@ -95,9 +104,15 @@ a {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/*-----------------
-投稿フォーム
------------------*/
+// セレクトボックスが無効化されている場合のスタイル
+select:disabled {
+  background-color: #f0f0f0;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+// 投稿フォーム(new, edit)
 .form-container {
   background: #ffffff;
   border-radius: 12px;
@@ -128,6 +143,7 @@ a {
   }
 }
 
+/*
 .page-container .form-group {
   position: relative;
   padding-left: 8px;
@@ -148,6 +164,7 @@ a {
     border-radius: 2px;
   }
 }
+  */
 
 // セレクトボックスに駅の券売機的なスタイル
 .page-container .form-select {
@@ -259,6 +276,115 @@ a {
       box-shadow: 0 12px 24px rgba(0,0,0,0.15);
     }
   }
+
+  .en-title {
+    color: #6c757d;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+  }
+
+  .ja-title {
+    color: #212529;
+    font-size: 1.6rem;
+  }
+}
+
+/*-----------------
+ログイン画面
+-----------------*/
+// googleログイン
+.google-login-btn {
+  border-color: #db4437;
+  color: #db4437;
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #db4437;
+    border-color: #db4437;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(219, 68, 55, 0.3);
+  }
+
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+// ゲストログイン
+.guest-login-btn {
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+  }
+
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+/*-----------------
+駅一覧画面(index)
+-----------------*/
+.station-list-wrapper {
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.station-list-item {
+  position: relative;
+  transition: all 0.2s ease;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--bs-primary);
+    transform: scaleY(0);
+    transition: transform 0.2s ease;
+  }
+  
+  &:hover {
+    background: rgba(var(--bs-primary-rgb), 0.03);
+    padding-left: 1.25rem !important;
+    
+    &::before {
+      transform: scaleY(1);
+    }
+    
+    .station-name {
+      color: var(--bs-primary) !important;
+    }
+  }
+}
+
+.station-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(0,0,0,0.1);
+  min-width: 45px;
+  font-family: 'Courier New', monospace;
+}
+
+.station-icon-minimal {
+  width: 40px;
+  height: 40px;
+  background: rgba(var(--bs-primary-rgb), 0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
 }
 
 /*-----------------
@@ -319,6 +445,16 @@ a {
   }
 }
 
+// 検索フォーム
+.search-item {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+  
+.search-item:nth-of-type(4) {
+  border-bottom: none !important;
+}
+
 /*-----------------
 投稿詳細画面(show)
 -----------------*/
@@ -374,10 +510,55 @@ dd.route-fresh {
   border-radius: 0 8px 8px 0;
 }
 
+/*-----------------
+ランキング画面
+-----------------*/
+
+/* 基本スタイル */
+.rank-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* 1位 - ゴールド */
+.rank-badge.rank-1 {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #333;
+  box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+}
+
+/* 2位 - シルバー */
+.rank-badge.rank-2 {
+  background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+  color: #333;
+  box-shadow: 0 2px 4px rgba(192, 192, 192, 0.3);
+}
+
+/* 3位以下 */
+.rank-number {
+  color: #666;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+/* アイコンのスタイル */
+.rank-badge i {
+  margin-right: 4px;
+}
 
 /*-----------------
 レスポンシブ
 -----------------*/
+/* レスポンシブ対応: lg以上の画面で幅を自動調整 */
+@media (min-width: 992px) {
+  .w-lg-auto {
+    width: auto !important;
+  }
+}
+
 @media (max-width: 768px) {
   // フローティングボタン
   .floating-action-button {

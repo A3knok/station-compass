@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def check_guest_user
     if current_user&.guest?
-      redirect_to routes_path, alert: t("devise.failure.guest_user")
+      redirect_to stations_path, alert: t("devise.failure.guest_user")
     end
   end
 end
