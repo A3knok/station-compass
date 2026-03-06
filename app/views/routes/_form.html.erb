@@ -71,7 +71,7 @@
           <%= f.collection_select :gate_id,
                                   @gates,
                                   :id,
-                                  :name, 
+                                  :name,
                                   { include_blank: '出発地を選択'},
                                   { class: "form-select",
                                     data: { gate_filter_target: "gate" }
@@ -111,7 +111,7 @@
           <span style="color: red;">*</span>
           <%= f.text_area :description, class: "form-control" %>
         </div>
-        
+
         <!-- 所要時間入力 -->
         <div class="mb-3">
           <strong>
@@ -177,7 +177,7 @@
         <i class="fa-solid fa-tags"></i>
         <%= f.text_field :tag_names, class: "form-control"%>
       </div>
-      
+
       <div class="d-grid">
         <%= f.submit class: "btn btn-primary btn-lg" %>
       </div>
