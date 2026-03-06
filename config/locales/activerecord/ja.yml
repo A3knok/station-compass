@@ -6,6 +6,8 @@ ja:
       gate: 地点
       exit: 地点
       railway_company: 鉄道会社
+      category: カテゴリー
+      tag: タグ
     attributes:
       user:
         name: ユーザー名
@@ -26,6 +28,16 @@ ja:
       exit:
         name: 地点名
 
+      category:
+        name: カテゴリー
+      
+      tag:
+        name: タグ
+
+      contact:
+        subject: 件名
+        body: お問い合わせ内容
+
     errors:
       messages:
         blank: "を入力してください"
@@ -41,6 +53,8 @@ ja:
             password_confirmation:
               blank: "を再入力してください"
               confirmation: "とパスワードの入力が一致しません"
+            current_password:
+              invalid: が正しくありません
               
         route:
           attributes:
@@ -49,7 +63,7 @@ ja:
             exit_id:
               blank: "を選択してください"
             description:
-              too_short: "は10文字以上で入力してください"
+              too_short: "は10文字以上で入力してください"          
   
   defaults:
     show: 詳細
@@ -66,9 +80,14 @@ ja:
         update: 更新
       user_session:
         create: ログイン
+      user_password:
+        create: 送信
+        update: 登録
       route:
         create: 作成
         update: 更新
+      contact:
+        create: 送信
 
     label:
       user:
@@ -77,9 +96,15 @@ ja:
         password: パスワード
         password_confirmation: パスワード(確認用)
       route:
-        gate_id: 出発地
-        exit_id: 目的地
+        railway_company: 鉄道会社
+        gate: 出発地
+        exit: 目的地
         railway_company_id: 鉄道会社
         description: ルート詳細
         estimated_time: 所要時間(分)
-        railway_company: 鉄道会社
+        category_id: カテゴリー
+        tag_names: タグ
+        images: 画像添付
+      contact:
+        subject: 件名
+        body: お問い合わせ内容

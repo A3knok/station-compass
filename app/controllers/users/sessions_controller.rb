@@ -38,6 +38,6 @@ class Users::SessionsController < Devise::SessionsController
   def guest_sign_in
     guest_user = User.guest_user
     sign_in guest_user
-    redirect_to routes_path, notice: "ゲストユーザーでログインしました"
+    redirect_to stations_path, notice: "ゲストユーザーでログインしました"
   end
 end

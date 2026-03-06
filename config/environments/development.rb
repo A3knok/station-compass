@@ -41,7 +41,7 @@ Rails.application.configure do
   # caching is enabled.
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+  config.action_mailer.default_url_options = { host: "localhost:3000" }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -83,4 +83,6 @@ Rails.application.configure do
   config.assets.debug = true
   config.assets.digest = false  # 開発環境では通常false
   config.assets.check_precompiled_asset = false
+
+  config.action_mailer.delivery_method = :letter_opener_web
 end

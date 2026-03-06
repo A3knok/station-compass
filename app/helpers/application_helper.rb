@@ -27,4 +27,35 @@ module ApplicationHelper
       end
     end
   end
+
+  def default_meta_tags
+    {
+      site: "駅コンパス",
+      title: "大型駅構内での迷子を解消するサービス",
+      reverse: true,
+      description: "駅コンパスでは改札から出口までのルートを共有・検索し、駅構内での迷子状態を解消することができます。",
+      keywords: "駅出口, 出口, アクセス, 渋谷",
+      canonical: request.original_url,
+      og: {
+        title: :title,
+        type: "website",
+        url: request.original_url,
+        image: image_url("ogp.png"), # OGP画像のパス
+        site_name: :site,
+        description: :description,
+        locale: "ja_JP"
+      },
+      twitter: {
+        card: "summary_large_image",
+        site: "@a3_knok_RUNTEQ",
+        title: :title,
+        description: :description,
+        image: image_url("ogp.png")
+      }
+    }
+  end
+
+  def share_twitter_url(url:, text:)
+    "https://twitter.com/share?url=#{CGI.escape(url)}&text=#{CGI.escape(text)}" # URLの文字列を返す
+  end
 end

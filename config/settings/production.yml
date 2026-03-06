@@ -1,0 +1,3 @@
+action_mailer:
+  from: <%= ENV['ACTION_MAILER_FROM'] %>
+  bcc: <%= ENV['ACTION_MAILER_BCC'] %>

@@ -78,6 +78,22 @@ Rails.application.configure do
   # caching is enabled.
   config.action_mailer.perform_caching = false
 
+  # SendGrid ActionMailer の設定
+  config.action_mailer.delivery_method = :sendgrid_actionmailer
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  # SendGridの設定
+  config.action_mailer.sendgrid_actionmailer_settings = {
+    api_key: Rails.application.credentials.dig(:sendgrid, :api_key)
+  }
+
+  # メール内のURLを生成するための設定
+  config.action_mailer.default_url_options = {
+    host: "stationcompass.com",
+    protocol: "https"
+  }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
