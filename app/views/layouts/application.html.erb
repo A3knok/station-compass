@@ -12,9 +12,8 @@
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/compass.png" type="image/png">
-    <link rel="icon" href="/compass.svg" type="image/svg+xml">
-    <!-- <link rel="apple-touch-icon" href="/icon.png"> -->
+    <%= favicon_link_tag "compass.png", type: "image/png" %>
+    <%= favicon_link_tag "compass.svg", type: "image/svg+xml" %>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +24,8 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+  <body data-is-guest="<%= current_user&.guest? ? 'true' : 'false' %>"
+        data-show-guide="<%= Rails.env.test? ? 'false' : 'true' %>">
     <%= render 'shared/header' %>
     <%= render 'shared/flash_messages' %>
 

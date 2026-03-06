@@ -1,6 +1,6 @@
 <%= content_for(:title, t('.title')) %>
 
-<div class="alert alert-info text-center mb-0 rounded-0 border-0" role="alert">
+<div id="route-index" class="alert alert-info text-center mb-0 rounded-0 border-0" role="alert">
   <i class="fas fa-info-circle me-2"></i>
   現在は<strong>渋谷駅</strong>のみ対応しています。今後、他の駅も順次追加予定です!
 </div>
@@ -33,7 +33,7 @@
         </div>
 
         <!-- ルート概要一覧 -->
-        <div class="routes-grid">
+        <div id="step3" class="routes-grid">
           <%= render 'routes/route', 
               routes: @routes,
               show_actions: false %>
@@ -80,10 +80,12 @@
 
 <!-- 新規投稿ボタン(ゲストユーザー以外) -->
 <% if !current_user&.guest? %>
-  <%= link_to new_route_path, class: "floating-action-button", title: "新規投稿" do %>
+  <%= link_to new_route_path, id: "step4", class: "floating-action-button", title: "新規投稿" do %>
     <i class="fas fa-plus"></i>
   <% end %>
 <% end %>
+
+
 
 <!-- Google Maps JavaScript -->
 <script>
