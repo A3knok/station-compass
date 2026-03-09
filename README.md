@@ -68,7 +68,7 @@ https://stationcompass.com/
 
 ### 使用技術
 | カテゴリ | 技術 |
-| :---: | :---: |
+| :---: | --- |
 | フロントエンド | HTML / JavaScript / Stimulus / SlimSelect |
 | UI/CSS | Bootstrap |
 | データベース | PostgreSQL |
