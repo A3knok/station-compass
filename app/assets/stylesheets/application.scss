@@ -9,6 +9,10 @@
   --bs-form-select-bg-icon: none !important;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Inter", "Noto Sans JP", sans-serif;
 }
@@ -455,6 +459,10 @@ select:disabled {
   border-bottom: none !important;
 }
 
+.sp-rank {
+  display: none;
+}
+
 /*-----------------
 投稿詳細画面(show)
 -----------------*/
@@ -572,6 +580,14 @@ dd.route-fresh {
   // ルート一覧画面(index)
   .routes-grid {
     display: block;
+  }
+
+  .sp-rank {
+    display: block;
+  }
+
+  .pc-rank {
+    display: none;
   }
 }
 
