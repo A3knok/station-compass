@@ -1,59 +1,60 @@
 <%= content_for(:title, t('.title')) %>
+<% breadcrumb :account_edit %>
 
-<div class="station-atmosphere bg-light">
-  <div class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6">
-        <h2 class="text-center mb-5"><%= t('.title') %></h2>
-        <%= render 'shared/error_messages' %>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      <div class="station-sign-bar mb-3"></div>
+      <h2 class="text-center mb-5"><%= t('.title') %></h2>
+      <%= render 'shared/error_messages' %>
 
-        <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), class: "mb-3") do |f| %>
-          <div class="field mb-3">
-            <strong>
-              <%= f.label :name, class: "form-label" %>
-            </strong>
-            <%= f.text_field :name, autofocus: true, autocomplete: "name",  class: "form-control" %>
-          </div>
+      <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), class: "mb-3") do |f| %>
+        <div class="field mb-3">
+          <strong>
+            <%= f.label :name, class: "form-label" %>
+          </strong>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name",  class: "form-control" %>
+        </div>
 
-          <div class="field mb-3">
-            <strong>
-              <%= f.label :email, class: "form-label" %>
-            </strong>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email",  class: "form-control" %>
-          </div>
+        <div class="field mb-3">
+          <strong>
+            <%= f.label :email, class: "form-label" %>
+          </strong>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",  class: "form-control" %>
+        </div>
 
-          <div class="field mb-3">
-            <strong>
-              <%= f.label :password, class: "form-label" %>
-            </strong>
-            <!-- 入力情報：新しいパスワード情報-->
-            <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-          </div>
+        <div class="field mb-3">
+          <strong>
+            <%= f.label :password, class: "form-label" %>
+          </strong>
+          <!-- 入力情報：新しいパスワード情報-->
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+        </div>
 
-          <div class="field mb-3">
-            <strong>
-              <%= f.label :password_confirmation, class: "form-label" %>
-            </strong>
-            <!-- 入力情報：新しいパスワード情報-->
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-          </div>
+        <div class="field mb-3">
+          <strong>
+            <%= f.label :password_confirmation, class: "form-label" %>
+          </strong>
+          <!-- 入力情報：新しいパスワード情報-->
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+        </div>
 
-          <div class="field mb-3">
-            <strong>
-              <%= f.label :current_password, class: "form-label" %>
-            </strong>
-            <%= f.password_field :current_password, autocomplete: "current-password", class: "mb-2 form-control" %>
-            <small class="text-muted d-block mb-5">
-              本人確認のため、情報を変更する際は必ず入力してください
-            </small>
-          </div>
+        <div class="field mb-3">
+          <strong>
+            <%= f.label :current_password, class: "form-label" %>
+          </strong>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "mb-2 form-control" %>
+          <small class="text-muted d-block mb-5">
+            本人確認のため、情報を変更する際は必ず入力してください
+          </small>
+        </div>
 
-          <div class="d-grid">
-            <%= f.submit t('helpers.submit.user.update'), class: "btn btn-primary btn-lg" %>
-          </div>
-        <% end %>
-      </div>
+        <div class="d-grid">
+          <%= f.submit t('helpers.submit.user.update'), class: "btn btn-primary btn-lg" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
+
 

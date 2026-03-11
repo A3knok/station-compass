@@ -68,7 +68,7 @@ a {
 /*-----------------
 共通コンテンツ
 -----------------*/
-.page-container {
+.main-container {
   // 駅構内の明るい雰囲気
   background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
   min-height: 100vh;
@@ -96,7 +96,7 @@ a {
 }
 
 // タイトルに駅の案内板風のスタイル
-.page-container h2 {
+.main-container h2 {
   font-weight: 700;
   letter-spacing: 0.05em;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
