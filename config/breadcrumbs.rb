@@ -5,19 +5,19 @@ end
 
 # マイページ
 crumb :my_page do
-  link t('users.show.title') , user_path(current_user)
+  link t("users.show.title"), user_path(current_user)
   parent :root
 end
 
 # アカウント編集
 crumb :account_edit do
-  link t('devise.registrations.edit.title'), edit_user_registration_path
+  link t("devise.registrations.edit.title"), edit_user_registration_path
   parent :my_page
 end
 
 # 駅一覧
 crumb :stations do
-  link t('stations.index.title'), stations_path
+  link t("stations.index.title"), stations_path
   parent :root
 end
 
@@ -29,7 +29,7 @@ end
 
 # ランキングページ
 crumb :ranking do |station|
-  link t('ranks.index.title'), station_ranks_path(station)
+  link t("ranks.index.title"), station_ranks_path(station)
   parent :routes, station
 end
 
@@ -46,7 +46,7 @@ crumb :edit_route do |route|
 end
 
 crumb :new_route do
-  link t('routes.new.title'), new_route_path
+  link t("routes.new.title"), new_route_path
   parent :root
 end
 

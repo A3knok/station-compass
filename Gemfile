@@ -42,7 +42,7 @@ gem "config"
 gem "sendgrid-actionmailer"
 
 # パンくずリスト
-gem 'gretel', "~> 5.0"
+gem "gretel", "~> 5.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
