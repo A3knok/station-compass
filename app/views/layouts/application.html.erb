@@ -26,11 +26,17 @@
 
   <body data-is-guest="<%= current_user&.guest? ? 'true' : 'false' %>"
         data-show-guide="<%= Rails.env.test? ? 'false' : 'true' %>">
+    
     <%= render 'shared/header' %>
     <%= render 'shared/flash_messages' %>
 
     <main>
-      <%= yield %>
+      <div class="main-container">
+        <div class="p-4">
+          <%= breadcrumbs separator: " &rsaquo; " %>
+        </div>
+        <%= yield %>
+      </div>
     </main>
 
     <%= render 'shared/footer' %>

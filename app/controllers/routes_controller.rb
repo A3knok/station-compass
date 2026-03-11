@@ -1,5 +1,4 @@
 class RoutesController < ApplicationController
-  before_action :set_station
   before_action :set_station, only: %i[index]
   before_action :set_route, only: %i[ show edit update destroy ]
   before_action :check_route_owner, only: %i[ edit update destroy ]
@@ -15,7 +14,7 @@ class RoutesController < ApplicationController
   end
 
   def show
-    redirect_to station_routes_path(@route), alert: "投稿が見つかりません" if @route.nil?
+    redirect_to root_path, alert: "投稿が見つかりません" if @route.nil?
   end
 
   def new
@@ -62,7 +61,7 @@ class RoutesController < ApplicationController
   private
 
   def set_route
-    @route = Route.find_by(id: params[:id])
+    @route = Route.includes(:station, :gate, :exit).find_by(id: params[:id])
   end
 
   def set_station
