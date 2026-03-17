@@ -1,21 +1,17 @@
 class RoutesController < ApplicationController
   before_action :set_station, only: %i[index]
   before_action :set_route, only: %i[ show edit update destroy ]
+  before_action :set_form_data, only: %i[ new edit create update ]
   before_action :check_route_owner, only: %i[ edit update destroy ]
   before_action :set_search_form_data, only: %i[ index ]
-  before_action :set_new_form_data, only: %i[ new create ]
-  before_action :set_edit_form_data, only: %i[ edit update ]
   skip_before_action :check_guest_user, only: %i[ index show ]
-
 
   def index
     @q = @station.routes.ransack(params[:q])
     @routes = @q.result(distinct: true).includes(:gate, :exit, :tags, :category).order(created_at: :desc)
   end
 
-  def show
-    redirect_to root_path, alert: "投稿が見つかりません" if @route.nil?
-  end
+  def show; end
 
   def new
     @route = Route.new
@@ -35,55 +31,46 @@ class RoutesController < ApplicationController
   end
 
   def update
-    # images以外の要素を更新
-    if @route.update(route_params_without_images)
+    ActiveRecord::Base.transaction do
+      # images以外の要素を更新
+      @route.update!(route_params_without_images)
 
       # nilを安全に空配列として扱う
+      # Array()で配列に変換し、reject(&:blank?)で空文字を除外
       new_images = Array(params[:route][:images]).reject(&:blank?)
 
       if new_images.any?
         @route.images = new_images
-        @route.save
+        @route.save!
       end
-
-      redirect_to route_path(@route), success: t("flash_messages.routes.update.success")
-    else
-      flash.now[:danger] = t("flash_messages.routes.update.failure")
-      render :edit, status: :unprocessable_entity
     end
+
+    redirect_to route_path(@route), success: t("flash_messages.routes.update.success")
+  rescue ActiveRecord::RecordInvalid => e
+    flash.now[:danger] = t("flash_messages.routes.update.failure")
+    render :edit, status: :unprocessable_entity
   end
 
   def destroy
-    @route.destroy!
-    redirect_to user_path(current_user)
+    if @route.destroy
+      redirect_to user_path(current_user), success: t("flash_messages.routes.destroy.success")
+    else
+      redirect_to route_path(@route), alert: t("flash_messages.routes.destroy.failure")
+    end
   end
 
   private
 
   def set_route
-    @route = Route.includes(:station, :gate, :exit).find_by(id: params[:id])
+    @route = Route.includes(:station, :gate, :exit).find(params[:id])
   end
 
   def set_station
     @station = Station.find(params[:station_id])
   end
 
-  def check_route_owner
-    redirect_to root_path unless current_user == @route.user
-  end
-
-  def set_new_form_data
-    @exits = Exit.order(name: :asc)
-    @stations = Station.order(name: :asc)
-    @railway_companies = RailwayCompany.all.order(name: :asc)
-    @companies_by_station = RailwayCompany.grouped_by_station.to_json
-    @gates_by_company = Gate.grouped_by_company.to_json
-    @gates = [] # フォーム用の初期値
-    @categories = Category.all.order(name: :asc)
-    @tags = Tag.all.order(name: :asc)
-  end
-
-  def set_edit_form_data
+  def set_form_data
+    # 共通のフォームデータ
     @exits = Exit.order(name: :asc)
     @stations = Station.order(name: :asc)
     @railway_companies = RailwayCompany.all.order(name: :asc)
@@ -92,11 +79,12 @@ class RoutesController < ApplicationController
     @categories = Category.all.order(name: :asc)
     @tags = Tag.all.order(name: :asc)
 
-    if @route.gate&.railway_company_id
+    # 編集時のみ、既存のゲートを設定
+    if @route&.gate&.railway_company_id
       @gates = Gate.where(railway_company_id: @route.gate.railway_company_id)
                     .order(name: :asc)
     else
-      @gates = []
+      @gates = [] # new アクション用の初期値
     end
   end
 
@@ -105,6 +93,10 @@ class RoutesController < ApplicationController
     @gates = @station.gates.order(name: :asc)
     @categories = Category.all
     @tags = Tag.all
+  end
+
+  def check_route_owner
+    redirect_to root_path unless current_user == @route.user
   end
 
   def route_params

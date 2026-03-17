@@ -7,6 +7,9 @@ ja:
       update:
         success: ルートを更新しました
         failure: ルート更新に失敗しました
+      destroy:
+        success: ルートを削除しました
+        failure: ルート削除に失敗しました
     
     contacts:
       create:
