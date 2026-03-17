@@ -16,7 +16,9 @@ ja:
         password_confirmation: パスワード(確認用)
 
       route:
-        gate_id: 出発地
+        gate: 出発地
+        gate_id: 出発地 
+        exit: 目的地
         exit_id: 目的地
         railway_company_id: 鉄道会社
         description: ルート詳細
