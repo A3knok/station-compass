@@ -19,17 +19,12 @@ class Route < ApplicationRecord
 
   # 文字列を配列に変換
   def tag_names=(names)
-    self.tags.clear # 既存タグ削除(ルート編集時に古いタグを残さないため)
-
     return if names.blank?
-    # カンマで文字列を区切って分割し、前後の空白を削除、重複を排除、空文字を削除
-    tag_names = names.split(",").map(&:strip).uniq.reject(&:blank?)
 
-    tag_names.each do |tag_name|
-      # メソッドの戻り値となる配列
-      tag = Tag.find_or_create_by(name: tag_name.downcase) # 小文字に変換
-      self.tags << tag unless self.tags.include?(tag)
-    end
+    # タグ名の配列を取得
+    tag_names_array = parse_tag_names(names)
+
+    assign_tags(tag_names_array)
   end
 
   # 配列を文字列に変換
@@ -45,6 +40,14 @@ class Route < ApplicationRecord
     helpful_marks.count
   end
 
+  # 画像を更新するためのメソッド
+  def update_images(new_image_params)
+    return unless new_image_params.present?
+
+    valid_images = new_image_params.reject(&:blank?)
+    self.images = valid_images if valid_images.any?
+  end
+
   # ホワイトリストの管理
   def self.ransackable_attributes(auth_object = nil)
     [ "exit_id", "gate_id", "category_id" ]
@@ -52,5 +55,25 @@ class Route < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     [ "gate", "exit", "tags", "taggings", "station", "category" ]
+  end
+
+  private
+
+  # タグ名の文字列を配列に変換する
+  def parse_tag_names(names)
+    names.split(",") # カンマで文字列を区切って分割
+          .map(&:strip) # 前後の空白を削除
+          .uniq # 重複を排除
+          .reject(&:blank?) # 空文字を削除
+  end
+
+  def assign_tags(tag_names_array)
+    self.tags.clear # 既存タグ削除(ルート編集時に古いタグを残さないため)
+
+    tag_names_array.each do |tag_name|
+      # メソッドの戻り値となる配列
+      tag = Tag.find_or_create_by(name: tag_name.downcase) # 小文字に変換
+      self.tags << tag unless self.tags.include?(tag)
+    end
   end
 end

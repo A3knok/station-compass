@@ -20,7 +20,7 @@ class RoutesController < ApplicationController
   def edit; end
 
   def create
-    @route = current_user.routes.build(route_params) # セッターメソッド(tag_names)呼び出し
+    @route = current_user.routes.build(route_params)
 
     if @route.save
       redirect_to route_path(@route), flash: { show_thanks_modal: true } # モーダル用のflash
@@ -31,24 +31,15 @@ class RoutesController < ApplicationController
   end
 
   def update
-    ActiveRecord::Base.transaction do
-      # images以外の要素を更新
-      @route.update!(route_params_without_images)
+    # 画像を更新するための処理
+    @route.update_images(params[:route][:images])
 
-      # nilを安全に空配列として扱う
-      # Array()で配列に変換し、reject(&:blank?)で空文字を除外
-      new_images = Array(params[:route][:images]).reject(&:blank?)
-
-      if new_images.any?
-        @route.images = new_images
-        @route.save!
-      end
+    if @route.update(route_params_without_images)
+      redirect_to route_path(@route), success: t("flash_messages.routes.update.success")
+    else
+      flash.now[:danger] = t("flash_messages.routes.update.failure")
+      render :edit, status: :unprocessable_entity
     end
-
-    redirect_to route_path(@route), success: t("flash_messages.routes.update.success")
-  rescue ActiveRecord::RecordInvalid => e
-    flash.now[:danger] = t("flash_messages.routes.update.failure")
-    render :edit, status: :unprocessable_entity
   end
 
   def destroy
@@ -100,10 +91,16 @@ class RoutesController < ApplicationController
   end
 
   def route_params
-    params.require(:route).permit(:gate_id, :exit_id, :description, :category_id, :estimated_time, :tag_names, { images: [] }, :images_cache)
+    params.require(:route).permit(
+      :gate_id, :exit_id, :description, :category_id,
+      :estimated_time, :tag_names, :images_cache,
+      images: []
+    )
   end
 
   def route_params_without_images
-    params.require(:route).permit(:gate_id, :exit_id, :description, :category_id, :estimated_time, :tag_names)
+    params.require(:route).permit(
+      :gate_id, :exit_id, :description, :category_id,
+      :estimated_time, :tag_names)
   end
 end
