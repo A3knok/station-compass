@@ -40,6 +40,14 @@ class Route < ApplicationRecord
     helpful_marks.count
   end
 
+  # 画像を更新するためのメソッド
+  def update_images(new_image_params)
+    return unless new_image_params.present?
+
+    valid_images = new_image_params.reject(&:blank?)
+    self.images = valid_images if valid_images.any?
+  end
+
   # ホワイトリストの管理
   def self.ransackable_attributes(auth_object = nil)
     [ "exit_id", "gate_id", "category_id" ]
