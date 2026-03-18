@@ -100,7 +100,7 @@ class RoutesController < ApplicationController
 
   def route_params_without_images
     params.require(:route).permit(
-      :gate_id, :exit_id, :description, :category_id, 
+      :gate_id, :exit_id, :description, :category_id,
       :estimated_time, :tag_names)
   end
 end
