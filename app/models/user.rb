@@ -67,11 +67,6 @@ class User < ApplicationRecord
     helpful_routes.destroy(route)
   end
 
-  # 役に立ったマークをつけているか
-  def marked_as_helpful?(route)
-    helpful_routes.include?(route)
-  end
-
   # omniauthのコールバックで使うメソッド
   def self.from_omniauth(access_token)
     data = access_token.info
