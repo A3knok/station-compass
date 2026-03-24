@@ -43,6 +43,16 @@ class User < ApplicationRecord
     provider.present? && uid.present?
   end
 
+  # 役に立ったマークをつける
+  def mark_as_helpful(route)
+    helpful_routes << route
+  end
+
+  # 役に立ったマークを外す
+  def unmark_as_helpful(route)
+    helpful_routes.destroy(route)
+  end
+
   private
 
   # 新規作成 or パスワード更新かを判断
@@ -55,16 +65,6 @@ class User < ApplicationRecord
     if email == "guest@example.com" && !guest # !guestは一般ユーザー
       errors.add(:email, "このメールアドレスは使用できません")
     end
-  end
-
-  # 役に立ったマークをつける
-  def mark_as_helpful(route)
-    helpful_routes.create(route_id: route.id)
-  end
-
-  # 役に立ったマークを外す
-  def unmark_as_helpful(route)
-    helpful_routes.destroy(route)
   end
 
   # omniauthのコールバックで使うメソッド
