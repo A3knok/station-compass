@@ -43,6 +43,16 @@ class User < ApplicationRecord
     provider.present? && uid.present?
   end
 
+  # 役に立ったマークをつける
+  def mark_as_helpful(route)
+    helpful_routes << route
+  end
+
+  # 役に立ったマークを外す
+  def unmark_as_helpful(route)
+    helpful_routes.destroy(route)
+  end
+
   private
 
   # 新規作成 or パスワード更新かを判断

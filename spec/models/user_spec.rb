@@ -203,4 +203,45 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "「役に立った」機能" do
+    let(:user) { create(:user) }
+    let(:route) { create(:route) }
+
+    describe "#mark_as_helpful" do
+      context "役に立ったマークをつける場合" do
+        it "helpful_marksにルートが追加されること" do
+          expect {
+            user.mark_as_helpful(route)
+          }.to change(user.helpful_marks, :count).by(1)
+        end
+
+        it "helpful_routesにルートが追加されること" do
+          expect {
+            user.mark_as_helpful(route)
+          }.to change(user.helpful_routes, :count).by(1)
+        end
+      end
+    end
+
+    describe "#unmark_as_helpful" do
+      context "役に立ったマークを外す場合" do
+        before do
+          user.mark_as_helpful(route)
+        end
+
+        it "helpful_marksからルートが削除されること" do
+          expect {
+            user.unmark_as_helpful(route)
+            }.to change(user.helpful_marks, :count).by(-1)
+        end
+
+        it "helpful_routesからルートが削除されること" do
+          expect {
+            user.unmark_as_helpful(route)
+            }.to change(user.helpful_routes, :count).by(-1)
+        end
+      end
+    end
+  end
 end

@@ -3,15 +3,11 @@ class HelpfulMarksController < ApplicationController
   skip_before_action :check_guest_user, only: %i[ create destroy ]
 
   def create
-    @helpful_mark = current_user.helpful_marks.build(route_id: @route.id)
-    @helpful_mark.save!
-    redirect_to route_path(@route)
+    current_user.mark_as_helpful(@route)
   end
 
   def destroy
-    @helpful_mark = current_user.helpful_marks.find_by(route_id: @route.id)
-    @helpful_mark.destroy!
-    redirect_to route_path(@route)
+    current_user.unmark_as_helpful(@route)
   end
 
   private
