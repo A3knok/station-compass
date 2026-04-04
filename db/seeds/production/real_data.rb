@@ -13,8 +13,11 @@ end
 
 railway_companies_data = [
   { name: "JR東日本" },
-  { name: "東京メトロ / 東急電鉄" },
-  { name: "京王電鉄" }
+  { name: "東京メトロ" },
+  { name: "東急電鉄" },
+  { name: "京王電鉄" },
+  { name: "西武鉄道" },
+  { name: "東武鉄道" }
 ]
 
 railway_companies = railway_companies_data.map do |company_data|
@@ -22,7 +25,8 @@ railway_companies = railway_companies_data.map do |company_data|
 end
 
 stations_data = [
-  { name: "渋谷駅", latitude: 35.658611, longitude: 139.701111 }
+  { name: "渋谷駅", latitude: 35.658611, longitude: 139.701111 },
+  { name: "池袋駅", latitude: 35.728926, longitude: 139.710396 }
 ]
 
 stations = stations_data.map do |station_data|
@@ -34,44 +38,72 @@ end
 
 puts "Stationデータを #{Station.count} 件作成しました"
 
+# ========================================
+# 駅ごとの詳細データ（改札・出口）を定義
+# ========================================
+
 shibuya_station = Station.find_by(name: "渋谷駅")
 
-if shibuya_station
-  shibuya_gates = [
-    { name: "ハチ公改札(JR)", railway_company: railway_companies[0] },
-    { name: "中央改札", railway_company: railway_companies[0] },
-    { name: "南改札", railway_company: railway_companies[0] },
-    { name: "新南改札", railway_company: railway_companies[0] },
-    { name: "ハチ公改札(メトロ)", railway_company: railway_companies[1] },
-    { name: "渋谷ヒカリエ1改札", railway_company: railway_companies[1] },
-    { name: "渋谷ヒカリエ2改札", railway_company: railway_companies[1] },
-    { name: "スクランブルスクエア方面改札", railway_company: railway_companies[1] },
-    { name: "宮益坂中央改札", railway_company: railway_companies[1] },
-    { name: "宮益坂東改札", railway_company: railway_companies[1] },
-    { name: "中央口改札", railway_company: railway_companies[2] }
-  ]
-end
+station_details = [
+  {
+    station_name: "渋谷駅",
+    gates: [
+      { name: "ハチ公改札(JR)", railway_company: railway_companies[0] },
+      { name: "中央改札", railway_company: railway_companies[0] },
+      { name: "南改札", railway_company: railway_companies[0] },
+      { name: "新南改札", railway_company: railway_companies[0] },
+      { name: "ハチ公改札(メトロ)", railway_company: railway_companies[1] },
+      { name: "渋谷ヒカリエ1改札", railway_company: railway_companies[1] },
+      { name: "渋谷ヒカリエ2改札", railway_company: railway_companies[1] },
+      { name: "スクランブルスクエア方面改札", railway_company: railway_companies[1] },
+      { name: "宮益坂中央改札", railway_company: railway_companies[1] },
+      { name: "宮益坂東改札", railway_company: railway_companies[1] },
+      { name: "中央口改札", railway_company: railway_companies[2] }
+    ],
+    exits: [
+      { name: "ハチ公口", direction: "渋谷PARCO方面" },
+      { name: "西口", direction: "渋谷フラスク方面" },
+      { name: "東口", direction: "渋谷ヒカリエ方面" },
+      { name: "新南口", direction: "渋谷サクラステージ方面" },
+      { name: "A2", direction: "渋谷109方面" },
+      { name: "A8", direction: "渋谷センター街方面" },
+      { name: "B1", direction: "宮下パーク方面" },
+      { name: "B5", direction: "渋谷ヒカリエ方面" },
+      { name: "C2", direction: "渋谷ストリーム方面" }
+    ]
+  },
+  {
+    station_name: "池袋駅",
+    gates: [
 
-shibuya_gates.each do |gate_data|
-  # 検索または作成
-  shibuya_station.gates.find_or_create_by!(
-    name: gate_data[:name],
-    railway_company: gate_data[:railway_company]
-  )
-end
+    ],
+    exits: [
 
-shibuya_exits = [
-  { name: "ハチ公口", direction: "渋谷PARCO方面" },
-  { name: "西口", direction: "渋谷フラスク方面" },
-  { name: "東口", direction: "渋谷ヒカリエ方面" },
-  { name: "新南口", direction: "渋谷サクラステージ方面" },
-  { name: "A2", direction: "渋谷109方面" },
-  { name: "A8", direction: "渋谷センター街方面" },
-  { name: "B1", direction: "宮下パーク方面" },
-  { name: "B5", direction: "渋谷ヒカリエ方面" },
-  { name: "C2", direction: "渋谷ストリーム方面" }
+    ]
+  }
 ]
 
-shibuya_exits.each do |exit_data|
-  shibuya_station.exits.find_or_create_by!(exit_data)
+statin_details.each do |station_detail|
+  # 駅の取得
+  station = Station.find_by(name: station_detail[:station_name])
+
+  # 駅が見つからない場合スキップ
+  unless station
+    puts "警告: #{station_detail[:station_name]} が見つかりませんでした"
+    next
+  end
+
+  # 改札の作成
+  station_detail[:gates].each do |gate_data|
+  # 検索または作成
+    station.gates.find_or_create_by!(
+      name: gate_data[:name],
+      railway_company: gate_data[:railway_company]
+    )
+  end
+
+  # 出口の作成
+  station_detail[:exits].each do |exit_data|
+    station.exits.find_or_create_by!(exit_data)
+  end
 end
