@@ -75,10 +75,13 @@ station_details = [
   {
     station_name: "池袋駅",
     gates: [
-
+      
+      
     ],
     exits: [
-
+      { name: "東口（中央）", direction: "サンシャインシティ方面" },
+      { name: "西口（中央）", direction: "東武百貨店方面" },
+      { name: "西口（南）", direction: "ホテルメトロポリタン方面" }
     ]
   }
 ]
