@@ -75,8 +75,16 @@ station_details = [
   {
     station_name: "池袋駅",
     gates: [
-      
-      
+      { name: "中央１改札", railway_company: railway_companies[0] },
+      { name: "中央2改札", railway_company: railway_companies[0] },
+      { name: "北改札", railway_company: railway_companies[0] },
+      { name: "南改札", railway_company: railway_companies[0] },
+      { name: "メトロポリタン改札", railway_company: railway_companies[0] },
+      { name: "中央１改札", railway_company: railway_companies[0] },
+      { name: "中央通路西改札(丸ノ内)", railway_company: railway_companies[1] },
+      { name: "西通路東改札(副都心)", railway_company: railway_companies[1] },
+      { name: "南通路東改札(有楽町)", railway_company: railway_companies[1] },
+      { name: "地下改札", railway_company: railway_companies[4] },
     ],
     exits: [
       { name: "東口（中央）", direction: "サンシャインシティ方面" },
