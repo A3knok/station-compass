@@ -404,7 +404,7 @@ detect-libc@^1.0.3:
 
 driver.js@^1.4.0:
   version "1.4.0"
-  resolved "https://registry.npmjs.org/driver.js/-/driver.js-1.4.0.tgz"
+  resolved "https://registry.yarnpkg.com/driver.js/-/driver.js-1.4.0.tgz#02886248cd82f5475b6bd5eb9743502f88879038"
   integrity sha512-Gm64jm6PmcU+si21sQhBrTAM1JvUrR0QhNmjkprNLxohOBzul9+pNHXgQaT9lW84gwg9GMLB3NZGuGolsz5uew==
 
 electron-to-chromium@^1.5.238:

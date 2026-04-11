@@ -94,7 +94,7 @@ station_details = [
   }
 ]
 
-statin_details.each do |station_detail|
+station_details.each do |station_detail|
   # 駅の取得
   station = Station.find_by(name: station_detail[:station_name])
 
